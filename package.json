@@ -1,0 +1,33 @@
+{
+  "name": "ui-kit",
+  "version": "1.0.0",
+  "author": "Нагибин Михаил Юрьевич",
+  "private": true,
+  "main": "dist/ui-kit.umd.js",
+  "types": "types/main.d.ts",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name ui-kit src/lib-main.ts",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@ts-stack/markdown": "^1.4.0",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/eslint-config-typescript": "^11.0.1",
+    "eslint": "^8.23.1",
+    "eslint-plugin-vue": "^9.4.0",
+    "postcss-loader": "^7.0.1",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.9",
+    "sass-loader": "^10.3.1",
+    "typescript": "~4.1.5",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

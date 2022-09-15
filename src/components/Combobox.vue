@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import { ComboboxItem } from "@/models"
+import { ComboboxItem } from "@/../types/combobox"
 import { Marked } from "@ts-stack/markdown"
 import { Prop } from "vue/types/options"
 import cEdit from "@/components/Edit.vue"

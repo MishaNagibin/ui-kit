@@ -39,7 +39,7 @@
 import Vue from "vue"
 import { Prop } from "vue/types/options"
 import { arrays } from "@/utils"
-import { TableColumn } from "@/models"
+import { TableColumn } from "@/../types/table"
 
 export default Vue.extend({
     name: "cTable",

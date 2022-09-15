@@ -1,5 +1,7 @@
 import { VueConstructor } from "vue"
-import { ButtonCustomStyle, ComboboxItem, TableColumn } from "@/models"
+import { ButtonCustomStyle } from "./button"
+import { ComboboxItem } from "./combobox"
+import { TableColumn } from "./table"
 
 declare const cAlert: VueConstructor
 declare const cArrowSVG: VueConstructor

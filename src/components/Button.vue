@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import { ButtonCustomStyle } from "@/models"
+import { ButtonCustomStyle } from "@/../types/button"
 import { Prop } from "vue/types/options"
 
 export default Vue.extend({

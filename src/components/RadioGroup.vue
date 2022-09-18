@@ -52,14 +52,15 @@ export default Vue.extend({
                 {
                     props: {
                         value: props.value,
-                        checked: props.value === this.value && !props.disabled,
+                        disabled: this.disabled || props.disabled,
+                        checked: props.value === this.value && (!this.disabled || !props.disabled),
                         color: props.color,
                         hoverColor: props.hoverColor,
                         activeColor: props.activeColor,
                     },
                     class: classes,
                     attrs: {
-                        disabled: props.disabled,
+                        disabled: this.disabled || props.disabled,
                     },
                     on: {
                         ["update:checked"]: (v: string) => this.change(v),

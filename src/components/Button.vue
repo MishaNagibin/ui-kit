@@ -1,7 +1,7 @@
 <template>
     <button
         v-on="listeners"
-        :class="['ui-button', mode, size, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, gradient: (customStyle || {}).position !== undefined, 'not-color': customStyle !== undefined && customStyle.color === undefined, 'not-position': customStyle !== undefined && customStyle.position === undefined, 'not-upper-case': dontUpperCase, 'just-text': isJustText }]"
+        :class="['ui-button', customStyle === undefined ? mode : `custom ${mode === 'gradient' ? 'gradient' : ''}`, size, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, gradient: (customStyle || {}).position !== undefined, 'not-color': customStyle !== undefined && customStyle.color === undefined, 'not-position': customStyle !== undefined && customStyle.position === undefined, 'not-upper-case': dontUpperCase }]"
         :disabled="disabled"
         :style="customStyle ? { '--background': customStyle.background, '--hover': customStyle.hover, '--active': customStyle.active, '--color': customStyle.color, '--position': customStyle.position } : {}"
         ref="btn"
@@ -45,12 +45,11 @@ export default Vue.extend({
                     "gradient",
                     "crimson",
                     "disabled",
-                    "custom",
-                    "custom gradient",
                     "white-to-crimson",
                     "red",
                     "green",
                     "white",
+                    "just-text",
                 ].includes(v),
         },
         type: {
@@ -82,10 +81,6 @@ export default Vue.extend({
             type: Boolean,
             default: false,
         },
-        isJustText: {
-            type: Boolean,
-            default: false,
-        },
     },
     data() {
         return {
@@ -102,7 +97,16 @@ export default Vue.extend({
     },
     methods: {
         click(e: MouseEvent) {
-            this.$emit("click", e)
+            if (this.isMobile) {
+                setTimeout(
+                    () => {
+                        this.$emit("click", e)
+                    },
+                    this.mode === "gradient" ? 300 : 100,
+                )
+            } else {
+                this.$emit("click", e)
+            }
         },
         touchStart() {
             this.isTouch = true
@@ -112,7 +116,7 @@ export default Vue.extend({
                 () => {
                     this.isTouch = false
                 },
-                ["white-to-crimson", "gradient"].includes(this.mode) ? 300 : 100,
+                this.mode === "gradient" ? 300 : 100,
             )
         },
         mouseDown() {
@@ -123,7 +127,7 @@ export default Vue.extend({
                 () => {
                     this.isTouch = false
                 },
-                ["white-to-crimson", "gradient"].includes(this.mode) ? 300 : 100,
+                this.mode === "gradient" ? 300 : 100,
             )
         },
         touchMove(e: TouchEvent) {
@@ -375,7 +379,7 @@ export default Vue.extend({
     }
 
     &.white-to-crimson {
-        background: transparent;
+        background: $gray-000;
         border-color: $pink-500;
         color: $pink-500;
         transition: all 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -471,8 +475,13 @@ export default Vue.extend({
     }
 
     &.just-text {
+        background: unset;
         border: none;
         text-transform: unset;
+
+        &:hover {
+            color: $primary-350;
+        }
     }
 
     &:disabled,
@@ -519,20 +528,25 @@ export default Vue.extend({
         font-size: 10px;
         -webkit-tap-highlight-color: transparent;
 
+        &.s,
+        &.m,
+        &.l,
+        &.xl {
+            height: 38px;
+        }
+
         &.s {
             max-width: 124px;
-            height: 38px;
+        }
+
+        &.xl {
+            max-width: 314px;
         }
 
         & > .caption {
             & > .icon {
                 mask-size: 90%;
             }
-        }
-
-        &.xl {
-            max-width: 314px;
-            height: 38px;
         }
 
         &:hover,

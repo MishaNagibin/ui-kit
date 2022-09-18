@@ -30,7 +30,7 @@
                 :class="['icon', 'input-icon', { 'input-error': isError, 'input-warning': isWarning, 'input-valid': isValid }]"
             />
             <span
-                v-if="isClear"
+                v-if="isClear && !readonly && !disabled"
                 :class="['icon', 'input-icon', { close: value.length > 0 }]"
                 :style="{ right: isError || isWarning || isValid ? '32px' : '10px'}"
                 data-tooltip="Очистить"
@@ -46,7 +46,7 @@
     </label>
     <label
         v-else-if="isConfirmationCode"
-        :class="['ui-edit', 'code', { reg: codeLength < 6 }]"
+        class="ui-edit code"
         ref="ui-edit"
     >
         <div>
@@ -115,7 +115,7 @@
                 :class="['icon', 'input-icon', { 'input-error': isError, 'input-warning': isWarning, 'input-valid': isValid }]"
             />
             <span
-                v-if="isClear"
+                v-if="isClear && !readonly && !disabled"
                 :class="['icon', 'input-icon', { close: value.length > 0 }]"
                 :style="{ right: isError && isShowIcon || isWarning && isShowIcon || isValid && isShowIcon ? '32px' : '10px'}"
                 data-tooltip="Очистить"
@@ -130,7 +130,7 @@
             />
             <span
                 v-if="isSearch"
-                :class="['icon', 'input-icon', { hide: value.length > 0 || isSearchLeft && isFocus, left: isSearchLeft, 'search-mobile': isSearchIconBold, search2: !isSearchIconBold }]"
+                :class="['icon', 'input-icon', { hide: value.length > 0 || isSearchLeft && isFocus, left: isSearchLeft, 'search-small': !isSearchIconBold, 'search-bold': isSearchIconBold }]"
             />
         </div>
         <div
@@ -154,7 +154,7 @@ export default Vue.extend({
     props: {
         cols: {
             type: Number,
-            default: 20,
+            default: 42,
         },
         disabled: {
             type: Boolean,
@@ -215,7 +215,7 @@ export default Vue.extend({
         },
         rows: {
             type: Number,
-            default: 1,
+            default: 4,
         },
         type: {
             type: String,
@@ -302,7 +302,7 @@ export default Vue.extend({
         },
         multilineBinds(): any {
             const binds = [
-                { style: this.resize },
+                { style: `resize: ${this.readonly ? "none" : this.resize}` },
                 { required: this.required },
                 { disabled: this.disabled },
                 { readonly: this.readonly },
@@ -312,6 +312,8 @@ export default Vue.extend({
                     class: {
                         error: this.isError,
                         warning: this.isWarning,
+                        readonly: this.readonly,
+                        "no-resize": this.resize === "none" || this.readonly,
                     },
                 },
                 { autocomplete: this.autocomplete },
@@ -338,6 +340,7 @@ export default Vue.extend({
                         password: this.isPassword,
                         error: this.isError,
                         warning: this.isWarning,
+                        readonly: this.readonly,
                         entered: this.value.length > 0 || this.formattedPhone.length > 0,
                     },
                 },
@@ -394,7 +397,7 @@ export default Vue.extend({
             this.$emit("input", "")
             this.isFocus = false
             setTimeout(() => {
-                (this.$refs.input as HTMLInputElement).blur()
+                ;(this.$refs.input as HTMLInputElement).blur()
             }, 100)
         },
         focus(e: FocusEvent) {
@@ -442,7 +445,7 @@ export default Vue.extend({
                 const prev = refs.querySelector(`input[data-id="${index - 1}"]`) as HTMLElement
                 const next = refs.querySelector(`input[data-id="${index + 1}"]`) as HTMLElement
 
-                if (e.code === "Backspace") {
+                if (["Backspace", "Delete"].includes(e.code)) {
                     if (this.code[index].length > 0) {
                         this.code[index] = ""
                         setTimeout(() => {
@@ -533,11 +536,14 @@ export default Vue.extend({
         & > .placeholder {
             color: #818ca9;
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 10px;
             transition: opacity 0.2s ease-in-out;
             z-index: 2;
             pointer-events: none;
+            display: flex;
+            height: 40px;
+            align-items: center;
 
             &.search-left {
                 left: 46px;
@@ -549,7 +555,6 @@ export default Vue.extend({
 
             &:deep(span) {
                 color: $orange-600;
-                margin-left: -3px;
             }
         }
 
@@ -560,11 +565,14 @@ export default Vue.extend({
 
         & > .code-country {
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 16px;
             opacity: 0;
             transition: opacity 0.2s ease-in-out;
             user-select: none;
+            display: flex;
+            height: 40px;
+            align-items: center;
 
             &.show {
                 opacity: 1;
@@ -590,12 +598,10 @@ export default Vue.extend({
             border: none;
             padding: 11px 30px 12px 10px;
             background-color: #ebf0f9;
-            height: 58px;
-            width: 360px;
             border: 1px solid transparent;
             transition: all 0.3s ease-in-out, height 0s, width 0s;
 
-            &:focus {
+            &:focus:not(.readonly) {
                 border: 1px solid #3f51b5;
             }
 
@@ -616,6 +622,26 @@ export default Vue.extend({
                 color: $orange-600;
                 border: 1px solid $orange-600;
             }
+
+            &.readonly {
+                resize: none;
+                pointer-events: none;
+            }
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                height: 20px;
+                background-color: $gray-350;
+            }
+
+            &.no-resize {
+                &::-webkit-scrollbar {
+                    width: 4px;
+                }
+            }
         }
 
         & > input {
@@ -632,6 +658,11 @@ export default Vue.extend({
             background-color: #ebf0f9;
             transition: all 0.3s ease-in-out, letter-spacing 0s;
 
+            &.readonly {
+                resize: none;
+                pointer-events: none;
+            }
+
             &.password {
                 z-index: 1;
 
@@ -644,7 +675,7 @@ export default Vue.extend({
                 padding-left: 35px;
             }
 
-            &:focus {
+            &:focus:not(.readonly) {
                 border: 1px solid #3f51b5;
 
                 &.error,
@@ -745,7 +776,7 @@ export default Vue.extend({
                 transition: all 0.3s ease-in-out;
             }
 
-            &.search-mobile {
+            &.search-small {
                 opacity: 1;
                 background-color: #818ca9;
                 transition: all 0.3s ease-in-out;
@@ -800,7 +831,7 @@ export default Vue.extend({
                 left: 10px;
             }
 
-            &.search2 {
+            &.search-bold {
                 opacity: 1;
                 transition: all 0.3s ease-in-out;
                 width: 24px;
@@ -825,12 +856,6 @@ export default Vue.extend({
             align-items: center;
             width: 100%;
             justify-content: space-between;
-        }
-
-        &.reg {
-            & > div {
-                justify-content: space-evenly;
-            }
         }
     }
 

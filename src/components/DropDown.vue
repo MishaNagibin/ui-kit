@@ -1,7 +1,7 @@
 <template>
     <div
-        class="ui-drop-down"
         :style="{ left: `${left}%`, 'margin-left': `${marginLeft}px`  }"
+        class="ui-drop-down"
         ref="drop-down"
     >
         <span :style="{ left: `${taleLeft}%` }" />

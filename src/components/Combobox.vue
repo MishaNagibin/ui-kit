@@ -7,7 +7,6 @@
             :readonly="!filter"
             :placeholder="placeholder"
             :class="{ pointer: !filter }"
-            :id="id"
             :autocomplete="isNoAutocomplete ? 'new-password' : 'off'"
             :is-error="isError"
             :is-hide-status="isHideStatus"
@@ -92,10 +91,6 @@ export default Vue.extend({
         filter: {
             type: Boolean,
             default: true,
-        },
-        id: {
-            type: String,
-            default: null,
         },
         clearable: {
             type: Boolean,

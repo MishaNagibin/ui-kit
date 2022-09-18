@@ -1,9 +1,15 @@
 <template>
-    <div :class="['ui-slider', { mobile: isMobile }]">
+    <div
+        :class="['ui-slider', { mobile: isMobile }]"
+        :style="{ '--maxWidth': maxWidth }"
+    >
         <cArrowSVG
             v-if="!isMobile && isShowArrows && !isAutoplay"
             :size="arrowSize"
-            class="prev"
+            :circle-color="arrowCircleColor"
+            :color="arrowColor"
+            :hover-color="arrowHoverColor"
+            is-left
             mode="circle"
             @click="prev"
         />
@@ -24,6 +30,9 @@
         <cArrowSVG
             v-if="!isMobile && isShowArrows && !isAutoplay"
             :size="arrowSize"
+            :circle-color="arrowCircleColor"
+            :color="arrowColor"
+            :hover-color="arrowHoverColor"
             mode="circle"
             @click="next"
         />
@@ -71,6 +80,22 @@ export default Vue.extend({
             type: Number,
             default: 1500,
         },
+        maxWidth: {
+            type: String,
+            default: "unset",
+        },
+        arrowColor: {
+            type: String,
+            default: "#818ca9",
+        },
+        arrowHoverColor: {
+            type: String,
+            default: "#818ca9",
+        },
+        arrowCircleColor: {
+            type: String,
+            default: "#ffffff",
+        },
     },
     data() {
         return {
@@ -95,7 +120,7 @@ export default Vue.extend({
                     this.offset = 0
 
                     for (let i = 0; i < this.itemsCount; i++) {
-                        (items.children[i] as HTMLElement).style.transform = ""
+                        ;(items.children[i] as HTMLElement).style.transform = ""
                     }
                 }
             }
@@ -175,7 +200,7 @@ export default Vue.extend({
             items.style.transform = "translateX(0px)"
             for (const i in items.children) {
                 if (!isNaN(Number(i))) {
-                    (items.children[i] as HTMLElement).style.transform = "translateX(0px)"
+                    ;(items.children[i] as HTMLElement).style.transform = "translateX(0px)"
                 }
             }
             this.order = 0
@@ -278,12 +303,13 @@ export default Vue.extend({
 @import "../styles/colors";
 
 .ui-slider {
+    $maxWidth: var(--maxWidth);
     display: flex;
     flex-flow: row nowrap;
     margin: auto;
     align-items: center;
     position: relative;
-    max-width: 1368px;
+    max-width: $maxWidth;
     margin-bottom: 30px;
     overflow: hidden;
 

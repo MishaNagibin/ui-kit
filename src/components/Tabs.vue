@@ -150,7 +150,7 @@ export default Vue.extend({
                 "li",
                 {
                     class: classes,
-                    style: { '--activeColor': this.activeColor, '--hoverColor': this.hoverColor },
+                    style: { "--activeColor": this.activeColor, "--hoverColor": this.hoverColor },
                     on: { click: () => this.changeTabIndex(i) },
                 },
                 [caption].filter((i) => i !== undefined),
@@ -171,7 +171,7 @@ export default Vue.extend({
 
         const renderItems = [h("ul", { class: "tabs", ref: "tabs" }, tabNames), h("div", { class: "slider", ref: "slider" })]
         if (!this.isNoBorder) {
-            renderItems.push(h("div", { style: { '--borderColor': this.borderColor }, class: "border", ref: "border" }))
+            renderItems.push(h("div", { style: { "--borderColor": this.borderColor }, class: "border", ref: "border" }))
         }
         return h("div", { class: ["ui-tabs", { "not-stretch-tabs": this.isNotStretchTabs || this.isBorderFitContent }] }, [
             ...renderItems,
@@ -222,6 +222,7 @@ export default Vue.extend({
             padding: 15px;
             cursor: pointer;
             $activeColor: var(--activeColor);
+            transition: color 0.3s;
 
             &:first-of-type {
                 padding-left: 0;

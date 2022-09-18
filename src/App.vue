@@ -4,6 +4,7 @@
             :columns="columns"
             :items="items"
             needSorted
+            border-radius="15px"
         />
     </div>
 </template>
@@ -26,22 +27,77 @@ export default Vue.extend({
                 { ID: 1, code: "1111", status: "Готов", weight: "50кг" },
                 { ID: 2, code: "222", status: "В пути", weight: "80кг" },
                 { ID: 3, code: "5", weight: "150кг", status: "В обработке" },
-                { ID: 4, code: "533", weight: "150кг", status: "В обработке" },
-                { ID: 5, code: "995", weight: "15кг", status: "В obr" },
-                { ID: 6, code: "588", weight: "750кг", status: "В 888" },
+                { ID: 4, code: "95", weight: "150кг", status: "В обработке" },
             ],
+            isLoaded: false,
         }
+    },
+    beforeMount() {
+        this.isLoaded = true
     },
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     margin-top: 60px;
+
+    & > :deep(.ui-slider) {
+        & > .carousel {
+            & > .list {
+                & > .item {
+                    min-width: 200px;
+                    height: 200px;
+                    border-radius: 5px;
+                    margin: 0 10px;
+                    background-color: pink;
+                }
+            }
+        }
+    }
+
+    & > .filters {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 700px;
+
+        & > div {
+            position: relative;
+            margin-right: 40px;
+            width: 130px;
+            margin: 0 20px;
+            display: flex;
+            justify-content: center;
+
+            &:first-child {
+                justify-content: left;
+            }
+
+            &:last-child {
+                justify-content: right;
+            }
+
+            & > :deep(.ui-drop-down) {
+                opacity: 0;
+                transition: 0.3s;
+
+                & .ui-checkbox {
+                    padding: 10px;
+                }
+            }
+
+            &:hover {
+                & > :deep(.ui-drop-down) {
+                    opacity: 1;
+                }
+            }
+        }
+    }
 }
 
 section {

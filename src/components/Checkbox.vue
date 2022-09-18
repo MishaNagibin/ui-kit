@@ -2,7 +2,7 @@
     <label
         v-on="listeners"
         :class="['ui-checkbox', !isCustom ? mode : '', size, { nowrap, disabled, custom: isCustom }]"
-        :style="{ '--color': color, '--hoverColor': hoverColor, '--activeColor': activeColor }"
+        :style="{ '--color': color, '--hoverColor': hoverColor, '--activeColor': activeColor, '--borderWidth': borderWidth }"
     >
         <input
             :checked="checked"
@@ -56,6 +56,10 @@ export default Vue.extend({
         activeColor: {
             type: String,
         },
+        borderWidth: {
+            type: String,
+            default: "2px"
+        }
     },
     computed: {
         listeners(): Record<string, Function | Function[]> {
@@ -108,6 +112,7 @@ export default Vue.extend({
     cursor: pointer;
     align-items: center;
     width: fit-content;
+    $borderWidth: var(--borderWidth);
 
     &.nowrap {
         white-space: nowrap;
@@ -123,7 +128,7 @@ export default Vue.extend({
         margin: auto 9px auto 0;
         border-radius: 5px;
         background-color: $gray-000;
-        border: 2px solid #596175;
+        border: $borderWidth solid #596175;
         transition: all 0.2s ease-in-out;
         flex-shrink: 0;
         position: relative;

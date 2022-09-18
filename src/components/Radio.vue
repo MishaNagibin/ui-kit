@@ -108,19 +108,6 @@ export default Vue.extend({
     align-items: center;
     margin-bottom: 6px;
 
-    &.disabled {
-        color: $gray-500;
-        pointer-events: none;
-
-        & > .radio {
-            border-color: $gray-350;
-
-            &:after {
-                background-color: $gray-350;
-            }
-        }
-    }
-
     &.nowrap {
         white-space: nowrap;
     }
@@ -231,6 +218,19 @@ export default Vue.extend({
 
             &:after {
                 background-color: #ff324b;
+            }
+        }
+    }
+
+    &.disabled {
+        color: $gray-500;
+        pointer-events: none;
+
+        & > .radio {
+            border-color: $gray-350;
+
+            &:after {
+                background-color: $gray-350;
             }
         }
     }

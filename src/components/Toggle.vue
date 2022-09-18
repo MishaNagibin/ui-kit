@@ -42,10 +42,13 @@ export default Vue.extend({
             type: String,
             default: "#3f51b5",
         },
+        customSize: {
+            type: String,
+        },
     },
     computed: {
         height(): string {
-            return this.size === "m" ? "15px" : "20px"
+            return this.customSize !== undefined ? this.customSize : this.size === "m" ? "15px" : "20px"
         },
     },
     methods: {
@@ -113,6 +116,7 @@ export default Vue.extend({
                 width: $button-side-length;
                 margin: 0;
                 margin-left: 2px;
+                mask-size: 60%;
             }
         }
 

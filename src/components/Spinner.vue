@@ -1,7 +1,7 @@
 <template>
     <div
-        :style="{ '--color': color, position, backgroundColor: hideOverlay ? 'transparent' : '#ffffffc5', zIndex: position === 'fixed' ? 99992 : 998 }"
-        :class="['ui-spinner', { mobile: isMobile }]"
+        :class="['ui-spinner', position, { mobile: isMobile }]"
+        :style="{ '--color': color, position, backgroundColor: hideOverlay ? 'transparent' : '#ffffffc5', zIndex: position === 'fixed' ? 99992 : 998, '--left': left, '--top': top }"
     >
         <span
             :style="{ height: spinnerSize, width: spinnerSize }"
@@ -38,12 +38,23 @@ export default Vue.extend({
             type: String,
             default: "#3f51b5",
         },
+        customSize: {
+            type: String,
+        },
+        left: {
+            type: String,
+            default: "0",
+        },
+        top: {
+            type: String,
+            default: "0",
+        },
     },
     computed: {
         spinnerSize(): string {
             const s: { [key: string]: number } = { s: 38, m: 50, l: 65 }
 
-            return `${s[this.size]}px` || `${s.m}px`
+            return this.customSize !== undefined ? this.customSize : `${s[this.size]}px` || `${s.m}px`
         },
     },
 })
@@ -58,6 +69,8 @@ export default Vue.extend({
     width: 100%;
     display: flex;
     $color: var(--color);
+    $left: var(--left);
+    $top: var(--top);
 
     &.mobile {
         z-index: 998;
@@ -68,6 +81,12 @@ export default Vue.extend({
         margin: auto;
         mask-size: 100%;
         background-color: $color;
+    }
+
+    &.absolute,
+    &.fixed {
+        left: $left;
+        top: $top;
     }
 }
 </style>

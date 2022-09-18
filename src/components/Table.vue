@@ -2,6 +2,7 @@
     <table
         :align="align"
         :width="isFullWidth ? '100%' : 'fit-content'"
+        :style="{ '--borderRadius': borderRadius }"
         class="ui-table"
     >
         <caption v-if="hasCaption">{{ title }}</caption>
@@ -68,6 +69,10 @@ export default Vue.extend({
             type: String,
             default: "left",
         },
+        borderRadius: {
+            type: String,
+            default: "0px",
+        },
     },
     data() {
         const sortOrders = {} as { [key: string]: number }
@@ -110,6 +115,8 @@ export default Vue.extend({
 @import "../styles/colors";
 
 .ui-table {
+    $borderRadius: var(--borderRadius);
+    overflow: hidden;
     border-collapse: collapse;
 
     & > caption {
@@ -122,10 +129,19 @@ export default Vue.extend({
         &.header {
             background-color: $primary-300 !important;
             color: $gray-000;
+            overflow: hidden;
 
             & > td {
                 font-weight: 600;
                 opacity: 0.8;
+
+                &:first-of-type {
+                    border-top-left-radius: $borderRadius;
+                }
+
+                &:last-of-type {
+                    border-top-right-radius: $borderRadius;
+                }
 
                 &.active,
                 &.not-sorted {
@@ -156,6 +172,18 @@ export default Vue.extend({
                     &:hover {
                         cursor: pointer;
                     }
+                }
+            }
+        }
+
+        &:last-of-type {
+            & > td {
+                &:first-of-type {
+                    border-bottom-left-radius: $borderRadius;
+                }
+
+                &:last-of-type {
+                    border-bottom-right-radius: $borderRadius;
                 }
             }
         }

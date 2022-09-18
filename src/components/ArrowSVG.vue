@@ -1,8 +1,8 @@
 <template>
     <div
         v-on="listeners"
-        :style="{ '--color': color, '--hover-color': hoverColor }"
-        :class="['ui-arrow-svg', size, mode, styled, { 'no-shadow': isNoShadow }]"
+        :style="{ '--color': color, '--hover-color': hoverColor, '--circleColor': circleColor,'--rotate': rotate }"
+        :class="['ui-arrow-svg', size, mode, { 'no-shadow': isNoShadow, up: isUp, down: isDown, left: isLeft, 'custom-rotate': rotate !== undefined }]"
     >
         <div>
             <span class="icon arrow-part1" />
@@ -17,10 +17,6 @@ import Vue from "vue"
 export default Vue.extend({
     name: "cArrowSVG",
     props: {
-        isUp: {
-            type: Boolean,
-            default: false,
-        },
         color: {
             type: String,
             default: "#818ca9",
@@ -39,14 +35,29 @@ export default Vue.extend({
             default: "normal",
             validator: (v: string) => ["normal", "circle"].includes(v),
         },
+        circleColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        isUp: {
+            type: Boolean,
+            default: false,
+        },
+        isDown: {
+            type: Boolean,
+            default: false,
+        },
+        isLeft: {
+            type: Boolean,
+            default: false,
+        },
         isNoShadow: {
             type: Boolean,
             default: false,
         },
-        styled: {
+        rotate: {
             type: String,
-            default: "normal",
-            validator: (v: string) => ["normal", "primary"].includes(v),
+            default: undefined,
         },
     },
     computed: {
@@ -73,10 +84,12 @@ export default Vue.extend({
     $transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
     $color: var(--color);
     $hoverColor: var(--hover-color);
+    $circleColor: var(--circleColor);
+    width: fit-content;
 
     &.circle {
         margin-top: 9px !important;
-        background-color: $gray-000;
+        background-color: $circleColor;
         box-shadow: 1px 3px 10px 1px rgba(12, 7, 38, 0.15);
         justify-content: center;
         align-items: center;
@@ -116,16 +129,6 @@ export default Vue.extend({
                 mask-position: center;
                 mask-size: 45%;
                 margin-left: -25px;
-            }
-        }
-    }
-
-    &.primary {
-        background-color: $primary-500;
-
-        & > div {
-            & > span {
-                background-color: $gray-000;
             }
         }
     }
@@ -189,7 +192,27 @@ export default Vue.extend({
         }
     }
 
-    &.prev {
+    &.up {
+        & > div {
+            transform: rotate(-90deg);
+        }
+    }
+
+    &.down {
+        & > div {
+            transform: rotate(90deg);
+        }
+    }
+
+    &.custom-rotate {
+        $rotate: var(--rotate);
+
+        & > div {
+            transform: rotate($rotate) !important;
+        }
+    }
+
+    &.left {
         &.circle {
             left: 10px;
             right: auto;
@@ -198,12 +221,6 @@ export default Vue.extend({
 
         & > div {
             transform: rotate(180deg);
-        }
-    }
-
-    &.up {
-        & > div {
-            transform: rotate(-90deg);
         }
     }
 

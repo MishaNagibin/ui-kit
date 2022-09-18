@@ -3,6 +3,7 @@ import cArrowSVG from "@/components/ArrowSVG.vue"
 import cButton from "@/components/Button.vue"
 import cCheckbox from "@/components/Checkbox.vue"
 import cCombobox from "@/components/Combobox.vue"
+import cDropDown from "@/components/DropDown.vue"
 import cEdit from "@/components/Edit.vue"
 import cRadio from "@/components/Radio.vue"
 import cRadioGroup from "@/components/RadioGroup.vue"
@@ -20,6 +21,7 @@ export {
     cButton,
     cCheckbox,
     cCombobox,
+    cDropDown,
     cEdit,
     cRadio,
     cRadioGroup,

@@ -7,6 +7,7 @@
             <span
                 v-if="placeholder || required"
                 :class="['placeholder', { hide: isFocus || value.length > 0 }]"
+                :style="{ '--placeholderColor': placeholderColor }"
             >
                 {{ placeholder }}
                 <span
@@ -32,9 +33,15 @@
             <span
                 v-if="isClear && !readonly && !disabled"
                 :class="['icon', 'input-icon', { close: value.length > 0 }]"
-                :style="{ right: isError || isWarning || isValid ? '32px' : '10px'}"
+                :style="{ right: isError || isWarning || isValid ? '32px' : enableEmoji ? '6px' : '10px', '--clearIconColor': clearIconColor, '--clearIconHoverColor': clearIconHoverColor }"
                 data-tooltip="Очистить"
                 @click="clear"
+            />
+            <cEmoji
+                v-if="enableEmoji && !readonly && !disabled"
+                :style="{ right: isClear && value.length > 0 ? '32px' : '10px', '--emojiIconColor': emojiIconColor, '--emojiIconHoverColor': emojiIconHoverColor }"
+                @click="e => e.preventDefault()"
+                @select="selectEmoji"
             />
         </div>
         <div
@@ -82,6 +89,7 @@
             <span
                 v-if="placeholder || required"
                 :class="['placeholder', { hide: isFocus || value.length > 0, phone: isPhone, 'search-left': isSearchLeft }]"
+                :style="{ '--placeholderColor': placeholderColor }"
             >
                 {{ placeholder }}
                 <span
@@ -117,20 +125,26 @@
             <span
                 v-if="isClear && !readonly && !disabled"
                 :class="['icon', 'input-icon', { close: value.length > 0 }]"
-                :style="{ right: isError && isShowIcon || isWarning && isShowIcon || isValid && isShowIcon ? '32px' : '10px'}"
+                :style="{ right: isError && isShowIcon || isWarning && isShowIcon || isValid && isShowIcon ? '32px' : (enableEmoji && !isPhone) ? '6px' : '10px', '--clearIconColor': clearIconColor, '--clearIconHoverColor': clearIconHoverColor }"
                 data-tooltip="Очистить"
                 @click="clear"
             />
             <span
                 v-if="isPassword"
                 :class="['icon', { 'eye-closed': !isShowPassword, 'eye-open': isShowPassword, show: value.length > 0 }]"
-                :style="{ right: isClear && (isError || isWarning || isValid) ? '60px' : isError || isWarning || isValid || isClear ? '40px' : '10px' }"
+                :style="{ right: isClear && (isError || isWarning || isValid || (enableEmoji && !isPhone)) ? '60px' : isError || isWarning || isValid || isClear ? '40px' : '10px' }"
                 :data-tooltip="iconTitle"
                 @click.prevent="showPassword"
             />
             <span
                 v-if="isSearch"
                 :class="['icon', 'input-icon', { hide: value.length > 0 || isSearchLeft && isFocus, left: isSearchLeft, 'search-small': !isSearchIconBold, 'search-bold': isSearchIconBold }]"
+            />
+            <cEmoji
+                v-if="enableEmoji && !readonly && !disabled && !isPhone"
+                :style="{ right: isClear && value.length > 0 ? '32px' : '10px', '--emojiIconColor': emojiIconColor, '--emojiIconHoverColor': emojiIconHoverColor }"
+                @click="e => e.preventDefault()"
+                @select="selectEmoji"
             />
         </div>
         <div
@@ -144,9 +158,11 @@
 
 <script lang="ts">
 import Vue from "vue"
+import cEmoji from "@/components/Emoji.vue"
 
 export default Vue.extend({
     name: "cEdit",
+    components: { cEmoji },
     model: {
         prop: "value",
         event: "update:value",
@@ -265,6 +281,50 @@ export default Vue.extend({
             type: Boolean,
             default: false,
         },
+        enableEmoji: {
+            type: Boolean,
+            default: false,
+        },
+        emojiIconColor: {
+            type: String,
+            default: "#3f51b5",
+        },
+        emojiIconHoverColor: {
+            type: String,
+            default: "#4960df",
+        },
+        width: {
+            type: String,
+            default: "360px",
+        },
+        backgroundColor: {
+            type: String,
+            default: "#ebf0f9",
+        },
+        placeholderColor: {
+            type: String,
+            default: "#818ca9",
+        },
+        color: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        borderActiveColor: {
+            type: String,
+            default: "#3f51b5",
+        },
+        borderWidth: {
+            type: String,
+            default: "1px"
+        },
+        clearIconColor: {
+            type: String,
+            default: "#818ca9",
+        },
+        clearIconHoverColor: {
+            type: String,
+            default: "#3f51b5",
+        },
     },
     data() {
         return {
@@ -301,6 +361,16 @@ export default Vue.extend({
             }
         },
         multilineBinds(): any {
+            const style = {
+                "--backgroundColor": this.backgroundColor,
+                "--color": this.color,
+                "--borderActiveColor": this.borderActiveColor,
+                "--borderWidth": this.borderWidth,
+            } as { [key: string]: string }
+
+            if (this.isMultiline && this.cols === 42 && this.width !== "360px") {
+                style["--width"] = this.width
+            }
             const binds = [
                 { style: `resize: ${this.readonly ? "none" : this.resize}` },
                 { required: this.required },
@@ -314,11 +384,13 @@ export default Vue.extend({
                         warning: this.isWarning,
                         readonly: this.readonly,
                         "no-resize": this.resize === "none" || this.readonly,
+                        "custom-width": this.isMultiline && this.cols === 42 && this.width !== "360px",
                     },
                 },
                 { autocomplete: this.autocomplete },
                 { ref: "input" },
                 { inputmode: this.inputmode },
+                { style: style },
             ] as any
 
             if (!this.isLazy) {
@@ -347,6 +419,15 @@ export default Vue.extend({
                 { autocomplete: this.autocomplete },
                 { ref: "input" },
                 { inputmode: this.inputmode },
+                {
+                    style: {
+                        "--width": this.width,
+                        "--backgroundColor": this.backgroundColor,
+                        "--color": this.color,
+                        "--borderActiveColor": this.borderActiveColor,
+                        "--borderWidth": this.borderWidth,
+                    },
+                },
             ] as any
 
             if (!this.isPhone) {
@@ -376,6 +457,17 @@ export default Vue.extend({
         this.checkSlots()
     },
     methods: {
+        selectEmoji(emoji: any) {
+            const textarea = this.isMultiline ? (this.$refs.textarea as HTMLTextAreaElement) : (this.$refs.input as HTMLInputElement)
+            const start = textarea.selectionStart as number
+            const end = textarea.selectionEnd as number
+            if (this.isLazy) {
+                this.text = `${this.text.slice(0, start)}${emoji}${this.text.slice(end)}`
+            } else {
+                this.$emit("update:value", `${this.value.slice(0, start)}${emoji}${this.value.slice(end)}`)
+            }
+            textarea.setRangeText(emoji, start, end, "end")
+        },
         blur(e: FocusEvent) {
             this.isFocus = false
             this.$emit("blur", e)
@@ -502,8 +594,15 @@ export default Vue.extend({
 @import "../styles/icons";
 
 .ui-edit {
+    $width: var(--width);
+    $backgroundColor: var(--backgroundColor);
+    $color: var(--color);
+    $borderActiveColor: var(--borderActiveColor);
+    $borderWidth: var(--borderWidth);
+
     display: flex;
     flex-flow: column;
+    max-width: fit-content;
 
     &.textarea {
         height: auto !important;
@@ -534,7 +633,7 @@ export default Vue.extend({
         }
 
         & > .placeholder {
-            color: #818ca9;
+            color: var(--placeholderColor);
             position: absolute;
             top: 0;
             left: 10px;
@@ -597,12 +696,17 @@ export default Vue.extend({
             outline: none;
             border: none;
             padding: 11px 30px 12px 10px;
-            background-color: #ebf0f9;
+            background-color: $backgroundColor;
             border: 1px solid transparent;
             transition: all 0.3s ease-in-out, height 0s, width 0s;
+            color: $color;
+
+            &.custom-width {
+                width: $width;
+            }
 
             &:focus:not(.readonly) {
-                border: 1px solid #3f51b5;
+                border: $borderWidth solid $borderActiveColor;
             }
 
             &:disabled {
@@ -653,9 +757,10 @@ export default Vue.extend({
             overflow-x: hidden;
             text-overflow: ellipsis;
             height: 40px;
-            width: 360px;
+            width: $width;
             padding: 0 10px;
-            background-color: #ebf0f9;
+            background-color: $backgroundColor;
+            color: $color;
             transition: all 0.3s ease-in-out, letter-spacing 0s;
 
             &.readonly {
@@ -676,7 +781,7 @@ export default Vue.extend({
             }
 
             &:focus:not(.readonly) {
-                border: 1px solid #3f51b5;
+                border: $borderWidth solid $borderActiveColor;
 
                 &.error,
                 &.warning {
@@ -689,10 +794,11 @@ export default Vue.extend({
                 width: 40px;
                 height: 40px;
                 border-radius: 5px;
-                background-color: #ebf0f9;
+                background-color: $backgroundColor;
                 border: none;
                 padding: 0;
                 text-align: center;
+                color: $color;
 
                 &:last-of-type {
                     margin-right: 0;
@@ -744,6 +850,9 @@ export default Vue.extend({
         }
 
         & > .icon {
+            $clearIconColor: var(--clearIconColor);
+            $clearIconHoverColor: var(--clearIconHoverColor);
+
             mask-repeat: no-repeat;
             mask-position: center;
             position: absolute;
@@ -788,7 +897,7 @@ export default Vue.extend({
             }
 
             &.close {
-                background-color: #818ca9;
+                background-color: $clearIconColor;
                 transition: all 0.3s ease-in-out;
                 width: 24px;
                 height: 24px;
@@ -798,7 +907,7 @@ export default Vue.extend({
 
                 &:hover {
                     cursor: pointer;
-                    background-color: #3f51b5;
+                    background-color: $clearIconHoverColor;
                 }
             }
 
@@ -844,6 +953,30 @@ export default Vue.extend({
                 &.hide {
                     opacity: 0;
                     z-index: 0;
+                }
+            }
+        }
+
+        & > :deep(.ui-emoji) {
+            $emojiIconColor: var(--emojiIconColor);
+            $emojiIconHoverColor: var(--emojiIconHoverColor);
+
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            width: 24px;
+            transition: all 0.3s ease-in-out;
+
+            & > .icon {
+                mask-size: 100%;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                background-color: $emojiIconColor;
+            }
+
+            &:hover {
+                & > .icon {
+                    background-color: $emojiIconHoverColor;
                 }
             }
         }

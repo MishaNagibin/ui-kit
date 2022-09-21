@@ -5,6 +5,7 @@ import cCheckbox from "@/components/Checkbox.vue"
 import cCombobox from "@/components/Combobox.vue"
 import cDropDown from "@/components/DropDown.vue"
 import cEdit from "@/components/Edit.vue"
+import cEmoji from "@/components/Emoji.vue"
 import cRadio from "@/components/Radio.vue"
 import cRadioGroup from "@/components/RadioGroup.vue"
 import cRange from "@/components/Range.vue"
@@ -23,6 +24,7 @@ export {
     cCombobox,
     cDropDown,
     cEdit,
+    cEmoji,
     cRadio,
     cRadioGroup,
     cRange,

@@ -260,7 +260,7 @@ export default Vue.extend({
     methods: {
         mdParse: (e: string) => Marked.parse(e),
         windowBlur() {
-            if ((process as any).browser && document.activeElement instanceof HTMLInputElement) {
+            if (typeof window !== "undefined" && document.activeElement instanceof HTMLInputElement) {
                 document.activeElement.blur()
                 this.isOpenned = false
             }
@@ -289,7 +289,7 @@ export default Vue.extend({
                 this.$emit("update:value", this.initialValue)
             }
 
-            if (itemIndex !== null && (process as any).browser && document.activeElement instanceof HTMLInputElement) {
+            if (itemIndex !== null && typeof window !== "undefined" && document.activeElement instanceof HTMLInputElement) {
                 document.activeElement.blur()
             }
         },

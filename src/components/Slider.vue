@@ -168,12 +168,12 @@ export default Vue.extend({
     },
     methods: {
         windowBlur() {
-            if ((process as any).browser) {
+            if (typeof window !== "undefined") {
                 this.mouseOver()
             }
         },
         windowFocus() {
-            if ((process as any).browser) {
+            if (typeof window !== "undefined") {
                 this.mouseOut()
             }
         },

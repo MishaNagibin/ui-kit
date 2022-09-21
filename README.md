@@ -32,6 +32,7 @@
 - [**Edit**](#edit)
   - [Пропсы](#пропсы-edit)
   - [Примеры](#примеры-использования-edit)
+- [**Emoji**](#emoji)
 - [**Radio**](#radio)
   - [Пропсы](#пропсы-radio)
   - [Примеры](#примеры-использования-radio)
@@ -756,6 +757,17 @@ export default Vue.extend({
 | iconName | string | в инпуте слева будет иконка, название которой будет передано в этот пропс | undefined |
 | iconColor | string | цвет иконки iconName | #3F51B5 |
 | isHideRequired | boolean | скрыть звездочку в инпуте, о том что оно обязательно для заполнения | false |
+| enableEmoji | boolean | добавить возможность выбора и вставки эмодзи | false |
+| emojiIconColor | string | цвет иконки эмодзи в инпуте | #3f51b5 |
+| emojiIconHoverColor | string | цвет иконки эмодзи в инпуте при наведении | #4960df |
+| width | string | задать свою ширину, для textarea при не дефолтном значении cols этот пропс работать не будет, для isConfirmationCode тоже | 360px |
+| backgroundColor | string | цвета фона поля ввода | #ebf0f9 |
+| placeholderColor | string | цвет плейсхолдера | #818ca9 |
+| color | string | цвет текста | #1e1e1e |
+| borderActiveColor | string | цвет обводки при фокусе | #3f51b5 |
+| borderWidth | string | толщина обводки при фокусе | 1px |
+| clearIconColor | string | цвет иконки для очищения инпута | #818ca9 |
+| clearIconHoverColor | string | цвет иконки для очищения инпута при наведении | #3f51b5 |
 
 #### Примеры использования Edit:
 
@@ -809,6 +821,49 @@ export default Vue.extend({
     </template>
 </cEdit>
 ```
+
+```html
+<cEdit
+    v-model="val"
+    enable-emoji
+/>
+```
+
+```html
+<cEdit
+    v-model="val"
+    is-clear
+    placeholder="text"
+    background-color="purple"
+    placeholder-color="lightgray"
+    color="#fff"
+    border-active-color="pink"
+    border-width="2px"
+    clear-icon-color="lightgray"    
+    clear-icon-hover-color="#fff"
+/>
+```
+
+```html
+<cEdit
+    v-model="val"
+    placeholder="text"
+    background-color="purple"
+    placeholder-color="lightgray"
+    color="#fff"
+    border-active-color="purple"
+    clear-icon-color="lightgray"    
+    clear-icon-hover-color="#fff"
+    emoji-icon-color="lightgray"
+    emoji-icon-hover-color="#fff"
+/>
+```
+
+## Emoji
+
+Представляет собой компонент для выбора эмодзи. Также компонент сохраняет в отдельный список последние выбранные эмодзи, хранит его в localStorage.
+
+Имеет событие `select` в которое передает выбранное эмодзи.
 
 ## Radio
 

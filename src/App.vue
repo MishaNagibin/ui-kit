@@ -1,23 +1,33 @@
 <template>
     <div id="app">
-        <cTable
-            :columns="columns"
-            :items="items"
-            needSorted
-            border-radius="15px"
+        <cEdit
+            v-model="item"
+            is-clear
+            enableEmoji
+            placeholder="text"
+            background-color="purple"
+            placeholder-color="lightgray"
+            color="#fff"
+            border-active-color="pink"
+            border-width="2px"
+            clear-icon-color="lightgray"
+            clear-icon-hover-color="#fff"
+            emojiIconColor="lightgray"
+            emojiIconHoverColor="#fff"
         />
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import cTable from "@/components/Table.vue"
+import cEdit from "@/components/Edit.vue"
 
 export default Vue.extend({
     name: "App",
-    components: { cTable },
+    components: { cEdit },
     data() {
         return {
+            item: "",
             columns: [
                 { key: "code", title: "Код", align: "center", width: 120 },
                 { key: "status", title: "Статус", align: "center", width: 200 },

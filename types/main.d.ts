@@ -1,6 +1,7 @@
 import { VueConstructor } from "vue"
 import { ButtonCustomStyle } from "./button"
 import { ComboboxItem } from "./combobox"
+import { Emoji } from "./emoji"
 import { TableColumn } from "./table"
 
 declare const cAlert: VueConstructor
@@ -10,6 +11,7 @@ declare const cCheckbox: VueConstructor
 declare const cCombobox: VueConstructor
 declare const cDropDown: VueConstructor
 declare const cEdit: VueConstructor
+declare const cEmoji: VueConstructor
 declare const cRadio: VueConstructor
 declare const cRadioGroup: VueConstructor
 declare const cRange: VueConstructor
@@ -29,6 +31,7 @@ export {
     cCombobox,
     cDropDown,
     cEdit,
+    cEmoji,
     ComboboxItem,
     cRadio,
     cRadioGroup,
@@ -39,5 +42,6 @@ export {
     cTable,
     cTabs,
     cToggle,
+    Emoji,
     TableColumn,
 }

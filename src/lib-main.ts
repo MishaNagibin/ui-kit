@@ -1,3 +1,4 @@
+import cAccordion from "@/components/Accordion.vue"
 import cAlert from "@/components/Alert.vue"
 import cArrowSVG from "@/components/ArrowSVG.vue"
 import cButton from "@/components/Button.vue"
@@ -17,6 +18,7 @@ import cTabs from "@/components/Tabs.vue"
 import cToggle from "@/components/Toggle.vue"
 
 export {
+    cAccordion,
     cAlert,
     cArrowSVG,
     cButton,

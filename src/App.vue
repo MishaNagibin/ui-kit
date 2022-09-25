@@ -1,30 +1,39 @@
 <template>
     <div id="app">
-        <cEdit
-            v-model="item"
-            is-clear
-            enableEmoji
-            placeholder="text"
-            background-color="purple"
-            placeholder-color="lightgray"
-            color="#fff"
-            border-active-color="pink"
-            border-width="2px"
-            clear-icon-color="lightgray"
-            clear-icon-hover-color="#fff"
-            emojiIconColor="lightgray"
-            emojiIconHoverColor="#fff"
-        />
+        <cAccordion
+            title="Это боян епта"
+            headerName="элемент бояна номер"
+            notActiveColor="green"
+            hoverNotActiveColor="blue"
+            activeColor="purple"
+            hoverActiveColor="violet"
+            iconNotActiveColor="green"
+            iconHoverNotActiveColor="blue"
+            maxWidth="400px"
+            :headersByIndexes="{4:'первый',2:'two',1:'третий блят',0:'4тыре нах',3:'5ть'}"
+        >
+            <div
+                v-for="(a,i) of 5"
+                :key="i"
+                style="display:flex;flex-wrap:wrap;"
+            >
+                <div
+                    v-for="(v,n) of 2"
+                    :key="n"
+                    style="width:300px;height:200px;background:url(https://www.legato.su/products_pictures/Weltmeister_Romance_602_Black_001_bb.jpg);backgroundSize:contain;backgroundRepeat:no-repeat;marginRight:20px;marginBottom:20px;"
+                ></div>
+            </div>
+        </cAccordion>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import cEdit from "@/components/Edit.vue"
+import cAccordion from "@/components/Accordion.vue"
 
 export default Vue.extend({
     name: "App",
-    components: { cEdit },
+    components: { cAccordion },
     data() {
         return {
             item: "",

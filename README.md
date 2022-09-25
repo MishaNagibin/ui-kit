@@ -2,6 +2,9 @@
 
 - [**Установка**](#установка)
   - [Использование](#использование)
+- [**Accordion**](#accordion)
+  - [Пропсы](#пропсы-accordion)
+  - [Примеры](#примеры-использования-accordion)
 - [**Alert**](#alert)
   - [Статусы](#статусы-alert)
   - [Пропсы](#пропсы-alert)
@@ -107,6 +110,80 @@ export default Vue.extend({
         }
     }
 })
+```
+
+## Accordion
+
+Представляет собой компонент, который плавно разворачивает и сворачивает элементы аккордеона по клику на заголовок элемента. У компонента может быть заголовок, максимальная ширина, у каждого элемента аккордеона может быть свой заголовок.
+
+#### Пропсы accordion:
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| title | string | заголовок аккордеона (находится над аккордеоном) | undefined |
+| maxWidth | string | максимальная ширина аккордеона | undefined |
+| headerName | string | название каждого элемента в аккордеоне + инкремированный индекс, например всего будет 3 элемента в аккордеоне, и мы передадим в `headerName` значение `item`, тогда в каждом элементе аккордеона будет заголовок `item index + 1` -> `item 1`, `item 2`, `item 3` | undefined |
+| headers | string[] | мы можем передать массив состоящий из заголовков, применены они будут по индексам элементов | [] |
+| headersByIndexes | { [key: number]: string } | мы можем передать объект, в котором связать индекс с конкретным заголовком, чтобы к каждому индексу применился соответствующий ему заголовок | undefined |
+| onlyOneCanActive | boolean | можно будет раскрыть только один элемент аккордеона (по умолчанию можно все) | false |
+| notActiveColor | string | цвет текста заголовка элемента аккордеона, когда он не активен | #1e1e1e |
+| hoverNotActiveColor | string | цвет текста заголовка элемента аккордеона, когда он не активен, при наведении | #1e1e1e |
+| activeColor | string | цвет текста заголовка и иконки элемента аккордеона, когда он активен | #3f51b5 |
+| hoverActiveColor | string | цвет текста заголовка и иконки элемента аккордеона, когда он активен, при наведении | #4960df |
+| iconNotActiveColor | string | цвет иконки заголовка элемента аккордеона, когда он не активен | #e7e7ea |
+| iconHoverNotActiveColor | string | цвет иконки заголовка элемента аккордеона, когда он не активен, при наведении | #8e8e8e |
+
+
+#### Примеры использования accordion:
+
+```html
+<cAccordion title="Тайтл аккордеона">
+    <span v-for="i of 5" :key="i">{{ `элемент аккордеона ${i}` }}</span>
+</cAccordion>
+```
+
+```html
+<cAccordion max-width="900px">
+    <span v-for="i of 5" :key="i">{{ `элемент аккордеона ${i}` }}</span>
+</cAccordion>
+```
+
+```html
+<cAccordion only-one-can-active>
+    <span v-for="i of 5" :key="i">{{ `элемент аккордеона ${i}` }}</span>
+</cAccordion>
+```
+
+```html
+<cAccordion header-name="item accordion number">
+    <span v-for="i of 5" :key="i">текст аккордеона...</span>
+</cAccordion>
+```
+
+```html
+<cAccordion :headers="['первый', 'второй', 'третий', 'четвертый', 'пятый']">
+    <span v-for="i of 5" :key="i">текст аккордеона...</span>
+</cAccordion>
+```
+
+```html
+<cAccordion :headers-by-indexes="{ 0: 'Петя', 4: 'Федя', 2: 'Алиса', 1: 'Наташа', 3: 'Герыч' }">
+    <span v-for="i of 5" :key="i">Описание персонажей аккордеона...</span>
+</cAccordion>
+```
+
+```html
+<cAccordion 
+    :headers="['первый', 'второй', 'третий', 'четвертый', 'пятый']" 
+    not-active-color="green" 
+    hover-not-active-color="blue" 
+    active-color="purple" 
+    hover-active-color="violet" 
+    icon-not-active-color="green" 
+    icon-hover-not-active-color="blue"
+>
+    <span v-for="i of 5" :key="i">текст аккордеона...</span>
+</cAccordion>
 ```
 
 ## Alert

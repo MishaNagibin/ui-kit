@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  "cAccordion": function() { return /* reexport */ Accordion; },
   "cAlert": function() { return /* reexport */ Alert; },
   "cArrowSVG": function() { return /* reexport */ ArrowSVG; },
   "cButton": function() { return /* reexport */ Button; },
@@ -212,15 +213,277 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=template&id=89d78af2&scoped=true&
-var render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.show),expression:"show"}],class:['ui-alert', _vm.status, { 'hide-icon': _vm.hideIcon, closeable: _vm.closeable, closing: _vm.isClosing, custom: _vm.hasCustomBackgroundColor, 'icon-center': _vm.iconPositionCenter }],style:({ '--backgroundColor': _vm.backgroundColor, '--borderRadius': _vm.borderRadius || 0 })},[(!_vm.hideIcon)?_c('span',{class:['icon', `${_vm.status}-alert`, { custom: _vm.hasCustomIconColor }],style:({ '--iconColor': _vm.iconColor })}):_vm._e(),_c('div',{staticClass:"message"},[(_vm.showTitle)?_c('div',{class:['title', { custom: _vm.hasCustomTitleColor || _vm.hasCustomTitleSize }],style:({ '--titleColor': _vm.titleColor || '#000', '--titleSize': _vm.titleSize || '16px' })},[_vm._t("title")],2):_vm._e(),(_vm.showDesc)?_c('div',{class:['desc', { custom: _vm.hasCustomDescColor || _vm.hasCustomDescSize }],style:({ '--descColor': _vm.descColor || '#636363', '--descSize': _vm.descSize || '12px' })},[_vm._t("desc")],2):_vm._e()]),(_vm.closeable)?_c('span',{staticClass:"icon close-alert",style:({ '--iconCloseColor': _vm.iconCloseColor || '#636363', '--iconCloseHoverColor': _vm.iconCloseHoverColor || '#636363', '--iconCloseSize': _vm.iconCloseSize || '24px' }),on:{"click":_vm.close}}):_vm._e()])
-}
-var staticRenderFns = []
-
-
 ;// CONCATENATED MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject = require("vue");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject);
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=script&lang=ts&
+
+/* harmony default export */ var Accordionvue_type_script_lang_ts_ = (external_commonjs_vue_commonjs2_vue_root_Vue_default().extend({
+    name: "cAccordion",
+    functional: true,
+    props: {
+        title: {
+            type: String,
+        },
+        maxWidth: {
+            type: String,
+            default: "unset",
+        },
+        headerName: {
+            type: String,
+        },
+        onlyOneCanActive: {
+            type: Boolean,
+            default: false,
+        },
+        headers: {
+            type: Array,
+            default: () => [],
+        },
+        headersByIndexes: {
+            type: Object,
+        },
+        notActiveColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        hoverNotActiveColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        activeColor: {
+            type: String,
+            default: "#3f51b5",
+        },
+        hoverActiveColor: {
+            type: String,
+            default: "#4960df",
+        },
+        iconNotActiveColor: {
+            type: String,
+            default: "#e7e7ea",
+        },
+        iconHoverNotActiveColor: {
+            type: String,
+            default: "#8e8e8e",
+        },
+    },
+    render(h, ctx) {
+        var _a;
+        let activeElements = [];
+        const resize = () => {
+            for (let a of activeElements) {
+                const currentHeight = a.getClientRects()[0].height;
+                let newHeight = 15;
+                for (let i of Array.from(a.children)) {
+                    newHeight += i.clientHeight;
+                }
+                if (currentHeight !== newHeight) {
+                    a.style.height = `${newHeight}px`;
+                }
+            }
+        };
+        window.addEventListener("resize", resize);
+        const setActive = (e) => {
+            const isActive = e.classList.contains("active");
+            if (ctx.props.onlyOneCanActive && !isActive) {
+                if (activeElements.length > 0) {
+                    for (let a of activeElements) {
+                        a.style.height = "24px";
+                        a.classList.remove("active");
+                    }
+                    activeElements = [];
+                }
+            }
+            if (!isActive) {
+                const items = e.children;
+                let height = 15;
+                for (let i of Array.from(items)) {
+                    height += i.clientHeight;
+                }
+                e.style.height = `${height}px`;
+                e.classList.add("active");
+                activeElements.push(e);
+            }
+            else {
+                e.style.height = "24px";
+                e.classList.remove("active");
+                activeElements = activeElements.filter((i) => i !== e);
+            }
+        };
+        const renderItems = [
+            h("ul", [
+                ctx.children.map((v, i) => {
+                    var _a;
+                    return h("li", {
+                        style: {
+                            "--notActiveColor": ctx.props.notActiveColor,
+                            "--hoverNotActiveColor": ctx.props.hoverNotActiveColor,
+                            "--activeColor": ctx.props.activeColor,
+                            "--hoverActiveColor": ctx.props.hoverActiveColor,
+                            "--iconNotActiveColor": ctx.props.iconNotActiveColor,
+                            "--iconHoverNotActiveColor": ctx.props.iconHoverNotActiveColor,
+                        },
+                        ref: `item${i + 1}`,
+                        on: {
+                            click: (e) => {
+                                if (e.target.localName === "header") {
+                                    setActive(e.target.parentElement);
+                                }
+                            },
+                        },
+                    }, [
+                        h("header", [
+                            `${ctx.props.headersByIndexes !== undefined
+                                ? `${ctx.props.headersByIndexes[i]}`
+                                : ctx.props.headers.length > 0
+                                    ? `${ctx.props.headers[i]}`
+                                    : `${(_a = ctx.props.headerName) !== null && _a !== void 0 ? _a : ""} ${i + 1}`}`,
+                        ]),
+                        v,
+                    ]);
+                }),
+            ]),
+        ];
+        if (((_a = ctx.props.title) !== null && _a !== void 0 ? _a : "").length > 0) {
+            renderItems.unshift(h("h2", [`${ctx.props.title}`]));
+        }
+        return h("div", { class: "ui-accordion", style: { "--maxWidth": ctx.props.maxWidth } }, [...renderItems]);
+    },
+}));
+
+;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_Accordionvue_type_script_lang_ts_ = (Accordionvue_type_script_lang_ts_); 
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=38e0db53&prod&lang=scss&scoped=true&
+// extracted by mini-css-extract-plugin
+
+;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=38e0db53&prod&lang=scss&scoped=true&
+
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent(
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */,
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options =
+    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) {
+    // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () {
+          injectStyles.call(
+            this,
+            (options.functional ? this.parent : this).$root.$options.shadowRoot
+          )
+        }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functional component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+;// CONCATENATED MODULE: ./src/components/Accordion.vue
+var render, staticRenderFns
+;
+
+;
+
+
+/* normalize component */
+
+var component = normalizeComponent(
+  components_Accordionvue_type_script_lang_ts_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  "38e0db53",
+  null
+  
+)
+
+/* harmony default export */ var Accordion = (component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=template&id=89d78af2&scoped=true&
+var Alertvue_type_template_id_89d78af2_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.show),expression:"show"}],class:['ui-alert', _vm.status, { 'hide-icon': _vm.hideIcon, closeable: _vm.closeable, closing: _vm.isClosing, custom: _vm.hasCustomBackgroundColor, 'icon-center': _vm.iconPositionCenter }],style:({ '--backgroundColor': _vm.backgroundColor, '--borderRadius': _vm.borderRadius || 0 })},[(!_vm.hideIcon)?_c('span',{class:['icon', `${_vm.status}-alert`, { custom: _vm.hasCustomIconColor }],style:({ '--iconColor': _vm.iconColor })}):_vm._e(),_c('div',{staticClass:"message"},[(_vm.showTitle)?_c('div',{class:['title', { custom: _vm.hasCustomTitleColor || _vm.hasCustomTitleSize }],style:({ '--titleColor': _vm.titleColor || '#000', '--titleSize': _vm.titleSize || '16px' })},[_vm._t("title")],2):_vm._e(),(_vm.showDesc)?_c('div',{class:['desc', { custom: _vm.hasCustomDescColor || _vm.hasCustomDescSize }],style:({ '--descColor': _vm.descColor || '#636363', '--descSize': _vm.descSize || '12px' })},[_vm._t("desc")],2):_vm._e()]),(_vm.closeable)?_c('span',{staticClass:"icon close-alert",style:({ '--iconCloseColor': _vm.iconCloseColor || '#636363', '--iconCloseHoverColor': _vm.iconCloseHoverColor || '#636363', '--iconCloseSize': _vm.iconCloseSize || '24px' }),on:{"click":_vm.close}}):_vm._e()])
+}
+var Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns = []
+
+
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=script&lang=ts&
 
 /* harmony default export */ var Alertvue_type_script_lang_ts_ = (external_commonjs_vue_commonjs2_vue_root_Vue_default().extend({
@@ -336,104 +599,6 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
 
 ;// CONCATENATED MODULE: ./src/components/Alert.vue?vue&type=style&index=0&id=89d78af2&prod&lang=scss&scoped=true&
 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent(
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */,
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options =
-    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) {
-    // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () {
-          injectStyles.call(
-            this,
-            (options.functional ? this.parent : this).$root.$options.shadowRoot
-          )
-        }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functional component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
 ;// CONCATENATED MODULE: ./src/components/Alert.vue
 
 
@@ -443,10 +608,10 @@ function normalizeComponent(
 
 /* normalize component */
 
-var component = normalizeComponent(
+var Alert_component = normalizeComponent(
   components_Alertvue_type_script_lang_ts_,
-  render,
-  staticRenderFns,
+  Alertvue_type_template_id_89d78af2_scoped_true_render,
+  Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns,
   false,
   null,
   "89d78af2",
@@ -454,7 +619,7 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var Alert = (component.exports);
+/* harmony default export */ var Alert = (Alert_component.exports);
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ArrowSVG.vue?vue&type=template&id=7fe1efb5&scoped=true&
 var ArrowSVGvue_type_template_id_7fe1efb5_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',_vm._g({class:['ui-arrow-svg', _vm.size, _vm.mode, { 'no-shadow': _vm.isNoShadow, up: _vm.isUp, down: _vm.isDown, left: _vm.isLeft, 'custom-rotate': _vm.rotate !== undefined }],style:({ '--color': _vm.color, '--hover-color': _vm.hoverColor, '--circleColor': _vm.circleColor,'--rotate': _vm.rotate })},_vm.listeners),[_vm._m(0)])
 }
@@ -4419,6 +4584,7 @@ var Toggle_component = normalizeComponent(
 
 /* harmony default export */ var Toggle = (Toggle_component.exports);
 ;// CONCATENATED MODULE: ./src/lib-main.ts
+
 
 
 

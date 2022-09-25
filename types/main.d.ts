@@ -4,6 +4,7 @@ import { ComboboxItem } from "./combobox"
 import { Emoji } from "./emoji"
 import { TableColumn } from "./table"
 
+declare const cAccordion: VueConstructor
 declare const cAlert: VueConstructor
 declare const cArrowSVG: VueConstructor
 declare const cButton: VueConstructor
@@ -24,6 +25,7 @@ declare const cToggle: VueConstructor
 
 export {
     ButtonCustomStyle,
+    cAccordion,
     cAlert,
     cArrowSVG,
     cButton,

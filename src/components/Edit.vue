@@ -110,6 +110,12 @@
                 v-bind="singlelineBinds"
             />
             <input
+                v-else-if="mask !== undefined"
+                v-model="formattedMask"
+                v-on="listeners"
+                v-bind="singlelineBinds"
+            />
+            <input
                 v-else
                 v-on="listeners"
                 v-bind="singlelineBinds"
@@ -315,7 +321,7 @@ export default Vue.extend({
         },
         borderWidth: {
             type: String,
-            default: "1px"
+            default: "1px",
         },
         clearIconColor: {
             type: String,
@@ -325,6 +331,9 @@ export default Vue.extend({
             type: String,
             default: "#3f51b5",
         },
+        mask: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -333,6 +342,7 @@ export default Vue.extend({
             isFocus: false,
             hasStatusText: false,
             formattedPhone: "",
+            formattedMask: "",
             formattedCode: "",
             code: Object.fromEntries(Array.from({ length: this.codeLength }, (_, i) => [i + 1, ""])) as { [key: number]: string },
         }
@@ -413,7 +423,7 @@ export default Vue.extend({
                         error: this.isError,
                         warning: this.isWarning,
                         readonly: this.readonly,
-                        entered: this.value.length > 0 || this.formattedPhone.length > 0,
+                        entered: this.value.length > 0 || this.formattedPhone.length > 0 || this.formattedMask.length > 0,
                     },
                 },
                 { autocomplete: this.autocomplete },
@@ -436,6 +446,22 @@ export default Vue.extend({
 
             return binds
         },
+        maskNumbers(): number[] {
+            return (this.mask ?? "").split(/\D/).reduce((acc, cur) => {
+                if (/\d/g.test(cur)) {
+                    acc.push(Number(cur))
+                }
+                return acc
+            }, [] as number[])
+        },
+        maskSeparators(): string[] {
+            return (this.mask ?? "").split("").reduce((acc, cur) => {
+                if (/\D/g.test(cur)) {
+                    acc.push(cur)
+                }
+                return acc
+            }, [] as string[])
+        },
     },
     watch: {
         value: {
@@ -445,6 +471,10 @@ export default Vue.extend({
                 if (this.isPhone) {
                     if ((this.value || "").length !== 0) {
                         this.phoneFormatting("value")
+                    }
+                } else if (this.mask !== undefined) {
+                    if ((this.value || "").length !== 0) {
+                        this.maskFormatting("value")
                     }
                 }
             },
@@ -485,6 +515,8 @@ export default Vue.extend({
             this.$emit("update:value", "")
             if (this.isPhone) {
                 this.formattedPhone = ""
+            } else if (this.mask !== undefined) {
+                this.formattedMask = ""
             }
             this.$emit("input", "")
             this.isFocus = false
@@ -504,6 +536,17 @@ export default Vue.extend({
                 }
 
                 this.phoneFormatting("formattedPhone")
+                this.$emit("input", e)
+
+                return
+            }
+            if (!this.isPhone && this.mask !== undefined) {
+                if (e.inputType === "deleteContentBackward" && this.formattedMask.length < 1) {
+                    this.$emit("update:value", "")
+                    return
+                }
+
+                this.maskFormatting("formattedMask")
                 this.$emit("input", e)
 
                 return
@@ -573,13 +616,50 @@ export default Vue.extend({
             if (p.length > 10 && ["7", "8"].includes(p[0])) {
                 p = p.slice(1)
             }
+            const match = this.maskNumbers.reduce((acc, cur) => (acc += `${`(\\d{0,${cur}})`}`), "")
 
-            const m = p.match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/)
+            const m = match.length > 0 ? p.match(new RegExp(match)) : p.match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/)
+
             if (m === null) {
                 return
             }
 
-            this.formattedPhone = !m[2] ? m[1] : m[1] + " " + m[2] + (m[3] ? "-" + m[3] : "") + (m[4] ? "-" + m[4] : "")
+            let res = ""
+            if (match.length > 0) {
+                for (let i = 1; i < m.length; i++) {
+                    res +=
+                        m[i] +
+                        (m[i].length === Number(this.maskNumbers[i - 1])
+                            ? this.maskSeparators[i - 1] !== undefined && m[i + 1]
+                                ? this.maskSeparators[i - 1]
+                                : ""
+                            : "")
+                }
+            }
+
+            this.formattedPhone = res || (!m[2] ? m[1] : m[1] + " " + m[2] + (m[3] ? "-" + m[3] : "") + (m[4] ? "-" + m[4] : ""))
+            this.$emit("update:value", m[0])
+        },
+        maskFormatting(text: keyof { formattedMask: string; value: string }) {
+            let val = this[text].replace(/\D/g, "")
+            const match = this.maskNumbers.reduce((acc, cur) => (acc += `${`(\\d{0,${cur}})`}`), "")
+            const m = val.match(new RegExp(match))
+
+            if (m === null) {
+                return
+            }
+
+            let res = ""
+            for (let i = 1; i < m.length; i++) {
+                res +=
+                    m[i] +
+                    (m[i].length === Number(this.maskNumbers[i - 1])
+                        ? this.maskSeparators[i - 1] !== undefined && m[i + 1]
+                            ? this.maskSeparators[i - 1]
+                            : ""
+                        : "")
+            }
+            this.formattedMask = res
             this.$emit("update:value", m[0])
         },
         showPassword() {

@@ -845,6 +845,7 @@ export default Vue.extend({
 | borderWidth | string | толщина обводки при фокусе | 1px |
 | clearIconColor | string | цвет иконки для очищения инпута | #818ca9 |
 | clearIconHoverColor | string | цвет иконки для очищения инпута при наведении | #3f51b5 |
+| mask | string | маска для инпута, только если там числа, например номер какой-то или дата. Маска в данном случае это количество цифр + разделитель, например 3 цифры а после них тире и следом 2 цифры -> 3-2. Разделителем считается любой символ и они могут быть разными -> 1+1=1 | undefined |
 
 #### Примеры использования Edit:
 
@@ -934,6 +935,28 @@ export default Vue.extend({
     emoji-icon-color="lightgray"
     emoji-icon-hover-color="#fff"
 />
+```
+
+```html
+<cEdit v-model="passport"  mask="4 6" placeholder="серия и номер паспорта" />
+```
+
+```html
+<cEdit v-model="snils"  mask="3-3-3-2" placeholder="номер снилс" />
+```
+
+```html
+<cEdit v-model="birthday"  mask="2.2.4" placeholder="дата рождения" />
+```
+
+```html
+<cEdit v-model="val"  mask="1+1=1" placeholder="решаем примерчик" />
+```
+
+Маску можно применить и к номеру телефона, но если не указать то будет применена стандартная маска формата: 999 999-99-99 (+7 ставится автоматически и к маске отношения не имеет)
+
+```html
+<cEdit v-model="phone" type="tel" mask="3 3 2 2" placeholder="номер телефона" />
 ```
 
 ## Emoji

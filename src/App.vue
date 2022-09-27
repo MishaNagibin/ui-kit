@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <p>дата рождения</p>
-        <cEdit v-model="item" mask="1+1=1" />
+        <cEdit v-model="item" />
     </div>
 </template>
 

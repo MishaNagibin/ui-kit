@@ -334,6 +334,9 @@ export default Vue.extend({
         mask: {
             type: String,
         },
+        maxlength: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -403,6 +406,10 @@ export default Vue.extend({
                 { style: style },
             ] as any
 
+            if (this.maxlength !== undefined) {
+                binds.push({ maxlength: this.maxlength })
+            }
+
             if (!this.isLazy) {
                 binds.push({ value: this.value })
             }
@@ -439,6 +446,10 @@ export default Vue.extend({
                     },
                 },
             ] as any
+
+            if (this.maxlength !== undefined) {
+                binds.push({ maxlength: this.maxlength })
+            }
 
             if (!this.isPhone) {
                 binds.push({ value: this.value })

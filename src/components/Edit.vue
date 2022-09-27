@@ -694,6 +694,7 @@ export default Vue.extend({
     display: flex;
     flex-flow: column;
     max-width: fit-content;
+    line-height: initial;
 
     &.textarea {
         height: auto !important;

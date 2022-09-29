@@ -1,6 +1,6 @@
 export interface TableColumn {
     key: string
-    title: string
+    title?: string
     align?: string
     width?: number
 }

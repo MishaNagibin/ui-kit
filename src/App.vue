@@ -1,37 +1,74 @@
 <template>
     <div id="app">
-        <p>дата рождения</p>
-        <cEdit v-model="item" />
+        <cTable
+            :columns="columns"
+            :items="preparedServices"
+            is-full-width
+            need-sorted
+            border-radius="10px"
+            title="Справочник услуг"
+            titlePosition="left"
+            titleSize="20px"
+        >
+            <template slot="custom">
+                <button @click="e => check(e)">Изменить</button>
+            </template>
+        </cTable>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import cEdit from "@/components/Edit.vue"
+import cTable from "@/components/Table.vue"
+import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cEdit },
+    components: { cTable },
     data() {
         return {
-            item: "",
-            phone: "",
+            categories: [
+                { ID: 1, name: "Кондиционеры и холодосы" },
+                { ID: 2, name: "Курьерские услуги" },
+            ],
+            services: [
+                { ID: 1, name: "Установка генератора", price: 500, measure: "Час", description: "Подключение генератора", categoryID: 1 },
+                { ID: 2, name: "Установка генератора214124", price: 89500, measure: "Час", description: "Подключение ыыы", categoryID: 2 },
+                { ID: 3, name: "Установка ыыы", price: 1500, measure: "Час", description: " фыр фыр", categoryID: 1 },
+                {
+                    ID: 4,
+                    name: "Доставка лекарств на дом",
+                    price: 700,
+                    measure: "Рубль",
+                    description:
+                        "доставить посылку с аптеки дсвфвсфывфывфывсфыыфвфчывфвчффычфычыфвчфываваываываыаыаыоставить посылку ссфывыфв фвфаптеки доставить посылку с аптеки",
+                    categoryID: 2,
+                },
+            ] as any[],
             columns: [
-                { key: "code", title: "Код", align: "center", width: 120 },
-                { key: "status", title: "Статус", align: "center", width: 200 },
-                { title: "Масса", key: "weight", align: "center", width: 120 },
-            ],
-            items: [
-                { ID: 1, code: "1111", status: "Готов", weight: "50кг" },
-                { ID: 2, code: "222", status: "В пути", weight: "80кг" },
-                { ID: 3, code: "5", weight: "150кг", status: "В обработке" },
-                { ID: 4, code: "95", weight: "150кг", status: "В обработке" },
-            ],
+                { key: "categoryName", title: "Категория", align: "left", width: 200 },
+                { key: "name", title: "Услуга", align: "left", width: 240 },
+                { key: "measure", title: "Ед. измерения", align: "center", width: 200 },
+                { key: "description", title: "Описание", align: "left", width: 200 },
+                { key: "price", title: "Цена без НПД", align: "center", width: 200 },
+                { key: "custom", align: "center", width: 200 },
+            ] as TableColumn[],
             isLoaded: false,
         }
     },
+    computed: {
+        preparedServices(): any[] {
+            return this.services.map((s) => ({ ...s, categoryName: this.categories.find((c) => c.ID === s.categoryID)?.name }))
+        },
+    },
     beforeMount() {
         this.isLoaded = true
+    },
+    methods: {
+        check(e: PointerEvent) {
+            const index = Number((e.target as HTMLElement).parentElement?.dataset.index ?? 0)
+            console.log(this.preparedServices[index])
+        },
     },
 })
 </script>

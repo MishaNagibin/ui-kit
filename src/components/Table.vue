@@ -2,16 +2,19 @@
     <table
         :align="align"
         :width="isFullWidth ? '100%' : 'fit-content'"
-        :style="{ '--borderRadius': borderRadius }"
+        :style="{ '--borderRadius': borderRadius, '--headerBackgroundColor': headerBackgroundColor, '--headerColor': headerColor, '--sortedArrowColor': sortedArrowColor, '--rowBackgroundColor': rowBackgroundColor, '--rowColor': rowColor }"
         class="ui-table"
     >
-        <caption v-if="hasCaption">{{ title }}</caption>
+        <caption
+            v-if="hasCaption"
+            :style="{ '--titleSize': titleSize, '--titlePosition': titlePosition }"
+        >{{ title }}</caption>
         <tr class="header">
             <td
-                v-for="(c, i) of columns"
+                v-for="(c, i) of filteredColumns"
                 :key="`column-${i}`"
                 :class="{ active: needSorted && sortKey === c.key, 'not-sorted': !needSorted }"
-                :width="c.width"
+                :width="c.width || 100"
                 :style="{ '--align': c.align || 'left' }"
                 @click="sortBy(c.key)"
             >
@@ -21,25 +24,39 @@
                     :class="['arrow', sortOrders[c.key] > 0 ? 'asc' : 'desc']"
                 />
             </td>
+            <td
+                v-if="hasCustomSlot"
+                :width="customColumn.width || 100"
+                :style="{ '--align': customColumn.align || 'left' }"
+                class="not-sorted"
+            >{{ customColumn.title || "" }}</td>
         </tr>
         <tr
             v-for="(entry, index) in preparedItems"
             :key="`entry-${index}`"
         >
             <td
-                v-for="(c, i) in columns"
+                v-for="(c, i) in filteredColumns"
                 :key="i"
                 :width="c.width"
                 :style="{ '--align': c.align || 'left' }"
             >{{ entry[c.key] }}</td>
+            <td
+                v-if="hasCustomSlot"
+                :data-index="index"
+                :width="customColumn.width || 100"
+                :style="{ '--align': customColumn.align || 'left' }"
+            >
+                <slot name="custom" />
+            </td>
         </tr>
     </table>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
-import { Prop } from "vue/types/options"
 import { arrays } from "@/utils"
+import { Prop } from "vue/types/options"
 import { TableColumn } from "@/../types/table"
 
 export default Vue.extend({
@@ -52,6 +69,15 @@ export default Vue.extend({
         title: {
             type: String,
             default: "",
+        },
+        titleSize: {
+            type: String,
+            default: "14px",
+        },
+        titlePosition: {
+            type: String,
+            default: "center",
+            validator: (v: string) => ["left", "center", "right", "end", "start", "unset"].includes(v),
         },
         columns: {
             type: Array as Prop<TableColumn[]>,
@@ -68,10 +94,31 @@ export default Vue.extend({
         align: {
             type: String,
             default: "left",
+            validator: (v: string) => ["left", "center", "right"].includes(v),
         },
         borderRadius: {
             type: String,
             default: "0px",
+        },
+        headerBackgroundColor: {
+            type: String,
+            default: "#4e62d1",
+        },
+        headerColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        sortedArrowColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        rowBackgroundColor: {
+            type: String,
+            default: "#3f51b511",
+        },
+        rowColor: {
+            type: String,
+            default: "#1e1e1e",
         },
     },
     data() {
@@ -82,11 +129,18 @@ export default Vue.extend({
         return {
             sortKey: this.columns[0].key,
             sortOrders,
+            hasCustomSlot: !!this.$slots.custom,
         }
     },
     computed: {
         hasCaption(): boolean {
             return (this.title ?? "").length > 0
+        },
+        filteredColumns(): TableColumn[] {
+            return this.columns.filter((c) => c.key !== "custom")
+        },
+        customColumn(): TableColumn {
+            return this.columns.find((c) => c.key === "custom") ?? ({} as TableColumn)
         },
         preparedItems(): any[] {
             const order = this.sortOrders[this.sortKey] ?? 1
@@ -100,7 +154,16 @@ export default Vue.extend({
                 : this.items
         },
     },
+    mounted() {
+        this.checkSlots()
+    },
+    updated() {
+        this.checkSlots()
+    },
     methods: {
+        checkSlots() {
+            this.hasCustomSlot = !!this.$slots.custom
+        },
         sortBy(key: string) {
             if (this.needSorted) {
                 this.sortKey = key
@@ -116,19 +179,27 @@ export default Vue.extend({
 
 .ui-table {
     $borderRadius: var(--borderRadius);
+    $headerBackgroundColor: var(--headerBackgroundColor);
+    $headerColor: var(--headerColor);
+    $sortedArrowColor: var(--sortedArrowColor);
+    $rowBackgroundColor: var(--rowBackgroundColor);
+    $rowColor: var(--rowColor);
     overflow: hidden;
     border-collapse: collapse;
 
     & > caption {
+        $titleSize: var(--titleSize);
+        $titlePosition: var(--titlePosition);
+        text-align: $titlePosition;
+        font-size: $titleSize;
         padding: 8px;
-        height: 30px;
         font-weight: 600;
     }
 
     & > tr {
         &.header {
-            background-color: $primary-300 !important;
-            color: $gray-000;
+            background-color: $headerBackgroundColor !important;
+            color: $headerColor !important;
             overflow: hidden;
 
             & > td {
@@ -158,13 +229,13 @@ export default Vue.extend({
                     &.asc {
                         border-left: 5px solid transparent;
                         border-right: 5px solid transparent;
-                        border-bottom: 5px solid #fff;
+                        border-bottom: 5px solid $sortedArrowColor;
                     }
 
                     &.desc {
                         border-left: 5px solid transparent;
                         border-right: 5px solid transparent;
-                        border-top: 5px solid #fff;
+                        border-top: 5px solid $sortedArrowColor;
                     }
                 }
 
@@ -189,7 +260,8 @@ export default Vue.extend({
         }
 
         &:nth-of-type(2n + 1) {
-            background: #3f51b511;
+            background: $rowBackgroundColor;
+            color: $rowColor;
         }
 
         & > td {

@@ -61,6 +61,8 @@
 - [**Table**](#table)
   - [Пропсы](#пропсы-table)
   - [Структура массива столбцов таблицы](#tablecolumn)
+  - [Слоты](#слоты-таблицы)
+  - [Пример со слотами](#пример-со-слотами)
   - [Пример массивов для таблицы](#пример-массивов-для-таблицы)
   - [Примеры использования таблицы](#примеры-использования-table)
 
@@ -1570,21 +1572,65 @@ methods: {
 | name | type | description | default |
 | ---- | ---- | ----------- | ------- |
 | title | string | название таблицы | "" |
-| align | string | позиция таблицы | left |
+| align | string | позиция таблицы, допустимые значения: left &#124; center &#124; right | left |
 | isFullWidth | boolean | таблица на всю ширину | false |
 | needSorted | boolean | в таблице можно сортировать данные по столбцам | false |
 | borderRadius | string | скругление углов таблицы | 0px |
 | columns | TableColumn[] | массив столбцов таблицы, подробнее в таблице ниже | [] |
 | items | any[] | массив строк таблицы, важно чтобы набор полей соответствовал ключу столбца | [] |
+| titleSize | string | размер названия таблицы | 14px |
+| titlePosition | string | позиция названия таблицы, допустимые значения: left &#124; center &#124; right &#124; end &#124; start &#124; unset | center |
+| headerBackgroundColor | string | цвет фона header таблицы | #4e62d1 |
+| headerColor | string | цвет текста в header таблицы | #ffffff |
+| sortedArrowColor | string | цвет стрелочек для сортировки | #ffffff |
+| rowBackgroundColor | string | фон строчек таблицы `:nth-of-type(2n + 1)` | #3f51b511 |
+| rowColor | string | цвет строчек таблицы `:nth-of-type(2n + 1)` | #1e1e1e |
 
 #### TableColumn:
 
 | name | type | description |
 | ---- | ---- | ----------- |
 | key | string | ключ столбца, в массиве строк таблицы этот ключ должен содержать значение, пример ниже |
-| title | string | название столбца отображаемое в таблице |
-| align | string | выравнивание столба по переданному значению |
-| width | number | ширина столбца в пикселях |
+| title | string | название столбца отображаемое в таблице (не обязательное) |
+| align | string | выравнивание столба по переданному значению (не обязательное) |
+| width | number | ширина столбца в пикселях (не обязательное) |
+
+
+#### Слоты таблицы:
+
+Также можно передать в таблицу что-то через слоты. Например у нас таблица с данными, где нужно изменить / удалить запись, и для этого нам надо передать через слоты соответствующие кнопки. Соответственно, в таблице создается td в который помещается то, что передано через слот, на этот td добавляется data-index со индексом элемента. Таким образом, по нажатию на кнопку, мы можем узнать индекс записи, а по индексу найти ее в исходном массиве. Пример ниже.
+
+Также вы можете задать название этому столбцу, ширину и позицию. Для этого в `columns` надо добавить объект, у которого значение ключа `key` будет `custom`:
+
+```js
+columns: [
+    { key: "name", title: "Название", align: "left", width: 240 },
+    { key: "description", title: "Описание", align: "left", width: 200 },
+    { key: "price", title: "Цена", align: "center", width: 200 },
+    { key: "custom", title: "Кастомный столбик", align: "center", width: 200 },
+]
+```
+
+#### Пример со слотами:
+
+```html
+<cTable
+    :columns="columns"
+    :items="items"
+    border-radius="10px"
+>
+    <template slot="custom">
+        <button @click="e => edit(e)">Изменить</button>
+    </template>
+</cTable>
+
+...
+
+edit(e) {
+    const index = Number(e.target.parentElement.dataset.index)
+    console.log(this.items[index])
+}
+```
 
 #### Пример массивов для таблицы:
 
@@ -1622,4 +1668,33 @@ items: [
 
 ```html
 <cTable :columns="columns" :items="items" is-full-width border-radius="10px" />
+```
+
+```html
+<cTable
+    :columns="columns"
+    :items="items"
+    border-radius="10px"
+    title="Справочник услуг"
+    title-position="left"
+    title-size="20px"
+/>
+```
+
+```html
+<cTable
+    :columns="columns"
+    :items="items"
+    need-sorted
+    align="center"
+    border-radius="10px"
+    title="Справочник услуг"
+    title-position="left"
+    title-size="20px"
+    header-background-color="purple"
+    header-color="#f14a4a"
+    row-background-color="#cf27b3"
+    row-color="lightgray"
+    sorted-arrow-color="red"
+/>
 ```

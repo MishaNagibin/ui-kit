@@ -10,6 +10,7 @@
             :autocomplete="isNoAutocomplete ? 'new-password' : 'off'"
             :is-error="isError"
             :is-hide-status="isHideStatus"
+            :width="maxWidth"
             ref="combobox"
             @keydown="keyDown"
             @focus="focus"
@@ -124,6 +125,10 @@ export default Vue.extend({
         isNoAutocomplete: {
             type: Boolean,
             default: false,
+        },
+        maxWidth: {
+            type: String,
+            default: "360px",
         },
     },
     data() {
@@ -545,17 +550,6 @@ export default Vue.extend({
                 opacity: 1;
                 transition: 0.2s;
             }
-        }
-    }
-
-    & > .c-edit {
-        width: 100%;
-        padding-right: 26px;
-
-        & input {
-            width: 100%;
-            background-color: $gray-000;
-            border: 1px solid $gray-400;
         }
     }
 

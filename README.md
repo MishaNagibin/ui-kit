@@ -518,6 +518,7 @@ computed: {
 | isError | boolean | есть ошибка и ее надо отобразить (передается через слот) | false |
 | isHideStatus | boolean | скрыть блок с ошибкой | false |
 | isNoAutocomplete | boolean | убрать автозаполнение поля ввода (если используем пропс filter) | false |
+| maxWidth | string | максимальная ширина комбобокса | 360px |
 
 #### Размеры элементов выпадающего списка:
 

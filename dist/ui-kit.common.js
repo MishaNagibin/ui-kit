@@ -980,10 +980,10 @@ var Checkbox_component = normalizeComponent(
 )
 
 /* harmony default export */ var Checkbox = (Checkbox_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Combobox.vue?vue&type=template&id=1d774100&
-var Comboboxvue_type_template_id_1d774100_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{class:['ui-combobox', { error: _vm.isError }]},[_c('cEdit',{ref:"combobox",class:{ pointer: !_vm.filter },attrs:{"required":_vm.required,"disabled":_vm.disabled,"readonly":!_vm.filter,"placeholder":_vm.placeholder,"autocomplete":_vm.isNoAutocomplete ? 'new-password' : 'off',"is-error":_vm.isError,"is-hide-status":_vm.isHideStatus},on:{"keydown":_vm.keyDown,"focus":_vm.focus,"blur":_vm.blur,"input":_vm.input,"mousedown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"]))return null;if('button' in $event && $event.button !== 0)return null;return _vm.mouseDown.apply(null, arguments)}},model:{value:(_vm.initialText),callback:function ($$v) {_vm.initialText=(typeof $$v === 'string'? $$v.trim(): $$v)},expression:"initialText"}},[(_vm.isError)?_c('template',{slot:"status-text"},[_vm._t("status-text")],2):_vm._e()],2),(_vm.clearable && (_vm.initialValue !== null || _vm.initialText.length > 0))?_c('div',{staticClass:"icon-clear",attrs:{"data-tooltip":"Очистить"},on:{"click":function($event){return _vm.setValue()},"mousedown":_vm.childrenMouseDown}}):_c('div',{class:['icon-select', { opened: _vm.isOpenned && _vm.filteredItems.length > 0 }]}),(_vm.isOpenned && _vm.filteredItems.length > 0)?_c('ul',{ref:"menu",staticClass:"menu",on:{"mousedown":_vm.childrenMouseDown}},_vm._l((_vm.filteredItems),function(item,index){return _c('li',{key:index,class:[{ active: index === _vm.selectedItemIndex }, _vm.size],domProps:{"innerHTML":_vm._s(_vm.mdParse(item.name))},on:{"mousemove":function($event){return _vm.mousemove(index)},"click":function($event){return _vm.setValue(index)}}})}),0):_vm._e()],1)
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Combobox.vue?vue&type=template&id=c1354bb6&
+var Comboboxvue_type_template_id_c1354bb6_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{class:['ui-combobox', { error: _vm.isError }]},[_c('cEdit',{ref:"combobox",class:{ pointer: !_vm.filter },attrs:{"required":_vm.required,"disabled":_vm.disabled,"readonly":!_vm.filter,"placeholder":_vm.placeholder,"autocomplete":_vm.isNoAutocomplete ? 'new-password' : 'off',"is-error":_vm.isError,"is-hide-status":_vm.isHideStatus,"width":_vm.maxWidth},on:{"keydown":_vm.keyDown,"focus":_vm.focus,"blur":_vm.blur,"input":_vm.input,"mousedown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"]))return null;if('button' in $event && $event.button !== 0)return null;return _vm.mouseDown.apply(null, arguments)}},model:{value:(_vm.initialText),callback:function ($$v) {_vm.initialText=(typeof $$v === 'string'? $$v.trim(): $$v)},expression:"initialText"}},[(_vm.isError)?_c('template',{slot:"status-text"},[_vm._t("status-text")],2):_vm._e()],2),(_vm.clearable && (_vm.initialValue !== null || _vm.initialText.length > 0))?_c('div',{staticClass:"icon-clear",attrs:{"data-tooltip":"Очистить"},on:{"click":function($event){return _vm.setValue()},"mousedown":_vm.childrenMouseDown}}):_c('div',{class:['icon-select', { opened: _vm.isOpenned && _vm.filteredItems.length > 0 }]}),(_vm.isOpenned && _vm.filteredItems.length > 0)?_c('ul',{ref:"menu",staticClass:"menu",on:{"mousedown":_vm.childrenMouseDown}},_vm._l((_vm.filteredItems),function(item,index){return _c('li',{key:index,class:[{ active: index === _vm.selectedItemIndex }, _vm.size],domProps:{"innerHTML":_vm._s(_vm.mdParse(item.name))},on:{"mousemove":function($event){return _vm.mousemove(index)},"click":function($event){return _vm.setValue(index)}}})}),0):_vm._e()],1)
 }
-var Comboboxvue_type_template_id_1d774100_staticRenderFns = []
+var Comboboxvue_type_template_id_c1354bb6_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/@ts-stack/markdown/fesm2015/ts-stack-markdown.js
@@ -2999,6 +2999,10 @@ var Edit_component = normalizeComponent(
             type: Boolean,
             default: false,
         },
+        maxWidth: {
+            type: String,
+            default: "360px",
+        },
     },
     data() {
         return {
@@ -3307,10 +3311,10 @@ var Edit_component = normalizeComponent(
 
 ;// CONCATENATED MODULE: ./src/components/Combobox.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Comboboxvue_type_script_lang_ts_ = (Comboboxvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Combobox.vue?vue&type=style&index=0&id=1d774100&prod&lang=scss&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Combobox.vue?vue&type=style&index=0&id=c1354bb6&prod&lang=scss&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Combobox.vue?vue&type=style&index=0&id=1d774100&prod&lang=scss&
+;// CONCATENATED MODULE: ./src/components/Combobox.vue?vue&type=style&index=0&id=c1354bb6&prod&lang=scss&
 
 ;// CONCATENATED MODULE: ./src/components/Combobox.vue
 
@@ -3323,8 +3327,8 @@ var Edit_component = normalizeComponent(
 
 var Combobox_component = normalizeComponent(
   components_Comboboxvue_type_script_lang_ts_,
-  Comboboxvue_type_template_id_1d774100_render,
-  Comboboxvue_type_template_id_1d774100_staticRenderFns,
+  Comboboxvue_type_template_id_c1354bb6_render,
+  Comboboxvue_type_template_id_c1354bb6_staticRenderFns,
   false,
   null,
   null,

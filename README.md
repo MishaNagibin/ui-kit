@@ -942,27 +942,27 @@ export default Vue.extend({
 ```
 
 ```html
-<cEdit v-model="val"  maxlength="10" />
+<cEdit v-model="val" max-length="10" />
 ```
 
 ```html
-<cEdit v-model="passport"  mask="4 6" placeholder="серия и номер паспорта" />
+<cEdit v-model="passport" mask="4 6" placeholder="серия и номер паспорта" />
 ```
 
 ```html
-<cEdit v-model="snils"  mask="3-3-3-2" placeholder="номер снилс" />
+<cEdit v-model="snils" mask="3-3-3-2" placeholder="номер снилс" />
 ```
 
 ```html
-<cEdit v-model="birthday"  mask="2.2.4" placeholder="дата рождения" />
+<cEdit v-model="birthday" mask="2.2.4" placeholder="дата рождения" />
 ```
 
 ```html
-<cEdit v-model="val"  mask="1+1=1" placeholder="решаем примерчик" />
+<cEdit v-model="val" mask="1+1=1" placeholder="решаем примерчик" />
 ```
 
 ```html
-<cEdit v-model="val"  mask="10" placeholder="макс кол-во цифр - 10" />
+<cEdit v-model="val" mask="10" placeholder="макс кол-во цифр - 10" />
 ```
 
 Маску можно применить и к номеру телефона, но если не указать то будет применена стандартная маска формата: 999 999-99-99 (+7 ставится автоматически и к маске отношения не имеет)

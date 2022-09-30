@@ -381,7 +381,7 @@ export default Vue.extend({
                 "--borderWidth": this.borderWidth,
             } as { [key: string]: string }
 
-            if (this.isMultiline && this.cols === 42 && this.width !== "360px") {
+            if (this.isMultiline && this.cols === 42) {
                 style["--width"] = this.width
             }
             const binds = [
@@ -397,7 +397,7 @@ export default Vue.extend({
                         warning: this.isWarning,
                         readonly: this.readonly,
                         "no-resize": this.resize === "none" || this.readonly,
-                        "custom-width": this.isMultiline && this.cols === 42 && this.width !== "360px",
+                        "custom-width": this.isMultiline && this.cols === 42,
                     },
                 },
                 { autocomplete: this.autocomplete },

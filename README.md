@@ -784,7 +784,9 @@ export default Vue.extend({
 
         & > :deep(.ui-drop-down) {
             opacity: 0;
+            visibility: hidden;
             transition: 0.3s;
+            pointer-events: none;
 
             & .ui-checkbox {
                 padding: 10px;
@@ -794,6 +796,8 @@ export default Vue.extend({
         &:hover {
             & > :deep(.ui-drop-down) {
                 opacity: 1;
+                visibility: visible;
+                pointer-events: unset;
             }
         }
     }

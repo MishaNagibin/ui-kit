@@ -48,7 +48,7 @@
             >{{ entry[c.key] }}</td>
             <td
                 v-if="hasCustomSlot"
-                :data-index="index"
+                :data-index="getRowIndex(entry)"
                 :width="customColumn.width || 100"
                 :style="{ '--align': customColumn.align || 'left' }"
             >
@@ -193,6 +193,9 @@ export default Vue.extend({
             if (this.isSelectingRow) {
                 this.$emit("select", item)
             }
+        },
+        getRowIndex(item: any): number {
+            return this.items.findIndex((i) => JSON.stringify(i) === JSON.stringify(item))
         },
     },
 })

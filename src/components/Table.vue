@@ -34,6 +34,11 @@
         <tr
             v-for="(entry, index) in preparedItems"
             :key="`entry-${index}`"
+            :style="{ '--hoverBackground': selectingRowHoverBackground }"
+            :class="{ selecting: isSelectingRow }"
+            :data-tooltip="isSelectingRow !== undefined && selectingRowDataTooltip !== undefined ? selectingRowDataTooltip : undefined"
+            :title="isSelectingRow !== undefined && selectingRowDataTooltip === undefined && selectingRowTooltip !== undefined ? selectingRowTooltip : undefined"
+            @click="selectRow(entry)"
         >
             <td
                 v-for="(c, i) in filteredColumns"
@@ -120,6 +125,20 @@ export default Vue.extend({
             type: String,
             default: "#1e1e1e",
         },
+        isSelectingRow: {
+            type: Boolean,
+            default: false,
+        },
+        selectingRowDataTooltip: {
+            type: String,
+        },
+        selectingRowTooltip: {
+            type: String,
+        },
+        selectingRowHoverBackground: {
+            type: String,
+            default: "#5167e231",
+        },
     },
     data() {
         const sortOrders = {} as { [key: string]: number }
@@ -168,6 +187,11 @@ export default Vue.extend({
             if (this.needSorted) {
                 this.sortKey = key
                 this.sortOrders[key] = this.sortOrders[key] * -1
+            }
+        },
+        selectRow(item: any) {
+            if (this.isSelectingRow) {
+                this.$emit("select", item)
             }
         },
     },
@@ -269,6 +293,18 @@ export default Vue.extend({
             text-align: $align;
             padding: 8px;
             height: 40px;
+        }
+
+        &:not(.header) {
+            transition: 0.3s;
+            $hoverBackground: var(--hoverBackground);
+
+            &.selecting {
+                &:hover {
+                    cursor: pointer;
+                    background-color: $hoverBackground;
+                }
+            }
         }
     }
 }

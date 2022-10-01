@@ -4,16 +4,15 @@
             :columns="columns"
             :items="preparedServices"
             is-full-width
-            need-sorted
             border-radius="10px"
             title="Справочник услуг"
             titlePosition="left"
             titleSize="20px"
-        >
-            <template slot="custom">
-                <button @click="e => check(e)">Изменить</button>
-            </template>
-        </cTable>
+            isSelectingRow
+            selectingRowTooltip="Выбрать"
+            selectingRowDataTooltip="Выбрать 2"
+            @select="selectRow"
+        />
     </div>
 </template>
 
@@ -68,6 +67,9 @@ export default Vue.extend({
         check(e: PointerEvent) {
             const index = Number((e.target as HTMLElement).parentElement?.dataset.index ?? 0)
             console.log(this.preparedServices[index])
+        },
+        selectRow(item: any) {
+            console.log(item, 888)
         },
     },
 })

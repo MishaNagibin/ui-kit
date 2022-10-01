@@ -65,6 +65,7 @@
   - [Пример со слотами](#пример-со-слотами)
   - [Пример массивов для таблицы](#пример-массивов-для-таблицы)
   - [Примеры использования таблицы](#примеры-использования-table)
+  - [Пример с событием select](#пример-с-событием-select)
 
 ## Установка
 
@@ -1590,6 +1591,10 @@ methods: {
 | sortedArrowColor | string | цвет стрелочек для сортировки | #ffffff |
 | rowBackgroundColor | string | фон строчек таблицы `:nth-of-type(2n + 1)` | #3f51b511 |
 | rowColor | string | цвет строчек таблицы `:nth-of-type(2n + 1)` | #1e1e1e |
+| isSelectingRow | boolean | признак, обозначающий, что можно выбрать строку кликнув на нее. Будет отправлено событие `select` с элементом из `items`, который выбрали | false |
+| selectingRowDataTooltip | string | если вы используете мой [vue-data-tooltip](https://www.npmjs.com/package/vue-data-tooltip) то можете задать текст тултипа при наведении на строку | undefined |
+| selectingRowTooltip | string | текст обычного тултипа (title) при наведении на строку, не работает если передано значение для `selectingRowDataTooltip` | undefined |
+| selectingRowHoverBackground | string | фон строки при наведении | #5167e231 |
 
 #### TableColumn:
 
@@ -1702,4 +1707,27 @@ items: [
     row-color="lightgray"
     sorted-arrow-color="red"
 />
+```
+
+#### Пример с событием select:
+```html
+<cTable
+    :columns="columns"
+    :items="items"
+    is-selecting-row
+    border-radius="10px"
+    title="Справочник услуг"
+    title-position="left"
+    title-size="20px"
+    selecting-row-data-tooltip="Выбрать"
+    @select="selectRow"
+/>
+
+...
+
+methods: {
+    selectRow(item) {
+        console.log(item, "Выбранный элемент")
+    }
+}
 ```

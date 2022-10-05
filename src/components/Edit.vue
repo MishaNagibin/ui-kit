@@ -379,13 +379,13 @@ export default Vue.extend({
                 "--color": this.color,
                 "--borderActiveColor": this.borderActiveColor,
                 "--borderWidth": this.borderWidth,
+                resize: ` ${this.readonly ? "none" : this.resize}`,
             } as { [key: string]: string }
 
             if (this.isMultiline && this.cols === 42) {
                 style["--width"] = this.width
             }
             const binds = [
-                { style: `resize: ${this.readonly ? "none" : this.resize}` },
                 { required: this.required },
                 { disabled: this.disabled },
                 { readonly: this.readonly },

@@ -4,26 +4,37 @@
             :columns="columns"
             :items="preparedServices"
             is-full-width
+            need-sorted
             border-radius="10px"
             title="Справочник услуг"
             titlePosition="left"
             titleSize="20px"
-            isSelectingRow
-            selectingRowTooltip="Выбрать"
-            selectingRowDataTooltip="Выбрать 2"
-            @select="selectRow"
-        />
+            @remove="removeItem"
+            @open="openItem"
+        >
+            <template #custom="{ clicked }">
+                <cButton
+                    mode="red"
+                    @click="clicked('remove')"
+                >Удалить</cButton>
+                <cButton
+                    mode="primary"
+                    @click="clicked('open')"
+                >Открыть</cButton>
+            </template>
+        </cTable>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import cTable from "@/components/Table.vue"
+import cButton from "@/components/Button.vue"
 import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cTable },
+    components: { cButton, cTable },
     data() {
         return {
             categories: [
@@ -64,6 +75,12 @@ export default Vue.extend({
         this.isLoaded = true
     },
     methods: {
+        removeItem(item: any) {
+            console.log("Удалить", item);
+        },
+        openItem(item: any) {
+            console.log("Открыть", item);
+        },
         check(e: PointerEvent) {
             const index = Number((e.target as HTMLElement).parentElement?.dataset.index ?? 0)
             console.log(this.preparedServices[index])

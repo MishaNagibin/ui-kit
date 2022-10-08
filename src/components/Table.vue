@@ -48,11 +48,13 @@
             >{{ entry[c.key] }}</td>
             <td
                 v-if="hasCustomSlot"
-                :data-index="getRowIndex(entry)"
                 :width="customColumn.width || 100"
                 :style="{ '--align': customColumn.align || 'left' }"
             >
-                <slot name="custom" />
+                <slot
+                    :clicked="e => clicked(e, entry)"
+                    name="custom"
+                />
             </td>
         </tr>
     </table>
@@ -156,7 +158,7 @@ export default Vue.extend({
         return {
             sortKey: this.columns[0].key,
             sortOrders,
-            hasCustomSlot: !!this.$slots.custom,
+            hasCustomSlot: !!this.$slots.custom || !!this.$scopedSlots.custom,
         }
     },
     computed: {
@@ -188,8 +190,11 @@ export default Vue.extend({
         this.checkSlots()
     },
     methods: {
+        clicked(event: string, item: any) {
+            this.$emit(event, item)
+        },
         checkSlots() {
-            this.hasCustomSlot = !!this.$slots.custom
+            this.hasCustomSlot = !!this.$slots.custom || !!this.$scopedSlots.custom
         },
         sortBy(key: string) {
             if (this.needSorted) {
@@ -201,9 +206,6 @@ export default Vue.extend({
             if (this.isSelectingRow) {
                 this.$emit("select", item)
             }
-        },
-        getRowIndex(item: any): number {
-            return this.items.findIndex((i) => JSON.stringify(i) === JSON.stringify(item))
         },
     },
 })

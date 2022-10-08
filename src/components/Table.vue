@@ -1,8 +1,8 @@
 <template>
     <table
         :align="align"
-        :width="isFullWidth ? '100%' : 'fit-content'"
-        :style="{ '--borderRadius': borderRadius, '--headerBackgroundColor': headerBackgroundColor, '--headerColor': headerColor, '--sortedArrowColor': sortedArrowColor, '--rowBackgroundColor': rowBackgroundColor, '--rowColor': rowColor }"
+        :width="isFullWidth ? '100%' : width"
+        :style="{ '--borderRadius': borderRadius, '--headerBackgroundColor': headerBackgroundColor, '--headerColor': headerColor, '--sortedArrowColor': sortedArrowColor, '--rowBackgroundColor': rowBackgroundColor, '--rowColor': rowColor, '--maxWidth': maxWidth }"
         class="ui-table"
     >
         <caption
@@ -139,6 +139,14 @@ export default Vue.extend({
             type: String,
             default: "#5167e231",
         },
+        width: {
+            type: String,
+            default: "fit-content",
+        },
+        maxWidth: {
+            type: String,
+            default: "none",
+        },
     },
     data() {
         const sortOrders = {} as { [key: string]: number }
@@ -211,8 +219,10 @@ export default Vue.extend({
     $sortedArrowColor: var(--sortedArrowColor);
     $rowBackgroundColor: var(--rowBackgroundColor);
     $rowColor: var(--rowColor);
+    $maxWidth: var(--maxWidth);
     overflow: hidden;
     border-collapse: collapse;
+    max-width: $maxWidth;
 
     & > caption {
         $titleSize: var(--titleSize);

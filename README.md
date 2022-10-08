@@ -1595,6 +1595,8 @@ methods: {
 | selectingRowDataTooltip | string | если вы используете мой [vue-data-tooltip](https://www.npmjs.com/package/vue-data-tooltip) то можете задать текст тултипа при наведении на строку | undefined |
 | selectingRowTooltip | string | текст обычного тултипа (title) при наведении на строку, не работает если передано значение для `selectingRowDataTooltip` | undefined |
 | selectingRowHoverBackground | string | фон строки при наведении | #5167e231 |
+| width | string | ширина таблицы, но при `isFullWidth: true` ширина будет 100% | fit-content |
+| maxWidth | string | максимальная ширина таблицы | none |
 
 #### TableColumn:
 

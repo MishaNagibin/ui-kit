@@ -4535,6 +4535,10 @@ var Table_component = normalizeComponent(
             default: "#d6d6e1",
             validator: (v) => ![""].includes(v),
         },
+        renderAllTabs: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -4635,12 +4639,14 @@ var Table_component = normalizeComponent(
         });
         const main = [];
         if (this.internalTabIndex !== undefined && this.internalTabIndex < tabNames.length) {
-            const currentTab = slots[this.internalTabIndex];
-            const body = currentTab.componentOptions ? (_a = currentTab.componentOptions.children) !== null && _a !== void 0 ? _a : [] : [];
-            const staticClass = ((_b = currentTab.data) !== null && _b !== void 0 ? _b : {}).staticClass;
-            const dynamicClasses = (_d = ((_c = currentTab.data) !== null && _c !== void 0 ? _c : {}).class) !== null && _d !== void 0 ? _d : [];
-            const bodyClasses = [staticClass, ...dynamicClasses].filter((i) => i !== undefined);
-            main.push(h("div", { class: bodyClasses }, body));
+            for (let i = 0; i < (this.renderAllTabs ? slots.length : 1); i++) {
+                const currentTab = slots[this.renderAllTabs ? i : this.internalTabIndex];
+                const body = currentTab.componentOptions ? (_a = currentTab.componentOptions.children) !== null && _a !== void 0 ? _a : [] : [];
+                const staticClass = ((_b = currentTab.data) !== null && _b !== void 0 ? _b : {}).staticClass;
+                const dynamicClasses = (_d = ((_c = currentTab.data) !== null && _c !== void 0 ? _c : {}).class) !== null && _d !== void 0 ? _d : [];
+                const bodyClasses = [staticClass, ...dynamicClasses].filter((i) => i !== undefined);
+                main.push(h("div", { style: { display: !this.renderAllTabs || this.internalTabIndex === i ? "block" : "none" }, class: bodyClasses }, body));
+            }
         }
         this.$nextTick(() => this.updateSliderPos());
         const renderItems = [h("ul", { class: "tabs", ref: "tabs" }, tabNames), h("div", { class: "slider", ref: "slider" })];
@@ -4656,10 +4662,10 @@ var Table_component = normalizeComponent(
 
 ;// CONCATENATED MODULE: ./src/components/Tabs.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Tabsvue_type_script_lang_ts_ = (Tabsvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Tabs.vue?vue&type=style&index=0&id=ad33525e&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Tabs.vue?vue&type=style&index=0&id=879d4690&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Tabs.vue?vue&type=style&index=0&id=ad33525e&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Tabs.vue?vue&type=style&index=0&id=879d4690&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Tabs.vue
 var Tabs_render, Tabs_staticRenderFns
@@ -4676,7 +4682,7 @@ var Tabs_component = normalizeComponent(
   Tabs_staticRenderFns,
   false,
   null,
-  "ad33525e",
+  "879d4690",
   null
   
 )

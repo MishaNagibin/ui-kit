@@ -1387,7 +1387,8 @@ beforeMount() {
 ```
 ## Tabs и Tab
 
-Представляет собой компонент, который отображает контент в табах.
+Представляет собой компонент, который рендерит контент в табах.
+По умолчанию рендерится контент активного таба, т.е. аналогично `v-if`. Однако, если надо рендерить контент всех табов, но при этом не отображать его пока таб не активен, аналогично `v-show`, то нужно передать пропс `renderAllTabs`.
 
 #### Пропсы табов:
 
@@ -1401,6 +1402,7 @@ beforeMount() {
 | hoverColor | string | цвет текста таба при наведении | #3f51b5 |
 | borderActiveColor | string | цвет линии под активным табом | #3f51b5 |
 | borderColor | string | цвет линии под табами | #d6d6e1 |
+| renderAllTabs | boolean | рендерить все табы | false |
 
 #### Примеры использования табов:
 
@@ -1524,6 +1526,51 @@ beforeMount() {
         Контент второго таба
     </cTab>
 </cTabs>
+```
+
+Рендер всех вкладок на примере, что у нас есть разные компоненты, а в каждом компоненте есть инпут, и мы, при переключении вкладок, не хотим терять значение инпута каждого компонента. 
+
+По умолчанию, если делать так без пропса `renderAllRabs: true` - то переключая вкладки, компоненты будут рендериться заново т.е. мы будем каждый раз терять значения инпутов этих компонентов.
+
+```html
+<cTabs
+    :tab-index="tabIndex"
+    is-not-stretch-tabs
+    render-all-tabs
+    @tab-index-change="changeTabIndex"
+>
+    <cTab>
+        <template v-slot:caption>Вкладка 1</template>
+        <cCompOne />
+    </cTab>
+    <cTab>
+        <template v-slot:caption>Вкладка 2</template>
+        <cCompTwo />
+    </cTab>
+    <cTab>
+        <template v-slot:caption>Вкладка 3</template>
+        <cCompThree />
+    </cTab>
+    <cTab>
+        <template v-slot:caption>Вкладка 4</template>
+        <cCompFour />
+    </cTab>
+</cTabs>
+
+...
+
+
+import cTab from "@/components/Tab.vue"
+import cTabs from "@/components/Tabs.vue"
+import cCompOne from "@/components/CompOne.vue"
+import cCompTwo from "@/components/CompTwo.vue"
+import cCompThree from "@/components/CompThree.vue"
+import cCompFour from "@/components/CompFour.vue"
+
+...
+
+components: { cCompOne, cCompTwo, cCompThree, cCompFour, cTab, cTabs },
+
 ```
 
 ## Toggle

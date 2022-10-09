@@ -40,6 +40,10 @@ export default Vue.extend({
             default: "#d6d6e1",
             validator: (v: string) => ![""].includes(v),
         },
+        renderAllTabs: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -159,12 +163,20 @@ export default Vue.extend({
 
         const main: VNodeChildren = []
         if (this.internalTabIndex !== undefined && this.internalTabIndex < tabNames.length) {
-            const currentTab = slots[this.internalTabIndex]
-            const body: VNode[] = currentTab.componentOptions ? currentTab.componentOptions.children ?? [] : []
-            const staticClass = (currentTab.data ?? {}).staticClass
-            const dynamicClasses: any[] = (currentTab.data ?? {}).class ?? []
-            const bodyClasses: any[] = [staticClass, ...dynamicClasses].filter((i) => i !== undefined)
-            main.push(h("div", { class: bodyClasses }, body))
+            for (let i = 0; i < (this.renderAllTabs ? slots.length : 1); i++) {
+                const currentTab = slots[this.renderAllTabs ? i : this.internalTabIndex]
+                const body: VNode[] = currentTab.componentOptions ? currentTab.componentOptions.children ?? [] : []
+                const staticClass = (currentTab.data ?? {}).staticClass
+                const dynamicClasses: any[] = (currentTab.data ?? {}).class ?? []
+                const bodyClasses: any[] = [staticClass, ...dynamicClasses].filter((i) => i !== undefined)
+                main.push(
+                    h(
+                        "div",
+                        { style: { display: !this.renderAllTabs || this.internalTabIndex === i ? "block" : "none" }, class: bodyClasses },
+                        body,
+                    ),
+                )
+            }
         }
 
         this.$nextTick(() => this.updateSliderPos())
@@ -256,12 +268,6 @@ export default Vue.extend({
     & > .border {
         background-color: var(--borderColor);
         z-index: 1;
-    }
-
-    & > div {
-        &:last-of-type {
-            margin-top: 10px;
-        }
     }
 
     &.code {

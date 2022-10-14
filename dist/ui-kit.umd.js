@@ -4185,10 +4185,10 @@ var Slider_component = normalizeComponent(
 )
 
 /* harmony default export */ var Slider = (Slider_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Spinner.vue?vue&type=template&id=40e6fd02&scoped=true&
-var Spinnervue_type_template_id_40e6fd02_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{class:['ui-spinner', _vm.position, { mobile: _vm.isMobile }],style:({ '--color': _vm.color, position: _vm.position, backgroundColor: _vm.hideOverlay ? 'transparent' : '#ffffffc5', zIndex: _vm.position === 'fixed' ? 99992 : 998, '--left': _vm.left, '--top': _vm.top })},[_c('span',{staticClass:"icon spinner",style:({ height: _vm.spinnerSize, width: _vm.spinnerSize })})])
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Spinner.vue?vue&type=template&id=047d746c&scoped=true&
+var Spinnervue_type_template_id_047d746c_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{class:['ui-spinner', _vm.position, { mobile: _vm.isMobile }],style:({ '--color': _vm.color, position: _vm.position, backgroundColor: _vm.hideOverlay ? 'transparent' : '#ffffffc5', zIndex: _vm.position === 'fixed' ? 99992 : 998, '--left': _vm.left, '--top': _vm.top })},[_c('span',{class:`icon spinner${_vm.typeSpinner}`,style:({ height: _vm.spinnerSize, width: _vm.spinnerSize })})])
 }
-var Spinnervue_type_template_id_40e6fd02_scoped_true_staticRenderFns = []
+var Spinnervue_type_template_id_047d746c_scoped_true_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-83.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Spinner.vue?vue&type=script&lang=ts&
@@ -4229,6 +4229,10 @@ var Spinnervue_type_template_id_40e6fd02_scoped_true_staticRenderFns = []
             type: String,
             default: "0",
         },
+        typeSpinner: {
+            type: String,
+            default: "1",
+        },
     },
     computed: {
         spinnerSize() {
@@ -4240,10 +4244,10 @@ var Spinnervue_type_template_id_40e6fd02_scoped_true_staticRenderFns = []
 
 ;// CONCATENATED MODULE: ./src/components/Spinner.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Spinnervue_type_script_lang_ts_ = (Spinnervue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Spinner.vue?vue&type=style&index=0&id=40e6fd02&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Spinner.vue?vue&type=style&index=0&id=047d746c&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Spinner.vue?vue&type=style&index=0&id=40e6fd02&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Spinner.vue?vue&type=style&index=0&id=047d746c&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Spinner.vue
 
@@ -4256,11 +4260,11 @@ var Spinnervue_type_template_id_40e6fd02_scoped_true_staticRenderFns = []
 
 var Spinner_component = normalizeComponent(
   components_Spinnervue_type_script_lang_ts_,
-  Spinnervue_type_template_id_40e6fd02_scoped_true_render,
-  Spinnervue_type_template_id_40e6fd02_scoped_true_staticRenderFns,
+  Spinnervue_type_template_id_047d746c_scoped_true_render,
+  Spinnervue_type_template_id_047d746c_scoped_true_staticRenderFns,
   false,
   null,
-  "40e6fd02",
+  "047d746c",
   null
   
 )

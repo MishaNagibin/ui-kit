@@ -5,7 +5,7 @@
     >
         <span
             :style="{ height: spinnerSize, width: spinnerSize }"
-            class="icon spinner"
+            :class="`icon spinner${typeSpinner}`"
         />
     </div>
 </template>
@@ -48,6 +48,10 @@ export default Vue.extend({
         top: {
             type: String,
             default: "0",
+        },
+        typeSpinner: {
+            type: String,
+            default: "1",
         },
     },
     computed: {

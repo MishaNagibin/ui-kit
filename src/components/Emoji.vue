@@ -73,7 +73,7 @@ export default Vue.extend({
             type: String,
             default: "",
             validator: (v: string) =>
-                ["top-center", "top-left", "top-right", "bottom-center", "bottom-left", "bottom-right", "left", "right"].includes(v),
+                ["", "top-center", "top-left", "top-right", "bottom-center", "bottom-left", "bottom-right", "left", "right"].includes(v),
         },
     },
     data() {

@@ -10,7 +10,7 @@
             ref="emojiButton"
         />
         <div ref="emojiWrapper">
-            <div :class="{ 'has-often-used': hasOftenUsed }">
+            <div :class="[position, { 'has-often-used': hasOftenUsed }]">
                 <div class="menu">
                     <template v-for="(e, i) of emoji">
                         <div
@@ -43,12 +43,13 @@
                             <div
                                 :data-key="i"
                                 :data-collapsed="e.isItemsCollapsed ? 'true' : 'false'"
+                                :class="{ 'not-change-width': !['right', 'left', ''].includes(position) }"
                                 ref="emojiIconsListWrapper"
                             >
                                 <div
                                     v-for="(item, index) of e.items"
                                     :key="index"
-                                    @click="e => select(e, item)"
+                                    @click="select(item)"
                                 >
                                     <span>{{ item }}</span>
                                 </div>
@@ -67,6 +68,14 @@ import { Emoji } from "@/../types/emoji"
 
 export default Vue.extend({
     name: "cEmoji",
+    props: {
+        position: {
+            type: String,
+            default: "",
+            validator: (v: string) =>
+                ["top-center", "top-left", "top-right", "bottom-center", "bottom-left", "bottom-right", "left", "right"].includes(v),
+        },
+    },
     data() {
         return {
             emoji: {
@@ -130,16 +139,13 @@ export default Vue.extend({
             this.emoji.clock.items = oftenUsed
         }
     },
+    mounted() {
+        if (this.position.length > 0) {
+            this.positionEmojiWindow()
+        }
+    },
     methods: {
-        select(e: Event, item: any) {
-            const target =
-                (e.target as HTMLElement).nodeName === "SPAN"
-                    ? ((e.target as HTMLElement).parentElement as HTMLElement)
-                    : (e.target as HTMLElement)
-            target.classList.add("press")
-            setTimeout(() => {
-                target.classList.remove("press")
-            }, 200)
+        select(item: any) {
             this.$emit("select", item)
             if (this.hasOftenUsed) {
                 if (!this.emoji.clock.items.includes(item)) {
@@ -211,37 +217,96 @@ export default Vue.extend({
                 const positionCallback = () => {
                     const button: HTMLButtonElement | any = this.$refs.emojiButton
                     const emojiWrapper: HTMLDivElement | any = this.$refs.emojiWrapper
-                    const DesktopLeftOffset: number = 260 // menu width + padding
-                    const MobileLeftOffset: number = 60 // menu width + padding
-                    const rightOffset: number = 10
-                    const buttonPosition = button.getBoundingClientRect()
-                    const emojiWrapperPosition = emojiWrapper.getBoundingClientRect()
+                    const emojiIconsListWrapper: HTMLDivElement | any = this.$refs.emojiIconsListWrapper
+                    if (this.position.length > 0) {
+                        let left = undefined
+                        let top = undefined
+                        if (emojiWrapper !== undefined && button !== undefined) {
+                            if (this.position.includes("top")) {
+                                top = `-${emojiWrapper.clientHeight - 10}px`
+                            }
 
-                    // left position
-                    if (
-                        ((window.innerWidth > 700 && buttonPosition.left < DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
-                            (window.innerWidth <= 700 && buttonPosition.left < MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
-                        window.innerWidth - buttonPosition.right > emojiWrapperPosition.width + rightOffset
-                    ) {
-                        emojiWrapper.style.left = ""
-                    }
+                            if (this.position.includes("bottom")) {
+                                top = `10px`
+                            }
 
-                    // center position
-                    if (
-                        ((window.innerWidth > 700 && buttonPosition.left > DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
-                            (window.innerWidth <= 700 && buttonPosition.left > MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
-                        window.innerWidth - buttonPosition.right > emojiWrapperPosition.width + rightOffset
-                    ) {
-                        emojiWrapper.style.left = `-${emojiWrapperPosition.width / 2}px`
-                    }
+                            if (this.position.includes("center")) {
+                                left = `-${emojiWrapper.clientWidth / 2}px`
+                            }
 
-                    // right position
-                    if (
-                        ((window.innerWidth > 700 && buttonPosition.left > DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
-                            (window.innerWidth <= 700 && buttonPosition.left > MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
-                        window.innerWidth - buttonPosition.right < emojiWrapperPosition.width / 1.25 + rightOffset
-                    ) {
-                        emojiWrapper.style.left = `-${emojiWrapperPosition.width - buttonPosition.width}px`
+                            if (this.position.includes("left") && this.position !== "left") {
+                                left = `-${emojiWrapper.clientWidth - 44}px`
+                            }
+
+                            if (this.position.includes("right") && this.position !== "right") {
+                                const rectRight = button.getClientRects()[0].left + emojiWrapper.getClientRects()[0].width
+                                left = `${rectRight > window.innerWidth ? window.innerWidth - rectRight - 10 : 0}px`
+                            }
+
+                            if (this.position === "left") {
+                                if (button.getClientRects()[0].left < 370) {
+                                    for (let i of emojiIconsListWrapper) {
+                                        ;(i as HTMLDivElement).style.gridTemplateColumns = "repeat(6, 1fr)"
+                                    }
+                                } else {
+                                    for (let i of emojiIconsListWrapper) {
+                                        ;(i as HTMLDivElement).style.gridTemplateColumns = "repeat(8, 1fr)"
+                                    }
+                                }
+                                top = `-${emojiWrapper.clientHeight / 2}px`
+                                left = `-${emojiWrapper.clientWidth - 24}px`
+                            }
+
+                            if (this.position === "right") {
+                                if (button.getClientRects()[0].left + 400 > window.innerWidth) {
+                                    for (let i of emojiIconsListWrapper) {
+                                        ;(i as HTMLDivElement).style.gridTemplateColumns = "repeat(6, 1fr)"
+                                    }
+                                } else {
+                                    for (let i of emojiIconsListWrapper) {
+                                        ;(i as HTMLDivElement).style.gridTemplateColumns = "repeat(8, 1fr)"
+                                    }
+                                }
+                                top = `-${emojiWrapper.clientHeight / 2}px`
+                                left = `0px`
+                            }
+
+                            emojiWrapper.style.left = left ?? ""
+                            emojiWrapper.style.top = top ?? ""
+                        }
+                    } else {
+                        const DesktopLeftOffset: number = 260 // menu width + padding
+                        const MobileLeftOffset: number = 60 // menu width + padding
+                        const rightOffset: number = 10
+                        const buttonPosition = button.getBoundingClientRect()
+                        const emojiWrapperPosition = emojiWrapper.getBoundingClientRect()
+
+                        // left position
+                        if (
+                            ((window.innerWidth > 700 && buttonPosition.left < DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
+                                (window.innerWidth <= 700 && buttonPosition.left < MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
+                            window.innerWidth - buttonPosition.right > emojiWrapperPosition.width + rightOffset
+                        ) {
+                            emojiWrapper.style.left = ""
+                        }
+
+                        // center position
+                        if (
+                            ((window.innerWidth > 700 && buttonPosition.left > DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
+                                (window.innerWidth <= 700 && buttonPosition.left > MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
+                            window.innerWidth - buttonPosition.right > emojiWrapperPosition.width + rightOffset
+                        ) {
+                            emojiWrapper.style.left = `-${emojiWrapperPosition.width / 2}px`
+                        }
+
+                        // right position
+                        if (
+                            ((window.innerWidth > 700 && buttonPosition.left > DesktopLeftOffset + emojiWrapperPosition.width / 1.25) ||
+                                (window.innerWidth <= 700 && buttonPosition.left > MobileLeftOffset + emojiWrapperPosition.width / 1.25)) &&
+                            window.innerWidth - buttonPosition.right < emojiWrapperPosition.width / 1.25 + rightOffset
+                        ) {
+                            emojiWrapper.style.left = `-${emojiWrapperPosition.width - buttonPosition.width}px`
+                        }
                     }
                 }
 
@@ -293,6 +358,32 @@ export default Vue.extend({
             justify-content: center;
             overflow: hidden;
             max-height: 300px;
+
+            &.top-center,
+            &.top-left,
+            &.top-right {
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+
+            &.bottom-center,
+            &.bottom-left,
+            &.bottom-right {
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+
+            &.right {
+                margin-left: 30px;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            &.left {
+                margin-right: 30px;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
 
             &.has-often-used {
                 max-height: 330px;
@@ -382,8 +473,10 @@ export default Vue.extend({
                         overflow: hidden;
                         transition: all 0.2s ease-in-out;
 
-                        @media screen and (max-width: 1194px) {
-                            grid-template-columns: repeat(4, 1fr);
+                        &:not(.not-change-width) {
+                            @media screen and (max-width: 1194px) {
+                                grid-template-columns: repeat(4, 1fr);
+                            }
                         }
 
                         & > div {
@@ -405,11 +498,6 @@ export default Vue.extend({
                                 & > span {
                                     transform: scale(1.3);
                                 }
-                            }
-
-                            &:active,
-                            &.press {
-                                background-color: #b2c9f7;
                             }
                         }
                     }

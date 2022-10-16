@@ -39,6 +39,7 @@
             />
             <cEmoji
                 v-if="enableEmoji && !readonly && !disabled"
+                :position="emojiPosition"
                 :style="{ right: isClear && value.length > 0 ? '32px' : '10px', '--emojiIconColor': emojiIconColor, '--emojiIconHoverColor': emojiIconHoverColor }"
                 @click="e => e.preventDefault()"
                 @select="selectEmoji"
@@ -148,6 +149,7 @@
             />
             <cEmoji
                 v-if="enableEmoji && !readonly && !disabled && !isPhone"
+                :position="emojiPosition"
                 :style="{ right: isClear && value.length > 0 ? '32px' : '10px', '--emojiIconColor': emojiIconColor, '--emojiIconHoverColor': emojiIconHoverColor }"
                 @click="e => e.preventDefault()"
                 @select="selectEmoji"
@@ -290,6 +292,12 @@ export default Vue.extend({
         enableEmoji: {
             type: Boolean,
             default: false,
+        },
+        emojiPosition: {
+            type: String,
+            default: "",
+            validator: (v: string) =>
+                ["top-center", "top-left", "top-right", "bottom-center", "bottom-left", "bottom-right", "left", "right"].includes(v),
         },
         emojiIconColor: {
             type: String,

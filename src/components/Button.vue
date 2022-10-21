@@ -3,7 +3,7 @@
         v-on="listeners"
         :class="['ui-button', customStyle === undefined ? mode : `custom ${mode === 'gradient' ? 'gradient' : ''}`, size, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, gradient: (customStyle || {}).position !== undefined, 'not-color': customStyle !== undefined && customStyle.color === undefined, 'not-position': customStyle !== undefined && customStyle.position === undefined, 'not-upper-case': dontUpperCase }]"
         :disabled="disabled"
-        :style="customStyle ? { '--background': customStyle.background, '--hover': customStyle.hover, '--active': customStyle.active, '--color': customStyle.color, '--position': customStyle.position } : {}"
+        :style="customStyle ? { '--background': customStyle.background, '--hover': customStyle.hover, '--active': customStyle.active, '--color': customStyle.color, '--position': customStyle.position, width: width !== undefined ? width : '', height: height !== undefined ? height : '' } : { width: width !== undefined ? width : '', height: height !== undefined ? height : '' }"
         ref="btn"
         @touchstart="touchStart"
         @touchend="touchEnd"
@@ -80,6 +80,12 @@ export default Vue.extend({
         isMobile: {
             type: Boolean,
             default: false,
+        },
+        width: {
+            type: String,
+        },
+        height: {
+            type: String,
         },
     },
     data() {

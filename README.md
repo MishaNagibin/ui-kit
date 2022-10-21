@@ -348,10 +348,12 @@ closeAlert() {
 | type | string | тип кнопки, допустимые значения: button &#124; submit &#124; reset | button |
 | isLoading | boolean | нужно показать индикатор загрузки на кнопке | false |
 | disabled | boolean | кнопка отключена | false |
-| size | string | размер стрелки, допустимые значения: s &#124; m &#124; l &#124; xl, подробнее в таблице ниже | m |
+| size | string | размер кнопки, допустимые значения: s &#124; m &#124; l &#124; xl, подробнее в таблице ниже | m |
 | dontUpperCase | boolean | текст в кнопке не должен быть в верхнем регистре (по умолчанию он в верхнем регистре) | false |
 | isMobile | boolean | кнопка должна быть в стиле для мобильных устройств | false |
 | customStyle | ButtonCustomStyle | кастомные стили кнопки, подробнее в таблице ниже  | undefined |
+| width | string | ширина кнопки | undefined |
+| height | string | высота кнопки | undefined |
 
 #### Стили кнопки:
 

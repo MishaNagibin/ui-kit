@@ -738,10 +738,10 @@ var ArrowSVG_component = normalizeComponent(
 )
 
 /* harmony default export */ var ArrowSVG = (ArrowSVG_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=template&id=46675f7a&scoped=true&
-var Buttonvue_type_template_id_46675f7a_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('button',_vm._g({ref:"btn",class:['ui-button', _vm.customStyle === undefined ? _vm.mode : `custom ${_vm.mode === 'gradient' ? 'gradient' : ''}`, _vm.size, { active: _vm.isTouch, touch: _vm.isTouch, loading: _vm.isLoading, mobile: _vm.isMobile, gradient: (_vm.customStyle || {}).position !== undefined, 'not-color': _vm.customStyle !== undefined && _vm.customStyle.color === undefined, 'not-position': _vm.customStyle !== undefined && _vm.customStyle.position === undefined, 'not-upper-case': _vm.dontUpperCase }],style:(_vm.customStyle ? { '--background': _vm.customStyle.background, '--hover': _vm.customStyle.hover, '--active': _vm.customStyle.active, '--color': _vm.customStyle.color, '--position': _vm.customStyle.position } : {}),attrs:{"disabled":_vm.disabled},on:{"touchstart":_vm.touchStart,"touchend":_vm.touchEnd,"touchcancel":_vm.touchEnd,"touchmove":_vm.touchMove,"mousedown":_vm.mouseDown,"mouseup":_vm.mouseUp,"mouseout":_vm.mouseUp}},_vm.listeners),[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoading),expression:"isLoading"}],staticClass:"icon spinner"}),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isLoading),expression:"!isLoading"}],staticClass:"caption"},[_vm._t("default")],2)])
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=template&id=153ba07e&scoped=true&
+var Buttonvue_type_template_id_153ba07e_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('button',_vm._g({ref:"btn",class:['ui-button', _vm.customStyle === undefined ? _vm.mode : `custom ${_vm.mode === 'gradient' ? 'gradient' : ''}`, _vm.size, { active: _vm.isTouch, touch: _vm.isTouch, loading: _vm.isLoading, mobile: _vm.isMobile, gradient: (_vm.customStyle || {}).position !== undefined, 'not-color': _vm.customStyle !== undefined && _vm.customStyle.color === undefined, 'not-position': _vm.customStyle !== undefined && _vm.customStyle.position === undefined, 'not-upper-case': _vm.dontUpperCase }],style:(_vm.customStyle ? { '--background': _vm.customStyle.background, '--hover': _vm.customStyle.hover, '--active': _vm.customStyle.active, '--color': _vm.customStyle.color, '--position': _vm.customStyle.position, width: _vm.width !== undefined ? _vm.width : '', height: _vm.height !== undefined ? _vm.height : '' } : { width: _vm.width !== undefined ? _vm.width : '', height: _vm.height !== undefined ? _vm.height : '' }),attrs:{"disabled":_vm.disabled},on:{"touchstart":_vm.touchStart,"touchend":_vm.touchEnd,"touchcancel":_vm.touchEnd,"touchmove":_vm.touchMove,"mousedown":_vm.mouseDown,"mouseup":_vm.mouseUp,"mouseout":_vm.mouseUp}},_vm.listeners),[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoading),expression:"isLoading"}],staticClass:"icon spinner"}),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isLoading),expression:"!isLoading"}],staticClass:"caption"},[_vm._t("default")],2)])
 }
-var Buttonvue_type_template_id_46675f7a_scoped_true_staticRenderFns = []
+var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-83.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=script&lang=ts&
@@ -794,6 +794,12 @@ var Buttonvue_type_template_id_46675f7a_scoped_true_staticRenderFns = []
         isMobile: {
             type: Boolean,
             default: false,
+        },
+        width: {
+            type: String,
+        },
+        height: {
+            type: String,
         },
     },
     data() {
@@ -851,10 +857,10 @@ var Buttonvue_type_template_id_46675f7a_scoped_true_staticRenderFns = []
 
 ;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Buttonvue_type_script_lang_ts_ = (Buttonvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=style&index=0&id=46675f7a&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=style&index=0&id=153ba07e&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=style&index=0&id=46675f7a&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=style&index=0&id=153ba07e&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Button.vue
 
@@ -867,11 +873,11 @@ var Buttonvue_type_template_id_46675f7a_scoped_true_staticRenderFns = []
 
 var Button_component = normalizeComponent(
   components_Buttonvue_type_script_lang_ts_,
-  Buttonvue_type_template_id_46675f7a_scoped_true_render,
-  Buttonvue_type_template_id_46675f7a_scoped_true_staticRenderFns,
+  Buttonvue_type_template_id_153ba07e_scoped_true_render,
+  Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns,
   false,
   null,
-  "46675f7a",
+  "153ba07e",
   null
   
 )

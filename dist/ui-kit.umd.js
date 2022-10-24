@@ -738,10 +738,10 @@ var ArrowSVG_component = normalizeComponent(
 )
 
 /* harmony default export */ var ArrowSVG = (ArrowSVG_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=template&id=153ba07e&scoped=true&
-var Buttonvue_type_template_id_153ba07e_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('button',_vm._g({ref:"btn",class:['ui-button', _vm.customStyle === undefined ? _vm.mode : `custom ${_vm.mode === 'gradient' ? 'gradient' : ''}`, _vm.size, { active: _vm.isTouch, touch: _vm.isTouch, loading: _vm.isLoading, mobile: _vm.isMobile, gradient: (_vm.customStyle || {}).position !== undefined, 'not-color': _vm.customStyle !== undefined && _vm.customStyle.color === undefined, 'not-position': _vm.customStyle !== undefined && _vm.customStyle.position === undefined, 'not-upper-case': _vm.dontUpperCase }],style:(_vm.customStyle ? { '--background': _vm.customStyle.background, '--hover': _vm.customStyle.hover, '--active': _vm.customStyle.active, '--color': _vm.customStyle.color, '--position': _vm.customStyle.position, width: _vm.width !== undefined ? _vm.width : '', height: _vm.height !== undefined ? _vm.height : '' } : { width: _vm.width !== undefined ? _vm.width : '', height: _vm.height !== undefined ? _vm.height : '' }),attrs:{"disabled":_vm.disabled},on:{"touchstart":_vm.touchStart,"touchend":_vm.touchEnd,"touchcancel":_vm.touchEnd,"touchmove":_vm.touchMove,"mousedown":_vm.mouseDown,"mouseup":_vm.mouseUp,"mouseout":_vm.mouseUp}},_vm.listeners),[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoading),expression:"isLoading"}],staticClass:"icon spinner"}),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isLoading),expression:"!isLoading"}],staticClass:"caption"},[_vm._t("default")],2)])
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=template&id=9b136a04&scoped=true&
+var Buttonvue_type_template_id_9b136a04_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('button',_vm._g({ref:"btn",class:['ui-button', _vm.size, _vm.mode, { active: _vm.isTouch, touch: _vm.isTouch, loading: _vm.isLoading, mobile: _vm.isMobile, 'not-upper-case': _vm.dontUpperCase }],style:(_vm.styles),attrs:{"disabled":_vm.disabled},on:{"touchstart":_vm.touchStart,"touchend":_vm.touchEnd,"touchcancel":_vm.touchEnd,"touchmove":_vm.touchMove,"mousedown":_vm.mouseDown,"mouseup":_vm.mouseUp,"mouseleave":_vm.mouseUp}},_vm.listeners),[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoading),expression:"isLoading"}],staticClass:"icon spinner"}),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isLoading),expression:"!isLoading"}],staticClass:"caption"},[_vm._t("default")],2)])
 }
-var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
+var Buttonvue_type_template_id_9b136a04_scoped_true_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-83.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=script&lang=ts&
@@ -784,8 +784,67 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
             default: "m",
             validator: (v) => ["s", "m", "l", "xl"].includes(v),
         },
-        customStyle: {
-            type: Object,
+        background: {
+            type: String,
+        },
+        backgroundHoverColor: {
+            type: String,
+        },
+        backgroundActiveColor: {
+            type: String,
+        },
+        color: {
+            type: String,
+        },
+        colorHover: {
+            type: String,
+        },
+        colorActive: {
+            type: String,
+        },
+        backgroundPosition: {
+            type: String,
+        },
+        fontSize: {
+            type: String,
+            default: "12px",
+        },
+        fontWeight: {
+            type: String,
+            default: "600",
+        },
+        padding: {
+            type: String,
+            default: "8px 4px 8px 4px",
+        },
+        lineHeight: {
+            type: String,
+            default: "15px",
+        },
+        border: {
+            type: String,
+        },
+        borderWidth: {
+            type: String,
+        },
+        borderColor: {
+            type: String,
+        },
+        borderHoverColor: {
+            type: String,
+        },
+        borderActiveColor: {
+            type: String,
+        },
+        iconColor: {
+            type: String,
+        },
+        iconHoverColor: {
+            type: String,
+        },
+        borderRadius: {
+            type: String,
+            default: "5px",
         },
         dontUpperCase: {
             type: Boolean,
@@ -805,6 +864,107 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
     data() {
         return {
             isTouch: false,
+            modeProperties: {
+                normal: {
+                    background: "transparent",
+                    borderColor: "#3f51b5",
+                    color: "#3f51b5",
+                    iconColor: "#3f51b5",
+                    borderHoverColor: "#4960df",
+                    colorHover: "#4960df",
+                    iconHoverColor: "#4960df",
+                    borderActiveColor: "#818ca9",
+                    colorActive: "#818ca9",
+                },
+                orange: {
+                    background: "#ff7a00",
+                    borderColor: "#ff7a00",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#ffae63",
+                    backgroundHoverColor: "#ffae63",
+                    borderActiveColor: "#dd6a00",
+                    backgroundActiveColor: "#dd6a00",
+                },
+                primary: {
+                    background: "#3f51b5",
+                    borderColor: "#3f51b5",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#4960df",
+                    backgroundHoverColor: "#4960df",
+                    borderActiveColor: "#32408f",
+                    backgroundActiveColor: "#32408f",
+                },
+                red: {
+                    background: "#f14a4a",
+                    borderColor: "#f14a4a",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#f36363",
+                    backgroundHoverColor: "#f36363",
+                    borderActiveColor: "#db3a3a",
+                    backgroundActiveColor: "#db3a3a",
+                },
+                white: {
+                    background: "#ffffff",
+                    borderColor: "transparent",
+                    color: "#1e1e1e",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#4960df",
+                    borderActiveColor: "#32408f",
+                },
+                green: {
+                    background: "#19be6b",
+                    borderColor: "#19be6b",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#07d088",
+                    backgroundHoverColor: "#07d088",
+                    borderActiveColor: "#008000",
+                    backgroundActiveColor: "#008000",
+                },
+                crimson: {
+                    background: "#ff0089",
+                    borderColor: "#ff0089",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#cc006e",
+                    backgroundHoverColor: "#cc006e",
+                    borderActiveColor: "#cc006e",
+                    backgroundActiveColor: "#cc006e",
+                },
+                "white-to-crimson": {
+                    background: "#ffffff",
+                    borderColor: "#ff0089",
+                    color: "#ff0089",
+                    iconColor: "#ff0089",
+                    borderHoverColor: "#ff0089",
+                    backgroundHoverColor: "#ff0089",
+                    colorHover: "#ffffff",
+                    iconHoverColor: "#ffffff",
+                    borderActiveColor: "#cc006e",
+                    backgroundActiveColor: "#cc006e",
+                },
+                gradient: {
+                    background: "linear-gradient(92.59deg, #f9028a, #484db2, #f841aa, #5c45fb) 0% 50% / 300% 100%",
+                    border: "none",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    backgroundPosition: "55% 50%",
+                },
+                "just-text": {
+                    background: "unset",
+                    border: "none",
+                    colorHover: "#4960df",
+                },
+                disabled: {
+                    background: "#d6d6e1",
+                    borderColor: "#d6d6e1",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                },
+            },
         };
     },
     computed: {
@@ -813,6 +973,45 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
                 ...this.$listeners,
                 click: this.click,
             };
+        },
+        styles() {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13;
+            const style = {};
+            style["--background"] = (_b = (_a = this.background) !== null && _a !== void 0 ? _a : this.modeProperties[this.mode].background) !== null && _b !== void 0 ? _b : "";
+            style["--backgroundHoverColor"] =
+                this.mode === "gradient"
+                    ? (_d = (_c = this.background) !== null && _c !== void 0 ? _c : this.modeProperties[this.mode].background) !== null && _d !== void 0 ? _d : "" : (_g = (_f = (_e = this.backgroundHoverColor) !== null && _e !== void 0 ? _e : this.modeProperties[this.mode].backgroundHoverColor) !== null && _f !== void 0 ? _f : this.modeProperties[this.mode].background) !== null && _g !== void 0 ? _g : "";
+            style["--backgroundActiveColor"] =
+                this.mode === "gradient"
+                    ? (_j = (_h = this.background) !== null && _h !== void 0 ? _h : this.modeProperties[this.mode].background) !== null && _j !== void 0 ? _j : "" : (_m = (_l = (_k = this.backgroundActiveColor) !== null && _k !== void 0 ? _k : this.modeProperties[this.mode].backgroundActiveColor) !== null && _l !== void 0 ? _l : this.modeProperties[this.mode].background) !== null && _m !== void 0 ? _m : "";
+            style["--backgroundPosition"] = (_p = (_o = this.backgroundPosition) !== null && _o !== void 0 ? _o : this.modeProperties[this.mode].backgroundPosition) !== null && _p !== void 0 ? _p : "";
+            style["--color"] = (_r = (_q = this.color) !== null && _q !== void 0 ? _q : this.modeProperties[this.mode].color) !== null && _r !== void 0 ? _r : "";
+            style["--colorHover"] = (_u = (_t = (_s = this.colorHover) !== null && _s !== void 0 ? _s : this.modeProperties[this.mode].colorHover) !== null && _t !== void 0 ? _t : this.modeProperties[this.mode].color) !== null && _u !== void 0 ? _u : "";
+            style["--colorActive"] = (_y = (_x = (_w = (_v = this.colorActive) !== null && _v !== void 0 ? _v : this.modeProperties[this.mode].colorActive) !== null && _w !== void 0 ? _w : this.modeProperties[this.mode].colorHover) !== null && _x !== void 0 ? _x : this.modeProperties[this.mode].color) !== null && _y !== void 0 ? _y : "";
+            style["--borderColor"] = (_0 = (_z = this.borderColor) !== null && _z !== void 0 ? _z : this.modeProperties[this.mode].borderColor) !== null && _0 !== void 0 ? _0 : "";
+            style["--borderHoverColor"] = (_3 = (_2 = (_1 = this.borderHoverColor) !== null && _1 !== void 0 ? _1 : this.modeProperties[this.mode].borderHoverColor) !== null && _2 !== void 0 ? _2 : this.modeProperties[this.mode].borderColor) !== null && _3 !== void 0 ? _3 : "";
+            style["--borderActiveColor"] = (_6 = (_5 = (_4 = this.borderActiveColor) !== null && _4 !== void 0 ? _4 : this.modeProperties[this.mode].borderActiveColor) !== null && _5 !== void 0 ? _5 : this.modeProperties[this.mode].borderColor) !== null && _6 !== void 0 ? _6 : "";
+            style["--iconColor"] = (_8 = (_7 = this.iconColor) !== null && _7 !== void 0 ? _7 : this.modeProperties[this.mode].iconColor) !== null && _8 !== void 0 ? _8 : "";
+            style["--iconHoverColor"] = (_11 = (_10 = (_9 = this.iconHoverColor) !== null && _9 !== void 0 ? _9 : this.modeProperties[this.mode].iconHoverColor) !== null && _10 !== void 0 ? _10 : this.modeProperties[this.mode].iconColor) !== null && _11 !== void 0 ? _11 : "";
+            style["--border"] = (_13 = (_12 = this.border) !== null && _12 !== void 0 ? _12 : this.modeProperties[this.mode].border) !== null && _13 !== void 0 ? _13 : "1px solid";
+            style.borderRadius = this.borderRadius;
+            style.fontWeight = this.fontWeight;
+            style.padding = this.padding;
+            style.lineHeight = this.lineHeight;
+            if (this.fontSize !== undefined) {
+                style.fontSize = this.fontSize;
+            }
+            if (this.borderWidth !== undefined) {
+                style.borderWidth = this.borderWidth;
+            }
+            if (this.width !== undefined) {
+                style.width = this.width;
+                style.maxWidth = "unset";
+            }
+            if (this.height !== undefined) {
+                style.height = this.height;
+            }
+            return style;
         },
     },
     methods: {
@@ -832,7 +1031,7 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
         touchEnd() {
             setTimeout(() => {
                 this.isTouch = false;
-            }, this.mode === "gradient" ? 300 : 100);
+            }, this.mode === "gradient" ? 300 : 300);
         },
         mouseDown() {
             this.isTouch = true;
@@ -840,7 +1039,7 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
         mouseUp() {
             setTimeout(() => {
                 this.isTouch = false;
-            }, this.mode === "gradient" ? 300 : 100);
+            }, this.mode === "gradient" ? 300 : 300);
         },
         touchMove(e) {
             const btn = this.$refs.btn;
@@ -857,10 +1056,10 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
 
 ;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Buttonvue_type_script_lang_ts_ = (Buttonvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=style&index=0&id=153ba07e&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Button.vue?vue&type=style&index=0&id=9b136a04&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=style&index=0&id=153ba07e&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Button.vue?vue&type=style&index=0&id=9b136a04&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Button.vue
 
@@ -873,11 +1072,11 @@ var Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns = []
 
 var Button_component = normalizeComponent(
   components_Buttonvue_type_script_lang_ts_,
-  Buttonvue_type_template_id_153ba07e_scoped_true_render,
-  Buttonvue_type_template_id_153ba07e_scoped_true_staticRenderFns,
+  Buttonvue_type_template_id_9b136a04_scoped_true_render,
+  Buttonvue_type_template_id_9b136a04_scoped_true_staticRenderFns,
   false,
   null,
-  "153ba07e",
+  "9b136a04",
   null
   
 )

@@ -1,9 +1,9 @@
 <template>
     <button
         v-on="listeners"
-        :class="['ui-button', customStyle === undefined ? mode : `custom ${mode === 'gradient' ? 'gradient' : ''}`, size, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, gradient: (customStyle || {}).position !== undefined, 'not-color': customStyle !== undefined && customStyle.color === undefined, 'not-position': customStyle !== undefined && customStyle.position === undefined, 'not-upper-case': dontUpperCase }]"
+        :class="['ui-button', size, mode, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, 'not-upper-case': dontUpperCase }]"
         :disabled="disabled"
-        :style="customStyle ? { '--background': customStyle.background, '--hover': customStyle.hover, '--active': customStyle.active, '--color': customStyle.color, '--position': customStyle.position, width: width !== undefined ? width : '', height: height !== undefined ? height : '' } : { width: width !== undefined ? width : '', height: height !== undefined ? height : '' }"
+        :style="styles"
         ref="btn"
         @touchstart="touchStart"
         @touchend="touchEnd"
@@ -11,7 +11,7 @@
         @touchmove="touchMove"
         @mousedown="mouseDown"
         @mouseup="mouseUp"
-        @mouseout="mouseUp"
+        @mouseleave="mouseUp"
     >
         <span
             v-show="isLoading"
@@ -28,8 +28,6 @@
 
 <script lang="ts">
 import Vue from "vue"
-import { ButtonCustomStyle } from "@/../types/button"
-import { Prop } from "vue/types/options"
 
 export default Vue.extend({
     name: "cButton",
@@ -70,8 +68,67 @@ export default Vue.extend({
             default: "m",
             validator: (v: string) => ["s", "m", "l", "xl"].includes(v),
         },
-        customStyle: {
-            type: Object as Prop<ButtonCustomStyle>,
+        background: {
+            type: String,
+        },
+        backgroundHoverColor: {
+            type: String,
+        },
+        backgroundActiveColor: {
+            type: String,
+        },
+        color: {
+            type: String,
+        },
+        colorHover: {
+            type: String,
+        },
+        colorActive: {
+            type: String,
+        },
+        backgroundPosition: {
+            type: String,
+        },
+        fontSize: {
+            type: String,
+            default: "12px",
+        },
+        fontWeight: {
+            type: String,
+            default: "600",
+        },
+        padding: {
+            type: String,
+            default: "8px 4px 8px 4px",
+        },
+        lineHeight: {
+            type: String,
+            default: "15px",
+        },
+        border: {
+            type: String,
+        },
+        borderWidth: {
+            type: String,
+        },
+        borderColor: {
+            type: String,
+        },
+        borderHoverColor: {
+            type: String,
+        },
+        borderActiveColor: {
+            type: String,
+        },
+        iconColor: {
+            type: String,
+        },
+        iconHoverColor: {
+            type: String,
+        },
+        borderRadius: {
+            type: String,
+            default: "5px",
         },
         dontUpperCase: {
             type: Boolean,
@@ -91,6 +148,107 @@ export default Vue.extend({
     data() {
         return {
             isTouch: false,
+            modeProperties: {
+                normal: {
+                    background: "transparent",
+                    borderColor: "#3f51b5",
+                    color: "#3f51b5",
+                    iconColor: "#3f51b5",
+                    borderHoverColor: "#4960df",
+                    colorHover: "#4960df",
+                    iconHoverColor: "#4960df",
+                    borderActiveColor: "#818ca9",
+                    colorActive: "#818ca9",
+                },
+                orange: {
+                    background: "#ff7a00",
+                    borderColor: "#ff7a00",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#ffae63",
+                    backgroundHoverColor: "#ffae63",
+                    borderActiveColor: "#dd6a00",
+                    backgroundActiveColor: "#dd6a00",
+                },
+                primary: {
+                    background: "#3f51b5",
+                    borderColor: "#3f51b5",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#4960df",
+                    backgroundHoverColor: "#4960df",
+                    borderActiveColor: "#32408f",
+                    backgroundActiveColor: "#32408f",
+                },
+                red: {
+                    background: "#f14a4a",
+                    borderColor: "#f14a4a",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#f36363",
+                    backgroundHoverColor: "#f36363",
+                    borderActiveColor: "#db3a3a",
+                    backgroundActiveColor: "#db3a3a",
+                },
+                white: {
+                    background: "#ffffff",
+                    borderColor: "transparent",
+                    color: "#1e1e1e",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#4960df",
+                    borderActiveColor: "#32408f",
+                },
+                green: {
+                    background: "#19be6b",
+                    borderColor: "#19be6b",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#07d088",
+                    backgroundHoverColor: "#07d088",
+                    borderActiveColor: "#008000",
+                    backgroundActiveColor: "#008000",
+                },
+                crimson: {
+                    background: "#ff0089",
+                    borderColor: "#ff0089",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    borderHoverColor: "#cc006e",
+                    backgroundHoverColor: "#cc006e",
+                    borderActiveColor: "#cc006e",
+                    backgroundActiveColor: "#cc006e",
+                },
+                "white-to-crimson": {
+                    background: "#ffffff",
+                    borderColor: "#ff0089",
+                    color: "#ff0089",
+                    iconColor: "#ff0089",
+                    borderHoverColor: "#ff0089",
+                    backgroundHoverColor: "#ff0089",
+                    colorHover: "#ffffff",
+                    iconHoverColor: "#ffffff",
+                    borderActiveColor: "#cc006e",
+                    backgroundActiveColor: "#cc006e",
+                },
+                gradient: {
+                    background: "linear-gradient(92.59deg, #f9028a, #484db2, #f841aa, #5c45fb) 0% 50% / 300% 100%",
+                    border: "none",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                    backgroundPosition: "55% 50%",
+                },
+                "just-text": {
+                    background: "unset",
+                    border: "none",
+                    colorHover: "#4960df",
+                },
+                disabled: {
+                    background: "#d6d6e1",
+                    borderColor: "#d6d6e1",
+                    color: "#ffffff",
+                    iconColor: "#ffffff",
+                },
+            } as { [key: string]: { [key: string]: string } },
         }
     },
     computed: {
@@ -99,6 +257,64 @@ export default Vue.extend({
                 ...this.$listeners,
                 click: this.click,
             }
+        },
+        styles(): { [key: string]: string } {
+            const style = {} as { [key: string]: string }
+            style["--background"] = this.background ?? this.modeProperties[this.mode].background ?? ""
+            style["--backgroundHoverColor"] =
+                this.mode === "gradient"
+                    ? this.background ?? this.modeProperties[this.mode].background ?? ""
+                    : this.backgroundHoverColor ??
+                      this.modeProperties[this.mode].backgroundHoverColor ??
+                      this.modeProperties[this.mode].background ??
+                      ""
+            style["--backgroundActiveColor"] =
+                this.mode === "gradient"
+                    ? this.background ?? this.modeProperties[this.mode].background ?? ""
+                    : this.backgroundActiveColor ??
+                      this.modeProperties[this.mode].backgroundActiveColor ??
+                      this.modeProperties[this.mode].background ??
+                      ""
+            style["--backgroundPosition"] = this.backgroundPosition ?? this.modeProperties[this.mode].backgroundPosition ?? ""
+            style["--color"] = this.color ?? this.modeProperties[this.mode].color ?? ""
+            style["--colorHover"] =
+                this.colorHover ?? this.modeProperties[this.mode].colorHover ?? this.modeProperties[this.mode].color ?? ""
+            style["--colorActive"] =
+                this.colorActive ??
+                this.modeProperties[this.mode].colorActive ??
+                this.modeProperties[this.mode].colorHover ??
+                this.modeProperties[this.mode].color ??
+                ""
+            style["--borderColor"] = this.borderColor ?? this.modeProperties[this.mode].borderColor ?? ""
+            style["--borderHoverColor"] =
+                this.borderHoverColor ?? this.modeProperties[this.mode].borderHoverColor ?? this.modeProperties[this.mode].borderColor ?? ""
+            style["--borderActiveColor"] =
+                this.borderActiveColor ??
+                this.modeProperties[this.mode].borderActiveColor ??
+                this.modeProperties[this.mode].borderColor ??
+                ""
+            style["--iconColor"] = this.iconColor ?? this.modeProperties[this.mode].iconColor ?? ""
+            style["--iconHoverColor"] =
+                this.iconHoverColor ?? this.modeProperties[this.mode].iconHoverColor ?? this.modeProperties[this.mode].iconColor ?? ""
+            style["--border"] = this.border ?? this.modeProperties[this.mode].border ?? "1px solid"
+            style.borderRadius = this.borderRadius
+            style.fontWeight = this.fontWeight
+            style.padding = this.padding
+            style.lineHeight = this.lineHeight
+            if (this.fontSize !== undefined) {
+                style.fontSize = this.fontSize
+            }
+            if (this.borderWidth !== undefined) {
+                style.borderWidth = this.borderWidth
+            }
+            if (this.width !== undefined) {
+                style.width = this.width
+                style.maxWidth = "unset"
+            }
+            if (this.height !== undefined) {
+                style.height = this.height
+            }
+            return style
         },
     },
     methods: {
@@ -122,7 +338,7 @@ export default Vue.extend({
                 () => {
                     this.isTouch = false
                 },
-                this.mode === "gradient" ? 300 : 100,
+                this.mode === "gradient" ? 300 : 300,
             )
         },
         mouseDown() {
@@ -133,7 +349,7 @@ export default Vue.extend({
                 () => {
                     this.isTouch = false
                 },
-                this.mode === "gradient" ? 300 : 100,
+                this.mode === "gradient" ? 300 : 300,
             )
         },
         touchMove(e: TouchEvent) {
@@ -156,21 +372,34 @@ export default Vue.extend({
 @import "../styles/icons";
 
 .ui-button {
+    $background: var(--background);
+    $backgroundHoverColor: var(--backgroundHoverColor);
+    $backgroundActiveColor: var(--backgroundActiveColor);
+    $backgroundPosition: var(--backgroundPosition);
+    $color: var(--color);
+    $colorHover: var(--colorHover);
+    $colorActive: var(--colorActive);
+    $border: var(--border);
+    $borderColor: var(--borderColor);
+    $borderHoverColor: var(--borderHoverColor);
+    $borderActiveColor: var(--borderActiveColor);
+    $iconColor: var(--iconColor);
+    $iconHoverColor: var(--iconHoverColor);
+
+    border: $border;
+    background: $background;
+    border-color: $borderColor;
+    color: $color;
+
     font-family: "Montserrat", sans-serif;
     position: relative;
     display: inline-flex;
     text-align: center;
     box-sizing: border-box;
-    border: 1px solid;
-    border-radius: 5px;
     outline: none;
     user-select: none;
     cursor: pointer;
-    transition: all 0.3s, color 0s, background 0.3s ease-in-out;
-    padding: 8px 4px 8px 4px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 15px;
+    transition: all 0.3s, color 0.3s, background 0.3s ease-in-out;
     letter-spacing: 0.065em;
     text-transform: uppercase;
     width: 100%;
@@ -220,281 +449,52 @@ export default Vue.extend({
         cursor: default;
     }
 
-    &.normal {
-        background: transparent;
-        border-color: $primary-500;
-        color: $primary-500;
-
-        & .icon {
-            background-color: $primary-500;
-        }
-
-        &:not(.mobile) {
-            &:hover {
-                border-color: $primary-350;
-                color: $primary-350;
-
-                & .icon {
-                    background-color: $primary-350;
-                }
-            }
-
-            &.active {
-                border-color: #818ca9;
-                color: #818ca9;
-            }
-        }
-
-        &.touch {
-            border-color: #818ca9;
-            color: #818ca9;
-        }
+    & .icon {
+        background-color: $iconColor;
     }
 
-    &.orange {
-        background: $orange-600;
-        border-color: $orange-600;
-        color: $gray-000;
+    &:not(.mobile) {
+        &:hover {
+            background: $backgroundHoverColor;
+            border-color: $borderHoverColor;
+            color: $colorHover;
 
-        & .icon {
-            background-color: $gray-000;
-        }
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: #ffae63;
-                border-color: #ffae63;
-                color: $gray-000;
-
-                & .icon {
-                    background-color: $gray-000;
-                }
-            }
-
-            &.active {
-                background-color: #dd6a00;
+            & .icon {
+                background-color: $iconHoverColor;
             }
         }
 
-        &.touch {
-            background-color: #dd6a00;
-        }
-    }
-
-    &.primary {
-        background-color: $primary-500;
-        border-color: $primary-500;
-        color: $gray-000;
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: $primary-350;
-            }
-
-            &.active {
-                background-color: $primary-700;
-            }
-        }
-
-        &.loading,
-        &.touch {
-            background-color: $primary-700;
-        }
-    }
-
-    &.red {
-        background-color: $red-500;
-        border-color: $red-500;
-        color: $gray-000;
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: $red-400;
-            }
-
-            &.active {
-                background-color: $red-600;
-            }
-        }
-
-        &.loading,
-        &.touch {
-            background-color: $red-600;
-        }
-    }
-
-    &.white {
-        background-color: $gray-000;
-        border-color: transparent;
-        color: #1e1e1e;
-        font-weight: 500;
-
-        &:not(.mobile) {
-            &:hover {
-                border-color: $primary-350;
-            }
-
-            &.active {
-                border-color: $primary-700;
-            }
-        }
-
-        &.loading,
-        &.touch {
-            border-color: $primary-350;
-        }
-    }
-
-    &.green {
-        background-color: $green-400;
-        border-color: $green-400;
-        color: $gray-000;
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: $green-350;
-            }
-
-            &.active {
-                background-color: $green-500;
-            }
-        }
-
-        &.loading,
-        &.touch {
-            background-color: $green-500;
-        }
-    }
-
-    &.crimson {
-        background-color: $pink-500;
-        border-color: $pink-500;
-        color: $gray-000;
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: #cc006e;
-                border-color: #cc006e;
-            }
-        }
-
-        &.touch {
-            background-color: #cc006e;
-            border-color: #cc006e;
+        &.active,
+        &.touch,
+        &.loading {
+            background: $backgroundActiveColor;
+            border-color: $borderActiveColor;
+            color: $colorActive;
         }
     }
 
     &.white-to-crimson {
-        background: $gray-000;
-        border-color: $pink-500;
-        color: $pink-500;
         transition: all 0.3s ease-in-out, color 0.3s ease-in-out;
-
-        &:not(.mobile) {
-            &:hover {
-                background-color: $pink-500;
-                border-color: $pink-500;
-                color: $gray-000;
-            }
-
-            &.active {
-                background-color: #cc006e;
-                border-color: #cc006e;
-                color: $gray-000;
-            }
-        }
-
-        &.touch {
-            background-color: #cc006e;
-            border-color: #cc006e;
-            color: $gray-000;
-        }
     }
 
     &.gradient {
-        background: linear-gradient(92.59deg, #f9028a, #484db2, #f841aa, #5c45fb) 0% 50% / 300% 100%;
-        border: none;
-        color: $gray-000;
-
         &:not(.mobile) {
             &:hover {
-                background-position: 55% 50% !important;
+                background-position: $backgroundPosition !important;
             }
         }
 
         &.touch {
-            background-position: 55% 50% !important;
-        }
-    }
-
-    &.custom {
-        $background: var(--background);
-        $hover: var(--hover);
-        $active: var(--active);
-        $color: var(--color);
-        $position: var(--position);
-
-        background: $background;
-        border-color: $background;
-        color: $color;
-
-        &.not-color {
-            color: $gray-000;
-        }
-
-        &:not(.mobile) {
-            &.gradient {
-                &:hover {
-                    background-position: $position !important;
-
-                    &.not-position {
-                        background-position: 55% 50% !important;
-                    }
-                }
-            }
-
-            &:not(.gradient) {
-                &.not-position {
-                    &:hover {
-                        background: $hover;
-                        border-color: $hover;
-                    }
-                }
-
-                &.active {
-                    &.not-position {
-                        background: $active;
-                        border-color: $active;
-                    }
-                }
-            }
-        }
-
-        &.touch {
-            &:not(.gradient) {
-                &.not-position {
-                    background: $active;
-                    border-color: $active;
-                }
-            }
+            background-position: $backgroundPosition !important;
         }
     }
 
     &.just-text {
-        background: unset;
-        border: none;
         text-transform: unset;
-
-        &:hover {
-            color: $primary-350;
-        }
     }
 
     &:disabled,
     &.disabled {
-        color: $gray-000;
-        background-color: $gray-350;
-        border-color: $gray-350;
         pointer-events: none;
 
         &.just-text {
@@ -533,6 +533,13 @@ export default Vue.extend({
     &.mobile {
         font-size: 10px;
         -webkit-tap-highlight-color: transparent;
+
+        &.touch,
+        &.loading {
+            background: $backgroundActiveColor;
+            border-color: $borderActiveColor;
+            color: $colorActive;
+        }
 
         &.s,
         &.m,

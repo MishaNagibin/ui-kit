@@ -17,7 +17,6 @@
   - [Стили кнопки](#стили-кнопки)
   - [Размеры кнопки](#размеры-кнопки)
   - [Размеры кнопки для мобильной версии](#размеры-кнопки-для-мобильной-версии)
-  - [Кастомные стили](#кастомные-стили-по-отдельности-не-работают)
   - [Примеры](#примеры-использования-button)
 - [**Checkbox**](#checkbox)
   - [Пропсы](#пропсы-checkbox)
@@ -338,7 +337,7 @@ closeAlert() {
 
 ## Button
 
-Представляет собой компонент кнопки, красиво стилизованной, поддерживающей слоты, индикатор загрузки, например если отправили данные из формы на апи, можно включить индикатор, пока не получим ответ с апи, чтобы не спамить кнопку и явно показать, что выполняется какой-то процесс. Также кнопка отлично выполняет анимацию как в ПК режиме, так и в режиме для мобильных устройств.
+Представляет собой компонент кнопки, красиво стилизованной, поддерживающей слоты, индикатор загрузки, например если отправили данные из формы на апи, можно включить индикатор, пока не получим ответ с апи, чтобы не спамить кнопку и явно показать, что выполняется какой-то процесс. Также кнопка отлично выполняет анимацию как в ПК режиме, так и в режиме для мобильных устройств. У кнопки есть несколько цветовых режимов, но вы всегда можете изменить цвета, размеры, и переданные пропсы, например, color, background - будут приоритетнее чем те, что есть у `mode`. Также вы можете задать кнопке свой градиент, через background, но обязательно с mode: gradient.
 
 #### Пропсы Button:
 
@@ -351,7 +350,25 @@ closeAlert() {
 | size | string | размер кнопки, допустимые значения: s &#124; m &#124; l &#124; xl, подробнее в таблице ниже | m |
 | dontUpperCase | boolean | текст в кнопке не должен быть в верхнем регистре (по умолчанию он в верхнем регистре) | false |
 | isMobile | boolean | кнопка должна быть в стиле для мобильных устройств | false |
-| customStyle | ButtonCustomStyle | кастомные стили кнопки, подробнее в таблице ниже  | undefined |
+| background | string | фон кнопки | undefined |
+| backgroundHoverColor | string | фон кнопки при наведении | undefined |
+| backgroundActiveColor | string | фон кнопки при нажатии | undefined |
+| backgroundPosition | string | смещение фона при наведении на кнопку (нажатию если isMobile: true) по `x` и `y` в том случае, если фон кнопки градиент | undefined |
+| color | string | цвет текста в кнопке | undefined |
+| colorHover | string | цвет текста в кнопке при наведении на кнопку | undefined |
+| colorActive | string | цвет текста в кнопке при нажатии на кнопку | undefined |
+| fontSize | string | размер текста в кнопке | 12px |
+| fontWeight | string | толщина текста в кнопке | 600 |
+| padding | string | отступы внутри кнопки | 8px 4px 8px 4px |
+| lineHeight | string | высота строки текста внутри кнопки | 15px |
+| border | string | бордер кнопки | undefined |
+| borderWidth | string | толщина бордера кнопки | undefined |
+| borderColor | string | цвет бордера кнопки | undefined |
+| borderHoverColor | string | цвет бордера кнопки при наведении на кнопку | undefined |
+| borderActiveColor | string | цвет бордера кнопки при нажатии на кнопку | undefined |
+| iconColor | string | цвет иконки в кнопке (индикатор загрузки isLoading: true или которую передадите в кнопку через слот) | undefined |
+| iconHoverColor | string | цвет иконки в кнопке при наведении на кнопку | undefined |
+| borderRadius | string | скругление углов кнопки | 5px |
 | width | string | ширина кнопки | undefined |
 | height | string | высота кнопки | undefined |
 
@@ -389,16 +406,6 @@ closeAlert() {
 | l | max-width: 188px; height: 38px; |
 | xl | max-width: 314px; height: 38px; |
 
-#### Кастомные стили (по отдельности не работают):
-
-| name | description |
-| ---- | ----------- |
-| background | цвет кнопки |
-| hover | цвет кнопки при наведении |
-| active | цвет кнопки при нажатии |
-| color | цвет текст в кнопке |
-| position | **работает только для режима градиентной кнопки** (т.е. для обычной кнопки можно не указывать): смещение градиента при наведении |
-
 #### Примеры использования Button:
 
 ```html
@@ -434,11 +441,29 @@ computed: {
 ```
 
 ```html
-<cButton :custom-style="{ color: '#fff', background: 'purple', hover: 'violet', active: 'pink' }">Кастомная кнопка</cButton>
+<cButton mode="crimson" background="pink">Кастомная кнопка с розовым фоном</cButton>
 ```
 
 ```html
-<cButton :custom-style="{ color: '#fff', background: 'linear-gradient(92.59deg, #f9028a, #484db2, #f841aa, #5c45fb) 0% 50% / 300% 100%', hover: 'violet', active: 'pink', position: '70% 70%' }" mode="gradient">Кастомная градиентная кнопка</cButton>
+<cButton
+    mode="crimson"
+    background="#ff728b"
+    background-hover-color="violet"
+    background-active-color="purple"
+    border-color="#ff728b"
+    border-hover-color="violet"
+    border-active-color="purple"
+    color="#fff"
+    border-radius="10px"
+>Кастомная кнопка</cButton>
+```
+
+```html
+<cButton
+    mode="gradient"
+    background="linear-gradient(92.59deg, red, blue, green, purple) 0% 50% / 300% 100%"
+    background-position="70% 70%"
+>Кастомная градиентная кнопка</cButton>
 ```
 
 Более подходящий градиент можно [**тут придумать**](https://pictures.apteka-april.ru/generic/GradientSandbox.html)

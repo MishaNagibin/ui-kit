@@ -1,7 +1,7 @@
 <template>
     <button
         v-on="listeners"
-        :class="['ui-button', size, mode, { active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, 'not-upper-case': dontUpperCase }]"
+        :class="['ui-button', size, mode, { disabled, active: isTouch, touch: isTouch, loading: isLoading, mobile: isMobile, 'not-upper-case': dontUpperCase }]"
         :disabled="disabled"
         :style="styles"
         ref="btn"
@@ -260,43 +260,53 @@ export default Vue.extend({
         },
         styles(): { [key: string]: string } {
             const style = {} as { [key: string]: string }
-            style["--background"] = this.background ?? this.modeProperties[this.mode].background ?? ""
-            style["--backgroundHoverColor"] =
-                this.mode === "gradient"
-                    ? this.background ?? this.modeProperties[this.mode].background ?? ""
-                    : this.backgroundHoverColor ??
-                      this.modeProperties[this.mode].backgroundHoverColor ??
-                      this.modeProperties[this.mode].background ??
-                      ""
-            style["--backgroundActiveColor"] =
-                this.mode === "gradient"
-                    ? this.background ?? this.modeProperties[this.mode].background ?? ""
-                    : this.backgroundActiveColor ??
-                      this.modeProperties[this.mode].backgroundActiveColor ??
-                      this.modeProperties[this.mode].background ??
-                      ""
-            style["--backgroundPosition"] = this.backgroundPosition ?? this.modeProperties[this.mode].backgroundPosition ?? ""
-            style["--color"] = this.color ?? this.modeProperties[this.mode].color ?? ""
-            style["--colorHover"] =
-                this.colorHover ?? this.modeProperties[this.mode].colorHover ?? this.modeProperties[this.mode].color ?? ""
-            style["--colorActive"] =
-                this.colorActive ??
-                this.modeProperties[this.mode].colorActive ??
-                this.modeProperties[this.mode].colorHover ??
-                this.modeProperties[this.mode].color ??
-                ""
-            style["--borderColor"] = this.borderColor ?? this.modeProperties[this.mode].borderColor ?? ""
-            style["--borderHoverColor"] =
-                this.borderHoverColor ?? this.modeProperties[this.mode].borderHoverColor ?? this.modeProperties[this.mode].borderColor ?? ""
-            style["--borderActiveColor"] =
-                this.borderActiveColor ??
-                this.modeProperties[this.mode].borderActiveColor ??
-                this.modeProperties[this.mode].borderColor ??
-                ""
-            style["--iconColor"] = this.iconColor ?? this.modeProperties[this.mode].iconColor ?? ""
-            style["--iconHoverColor"] =
-                this.iconHoverColor ?? this.modeProperties[this.mode].iconHoverColor ?? this.modeProperties[this.mode].iconColor ?? ""
-            style["--border"] = this.border ?? this.modeProperties[this.mode].border ?? "1px solid"
+            if (this.disabled) {
+                style["--background"] = this.modeProperties["disabled"].background ?? ""
+                style["--color"] = this.modeProperties["disabled"].color ?? ""
+                style["--borderColor"] = this.modeProperties["disabled"].borderColor ?? ""
+                style["--iconColor"] = this.modeProperties["disabled"].iconColor ?? ""
+            } else {
+                style["--background"] = this.background ?? this.modeProperties[this.mode].background ?? ""
+                style["--backgroundHoverColor"] =
+                    this.mode === "gradient"
+                        ? this.background ?? this.modeProperties[this.mode].background ?? ""
+                        : this.backgroundHoverColor ??
+                          this.modeProperties[this.mode].backgroundHoverColor ??
+                          this.modeProperties[this.mode].background ??
+                          ""
+                style["--backgroundActiveColor"] =
+                    this.mode === "gradient"
+                        ? this.background ?? this.modeProperties[this.mode].background ?? ""
+                        : this.backgroundActiveColor ??
+                          this.modeProperties[this.mode].backgroundActiveColor ??
+                          this.modeProperties[this.mode].background ??
+                          ""
+                style["--backgroundPosition"] = this.backgroundPosition ?? this.modeProperties[this.mode].backgroundPosition ?? ""
+                style["--color"] = this.color ?? this.modeProperties[this.mode].color ?? ""
+                style["--colorHover"] =
+                    this.colorHover ?? this.modeProperties[this.mode].colorHover ?? this.modeProperties[this.mode].color ?? ""
+                style["--colorActive"] =
+                    this.colorActive ??
+                    this.modeProperties[this.mode].colorActive ??
+                    this.modeProperties[this.mode].colorHover ??
+                    this.modeProperties[this.mode].color ??
+                    ""
+                style["--borderColor"] = this.borderColor ?? this.modeProperties[this.mode].borderColor ?? ""
+                style["--borderHoverColor"] =
+                    this.borderHoverColor ??
+                    this.modeProperties[this.mode].borderHoverColor ??
+                    this.modeProperties[this.mode].borderColor ??
+                    ""
+                style["--borderActiveColor"] =
+                    this.borderActiveColor ??
+                    this.modeProperties[this.mode].borderActiveColor ??
+                    this.modeProperties[this.mode].borderColor ??
+                    ""
+                style["--iconColor"] = this.iconColor ?? this.modeProperties[this.mode].iconColor ?? ""
+                style["--iconHoverColor"] =
+                    this.iconHoverColor ?? this.modeProperties[this.mode].iconHoverColor ?? this.modeProperties[this.mode].iconColor ?? ""
+                style["--border"] = this.border ?? this.modeProperties[this.mode].border ?? "1px solid"
+            }
             style.borderRadius = this.borderRadius
             style.fontWeight = this.fontWeight
             style.padding = this.padding

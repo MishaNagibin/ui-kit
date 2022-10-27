@@ -990,7 +990,7 @@ export default Vue.extend({
 ```
 
 ```html
-<cEdit v-model="val" max-length="10" />
+<cEdit v-model="val" maxlength="10" />
 ```
 
 ```html

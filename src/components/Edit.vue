@@ -488,13 +488,13 @@ export default Vue.extend({
             handler() {
                 this.text = this.value
                 if (this.isPhone) {
-                    if ((this.value || "").length !== 0) {
-                        this.phoneFormatting("value")
-                    }
+                    // if ((this.value || "").length !== 0) {
+                    this.phoneFormatting("value")
+                    // }
                 } else if (this.mask !== undefined) {
-                    if ((this.value || "").length !== 0) {
-                        this.maskFormatting("value")
-                    }
+                    // if ((this.value || "").length !== 0) {
+                    this.maskFormatting("value")
+                    // }
                 }
             },
         },

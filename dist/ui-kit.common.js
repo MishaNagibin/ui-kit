@@ -478,10 +478,10 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var Accordion = (component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=template&id=89d78af2&scoped=true&
-var Alertvue_type_template_id_89d78af2_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.show),expression:"show"}],class:['ui-alert', _vm.status, { 'hide-icon': _vm.hideIcon, closeable: _vm.closeable, closing: _vm.isClosing, custom: _vm.hasCustomBackgroundColor, 'icon-center': _vm.iconPositionCenter }],style:({ '--backgroundColor': _vm.backgroundColor, '--borderRadius': _vm.borderRadius || 0 })},[(!_vm.hideIcon)?_c('span',{class:['icon', `${_vm.status}-alert`, { custom: _vm.hasCustomIconColor }],style:({ '--iconColor': _vm.iconColor })}):_vm._e(),_c('div',{staticClass:"message"},[(_vm.showTitle)?_c('div',{class:['title', { custom: _vm.hasCustomTitleColor || _vm.hasCustomTitleSize }],style:({ '--titleColor': _vm.titleColor || '#000', '--titleSize': _vm.titleSize || '16px' })},[_vm._t("title")],2):_vm._e(),(_vm.showDesc)?_c('div',{class:['desc', { custom: _vm.hasCustomDescColor || _vm.hasCustomDescSize }],style:({ '--descColor': _vm.descColor || '#636363', '--descSize': _vm.descSize || '12px' })},[_vm._t("desc")],2):_vm._e()]),(_vm.closeable)?_c('span',{staticClass:"icon close-alert",style:({ '--iconCloseColor': _vm.iconCloseColor || '#636363', '--iconCloseHoverColor': _vm.iconCloseHoverColor || '#636363', '--iconCloseSize': _vm.iconCloseSize || '24px' }),on:{"click":_vm.close}}):_vm._e()])
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=template&id=43191980&scoped=true&
+var Alertvue_type_template_id_43191980_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.show),expression:"show"}],class:['ui-alert', _vm.status, { 'hide-icon': _vm.hideIcon, closeable: _vm.closeable, closing: _vm.isClosing, custom: _vm.hasCustomBackgroundColor, 'icon-center': _vm.iconPositionCenter }],style:({ '--backgroundColor': _vm.backgroundColor, '--borderRadius': _vm.borderRadius || 0, maxWidth: _vm.maxWidth !== undefined ? _vm.maxWidth : '' })},[(!_vm.hideIcon)?_c('span',{class:['icon', `${_vm.status}-alert`, { custom: _vm.hasCustomIconColor }],style:({ '--iconColor': _vm.iconColor })}):_vm._e(),_c('div',{staticClass:"message"},[(_vm.showTitle)?_c('div',{class:['title', { custom: _vm.hasCustomTitleColor || _vm.hasCustomTitleSize }],style:({ '--titleColor': _vm.titleColor || '#000', '--titleSize': _vm.titleSize || '16px' })},[_vm._t("title")],2):_vm._e(),(_vm.showDesc)?_c('div',{class:['desc', { custom: _vm.hasCustomDescColor || _vm.hasCustomDescSize }],style:({ '--descColor': _vm.descColor || '#636363', '--descSize': _vm.descSize || '12px' })},[_vm._t("desc")],2):_vm._e()]),(_vm.closeable)?_c('span',{staticClass:"icon close-alert",style:({ '--iconCloseColor': _vm.iconCloseColor || '#636363', '--iconCloseHoverColor': _vm.iconCloseHoverColor || '#636363', '--iconCloseSize': _vm.iconCloseSize || '24px' }),on:{"click":_vm.close}}):_vm._e()])
 }
-var Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns = []
+var Alertvue_type_template_id_43191980_scoped_true_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=script&lang=ts&
@@ -534,6 +534,9 @@ var Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns = []
         iconPositionCenter: {
             type: Boolean,
             default: false,
+        },
+        maxWidth: {
+            type: String,
         },
     },
     data() {
@@ -594,10 +597,10 @@ var Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns = []
 
 ;// CONCATENATED MODULE: ./src/components/Alert.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Alertvue_type_script_lang_ts_ = (Alertvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=style&index=0&id=89d78af2&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Alert.vue?vue&type=style&index=0&id=43191980&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Alert.vue?vue&type=style&index=0&id=89d78af2&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Alert.vue?vue&type=style&index=0&id=43191980&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Alert.vue
 
@@ -610,11 +613,11 @@ var Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns = []
 
 var Alert_component = normalizeComponent(
   components_Alertvue_type_script_lang_ts_,
-  Alertvue_type_template_id_89d78af2_scoped_true_render,
-  Alertvue_type_template_id_89d78af2_scoped_true_staticRenderFns,
+  Alertvue_type_template_id_43191980_scoped_true_render,
+  Alertvue_type_template_id_43191980_scoped_true_staticRenderFns,
   false,
   null,
-  "89d78af2",
+  "43191980",
   null
   
 )

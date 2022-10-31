@@ -221,6 +221,7 @@ export default Vue.extend({
 | iconCloseSize | string | размер иконки закрытия алерта | не задано |
 | borderRadius | string | скругление углов алерта | не задано |
 | iconPositionCenter | boolean | позиционированние иконок по центру | не задано |
+| maxWidth | string | максимальная ширина алерта | undefined |
 
 **не задано** - значит используется то, что по умолчанию в стилях, а если передать какие-то значения, то будут использоваться они, как кастомные.
 
@@ -266,6 +267,16 @@ closeAlert() {
     desc-color="#fff"
     desc-size="16px"
     icon-color="#fff"
+>
+    <template slot="desc">Какой-то текст</template>
+</cAlert>
+```
+
+```html
+<cAlert
+    status="info"
+    border-radius="5px"
+    max-width="800px"
 >
     <template slot="desc">Какой-то текст</template>
 </cAlert>

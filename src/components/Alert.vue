@@ -2,7 +2,7 @@
     <div
         v-show="show"
         :class="['ui-alert', status, { 'hide-icon': hideIcon, closeable, closing: isClosing, custom: hasCustomBackgroundColor, 'icon-center': iconPositionCenter }]"
-        :style="{ '--backgroundColor': backgroundColor, '--borderRadius': borderRadius || 0 }"
+        :style="{ '--backgroundColor': backgroundColor, '--borderRadius': borderRadius || 0, maxWidth: maxWidth !== undefined ? maxWidth : '' }"
     >
         <span
             v-if="!hideIcon"
@@ -86,6 +86,9 @@ export default Vue.extend({
             type: Boolean,
             default: false,
         },
+        maxWidth: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -146,7 +149,6 @@ export default Vue.extend({
     $borderRadius: var(--borderRadius);
     display: flex;
     flex-flow: row nowrap;
-    margin: 0 auto 8px;
     align-items: flex-start;
     position: relative;
     overflow: hidden;

@@ -214,7 +214,7 @@ interface Day {
 }
 
 export default Vue.extend({
-    name: "cDatepicker",
+    name: "cDatePicker",
     components: { cButton, cEdit },
     model: {
         prop: "value",

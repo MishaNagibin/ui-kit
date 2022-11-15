@@ -6,7 +6,7 @@
             placeholder="номер телефона"
             autocomplete="new-password"
         />-->
-        <cDatepicker
+        <cDatePicker
             v-model="date"
             placeholder="дд.мм.гггг"
             type="datetime"
@@ -62,14 +62,14 @@
 <script lang="ts">
 import Vue from "vue"
 import cEdit from "@/components/Edit.vue"
-import cDatepicker from "@/components/Datepicker.vue"
+import cDatePicker from "@/components/DatePicker.vue"
 import cTable from "@/components/Table.vue"
 import cButton from "@/components/Button.vue"
 import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cDatepicker },
+    components: { cDatePicker },
     data() {
         return {
             date: "" as Date | string,

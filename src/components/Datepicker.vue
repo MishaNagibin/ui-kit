@@ -1367,6 +1367,7 @@ export default Vue.extend({
                 transition: color 0.3s, background 0.3s;
                 width: calc(100% / 3);
                 text-align: center;
+                height: 58px;
 
                 &:hover {
                     cursor: pointer;
@@ -1698,6 +1699,24 @@ export default Vue.extend({
 
                         &.day-off {
                             color: $dayOffColor;
+                        }
+
+                        &:hover {
+                            color: $dayDisabledColor;
+                            background-color: $dayDisabledBackground;
+                            outline: none;
+                            outline-offset: 0;
+
+                            &.day-off {
+                                color: $dayOffColor;
+                            }
+
+                            &.today {
+                                outline: $todayOutline;
+                                outline-offset: $todayOutlineOffset;
+                                color: $dayDisabledColor;
+                                background-color: $dayDisabledBackground;
+                            }
                         }
 
                         &.not-selected {

@@ -1,6 +1,39 @@
 <template>
     <div id="app">
-        <cTable
+        <!-- <cEdit
+            v-model="phone"
+            mask="2.2"
+            placeholder="номер телефона"
+            autocomplete="new-password"
+        />-->
+        <cDatepicker
+            v-model="date"
+            placeholder="дд.мм.гггг"
+            type="datetime"
+            @change="changeDate"
+        />
+        <!-- <cButton
+            mode="red"
+            @click="clear"
+        >Кастомная кнопка</cButton>-->
+        <!-- <cButton
+            mode="crimson"
+            @click="changeDisabled"
+        >Кастомная кнопка</cButton>-->
+        <!-- <cButton
+            mode="crimson"
+            width="109px"
+            height="54px"
+            border-width="2px"
+            border-color="red"
+            border-active-color="violet"
+            color="red"
+            color-active="violet"
+            background-color="orange"
+            background-active-color="purple"
+        >button</cButton>-->
+        <!-- <cEdit v-model.trim="val"  enable-emoji emoji-position="top-left"/> -->
+        <!-- <cTable
             :columns="columns"
             :items="preparedServices"
             is-full-width
@@ -22,21 +55,27 @@
                     @click="clicked('open')"
                 >Открыть</cButton>
             </template>
-        </cTable>
+        </cTable>-->
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
+import cEdit from "@/components/Edit.vue"
+import cDatepicker from "@/components/Datepicker.vue"
 import cTable from "@/components/Table.vue"
 import cButton from "@/components/Button.vue"
 import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cButton, cTable },
+    components: { cDatepicker },
     data() {
         return {
+            date: "" as Date | string,
+            phone: "",
+            isDisabled: false,
+            val: "",
             categories: [
                 { ID: 1, name: "Кондиционеры и холодосы" },
                 { ID: 2, name: "Курьерские услуги" },
@@ -75,11 +114,28 @@ export default Vue.extend({
         this.isLoaded = true
     },
     methods: {
+        disabledDate(date: Date): boolean {
+            const today = new Date()
+            today.setHours(0, 0, 0, 0)
+
+            // return date < today || date > new Date(today.getTime() + 365 * 24 * 3600 * 1000)
+            return date < today
+        },
+        changeDate(date: Date | string) {
+            console.log(date, "changeDate")
+            this.date = date
+        },
+        clear() {
+            this.phone = ""
+        },
+        changeDisabled() {
+            this.isDisabled = !this.isDisabled
+        },
         removeItem(item: any) {
-            console.log("Удалить", item);
+            console.log("Удалить", item)
         },
         openItem(item: any) {
-            console.log("Открыть", item);
+            console.log("Открыть", item)
         },
         check(e: PointerEvent) {
             const index = Number((e.target as HTMLElement).parentElement?.dataset.index ?? 0)
@@ -98,7 +154,7 @@ export default Vue.extend({
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    margin-top: 60px;
+    margin: 860px 0;
 
     & > :deep(.ui-slider) {
         & > .carousel {

@@ -4,6 +4,7 @@ import cArrowSVG from "@/components/ArrowSVG.vue"
 import cButton from "@/components/Button.vue"
 import cCheckbox from "@/components/Checkbox.vue"
 import cCombobox from "@/components/Combobox.vue"
+import cDatepicker from "@/components/Datepicker.vue"
 import cDropDown from "@/components/DropDown.vue"
 import cEdit from "@/components/Edit.vue"
 import cEmoji from "@/components/Emoji.vue"
@@ -24,6 +25,7 @@ export {
     cButton,
     cCheckbox,
     cCombobox,
+    cDatepicker,
     cDropDown,
     cEdit,
     cEmoji,

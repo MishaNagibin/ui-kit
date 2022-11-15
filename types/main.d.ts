@@ -10,6 +10,7 @@ declare const cArrowSVG: VueConstructor
 declare const cButton: VueConstructor
 declare const cCheckbox: VueConstructor
 declare const cCombobox: VueConstructor
+declare const cDatepicker: VueConstructor
 declare const cDropDown: VueConstructor
 declare const cEdit: VueConstructor
 declare const cEmoji: VueConstructor
@@ -31,6 +32,7 @@ export {
     cButton,
     cCheckbox,
     cCombobox,
+    cDatepicker,
     cDropDown,
     cEdit,
     cEmoji,

@@ -192,6 +192,7 @@ __webpack_require__.d(__webpack_exports__, {
   "cButton": function() { return /* reexport */ Button; },
   "cCheckbox": function() { return /* reexport */ Checkbox; },
   "cCombobox": function() { return /* reexport */ Combobox; },
+  "cDatepicker": function() { return /* reexport */ Datepicker; },
   "cDropDown": function() { return /* reexport */ DropDown; },
   "cEdit": function() { return /* reexport */ Edit; },
   "cEmoji": function() { return /* reexport */ Emoji; },
@@ -3640,6 +3641,975 @@ var Combobox_component = normalizeComponent(
 )
 
 /* harmony default export */ var Combobox = (Combobox_component.exports);
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Datepicker.vue?vue&type=template&id=7cc10972&scoped=true&
+var Datepickervue_type_template_id_7cc10972_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{staticClass:"ui-datepicker"},[_c('cEdit',{attrs:{"mask":_vm.maskInput,"placeholder":_vm.preparedPlaceholder,"is-clear":_vm.clearable && _vm.initialValue.length > 0,"width":"320px","is-hide-status":""},on:{"change":function($event){return _vm.changeDate($event.target.value)}},model:{value:(_vm.initialValue),callback:function ($$v) {_vm.initialValue=$$v},expression:"initialValue"}}),_c('span',{ref:"icon",staticClass:"icon calendar-icon",on:{"click":_vm.open}}),(_vm.isOpened)?_c('div',{ref:"calendar",class:['calendar', { 'position-top': _vm.isCalendarPositionTop }]},[_c('div',{ref:"header",staticClass:"header",style:(_vm.stylesHeader)},[_c('div',[(!_vm.isOpenedMonth && !_vm.isOpenedYear && !_vm.isOpenedTime)?_c('span',{staticClass:"month",on:{"click":function($event){$event.stopPropagation();return _vm.openCloseMenuMonth.apply(null, arguments)}}},[_vm._v(_vm._s(_vm.preliminaryMonthName))]):_vm._e(),(!_vm.isOpenedYear && !_vm.isOpenedTime)?_c('span',{staticClass:"year",on:{"click":function($event){$event.stopPropagation();return _vm.openCloseMenuYear.apply(null, arguments)}}},[_vm._v(_vm._s(_vm.preliminaryYear))]):(_vm.isOpenedYear)?_c('span',{staticClass:"not-select"},[_vm._v(_vm._s(_vm.minRangeYear)+" − "+_vm._s(_vm.maxRangeYear))]):_vm._e(),(_vm.isDateTime && !_vm.isOpenedMonth && !_vm.isOpenedYear && !_vm.isOpenedTime)?_c('span',{staticClass:"time",on:{"click":function($event){$event.stopPropagation();return _vm.openCloseMenuTime.apply(null, arguments)}}},[_vm._v(_vm._s(_vm.preliminaryTime))]):(_vm.isOpenedTime)?_c('span',{staticClass:"not-select"},[_vm._v(_vm._s(_vm.preliminaryTime))]):_vm._e()]),(!_vm.isOpenedTime)?_c('div',[_c('span',{staticClass:"icon arrow-up",on:{"click":_vm.prev}}),_c('span',{staticClass:"icon arrow-up",on:{"click":_vm.next}})]):_c('div',[(_vm.isIconsInsteadButtonsForTime)?[_c('span',{staticClass:"icon close",on:{"click":function($event){$event.stopPropagation();return _vm.cancelSelectTime.apply(null, arguments)}}}),_c('span',{staticClass:"icon checkmark",on:{"click":function($event){$event.stopPropagation();return _vm.saveTime.apply(null, arguments)}}})]:[_c('cButton',{attrs:{"dont-upper-case":"","width":"55px","height":"20px","font-size":"11px","mode":"red"},on:{"click":function($event){$event.stopPropagation();return _vm.cancelSelectTime.apply(null, arguments)}}},[_vm._v("Отмена")]),_c('cButton',{attrs:{"dont-upper-case":"","width":"55px","height":"20px","font-size":"11px","mode":"green"},on:{"click":function($event){$event.stopPropagation();return _vm.saveTime.apply(null, arguments)}}},[_vm._v("Готово")])]],2)]),(_vm.isOpenedMonth)?_c('div',{class:['months', { opened: _vm.isMonthAnimationOpened, closed: _vm.isMonthAnimationClosed }],style:(_vm.stylesMonths)},_vm._l((_vm.renderMonths),function(m,i){return _c('div',{key:i,class:{ preliminary: _vm.preliminaryMonth === i },on:{"click":function($event){$event.stopPropagation();return _vm.selectMonth(i)}}},[_vm._v(_vm._s(m))])}),0):_vm._e(),(_vm.isOpenedYear)?_c('div',{ref:"years",class:['years', { opened: _vm.isYearAnimationOpened, closed: _vm.isYearAnimationClosed, animated: _vm.isYearsListAnimation }],style:(_vm.stylesYears)},_vm._l((_vm.renderYears),function(y,i){return _c('div',{key:i,class:{ preliminary: _vm.preliminaryYear === y && !_vm.isYearsListAnimation },on:{"click":function($event){$event.stopPropagation();return _vm.selectYear(y)}}},[_vm._v(_vm._s(y))])}),0):_vm._e(),(_vm.isOpenedTime)?_c('div',{class:['times', { opened: _vm.isTimeAnimationOpened, closed: _vm.isTimeAnimationClosed }]},[_vm._m(0),_c('div',{style:(_vm.stylesTimes)},[_c('div',_vm._l((_vm.renderHours),function(h,i){return _c('div',{key:i,class:{ preliminary: _vm.preliminaryHours === h },on:{"click":function($event){return _vm.selectHours(h)}}},[_vm._v(_vm._s(h))])}),0),_c('div',_vm._l((_vm.renderMinutes),function(m,i){return _c('div',{key:i,class:{ preliminary: _vm.preliminaryMinutes === m },on:{"click":function($event){return _vm.selectMinutes(m)}}},[_vm._v(_vm._s(m))])}),0),_c('div',_vm._l((_vm.renderSeconds),function(s,i){return _c('div',{key:i,class:{ preliminary: _vm.preliminarySeconds === s },on:{"click":function($event){return _vm.selectSeconds(s)}}},[_vm._v(_vm._s(s))])}),0)])]):_vm._e(),(!_vm.isOpenedMonth && !_vm.isOpenedYear && !_vm.isOpenedTime)?_c('div',{class:['days', { opened: _vm.isDayAnimationOpened, closed: _vm.isDayAnimationClosed, animated: _vm.isDaysListAnimation }]},[_c('div',_vm._l((_vm.daysOfWeek),function(d,i){return _c('div',{key:i},[_vm._v(_vm._s(d))])}),0),_c('div',{ref:"preliminaryDaysList",style:(_vm.stylesDay)},[_c('div',_vm._l((_vm.prevDays),function(d,i){return _c('div',{key:i,class:['day', { 'not-selected': d.isNotSelected, today: !_vm.isDontHighlightToday && d.isToday && !_vm.isDaysListAnimation, selected: d.isSelected && !_vm.isDaysListAnimation, 'day-off': d.isDayOff, disabled: d.isDisabled }],on:{"click":function($event){return _vm.selectDay(d)}}},[_vm._v(_vm._s(d.day))])}),0),_c('div',{ref:"preliminaryDays"},_vm._l((_vm.days),function(d,i){return _c('div',{key:i,class:['day', { 'not-selected': d.isNotSelected, today: !_vm.isDontHighlightToday && d.isToday && !_vm.isDaysListAnimation, selected: d.isSelected, 'day-off': d.isDayOff, disabled: d.isDisabled }],on:{"click":function($event){return _vm.selectDay(d)}}},[_vm._v(_vm._s(d.day))])}),0),_c('div',_vm._l((_vm.nextDays),function(d,i){return _c('div',{key:i,class:['day', { 'not-selected': d.isNotSelected, today: !_vm.isDontHighlightToday && d.isToday && !_vm.isDaysListAnimation, selected: d.isSelected && !_vm.isDaysListAnimation, 'day-off': d.isDayOff, disabled: d.isDisabled }],on:{"click":function($event){return _vm.selectDay(d)}}},[_vm._v(_vm._s(d.day))])}),0)])]):_vm._e()]):_vm._e()],1)
+}
+var Datepickervue_type_template_id_7cc10972_scoped_true_staticRenderFns = [function (){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',[_c('div',[_vm._v("Часы")]),_c('div',[_vm._v("Минуты")]),_c('div',[_vm._v("Секунды")])])
+}]
+
+
+;// CONCATENATED MODULE: ./src/components/Datepicker.vue?vue&type=template&id=7cc10972&scoped=true&
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-83.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Datepicker.vue?vue&type=script&lang=ts&
+
+
+
+const MONTH = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+/* harmony default export */ var Datepickervue_type_script_lang_ts_ = (external_commonjs_vue_commonjs2_vue_root_Vue_default().extend({
+    name: "cDatepicker",
+    components: { cButton: Button, cEdit: Edit },
+    model: {
+        prop: "value",
+        event: "update:value",
+    },
+    props: {
+        value: {
+            type: [Date, String, Number],
+            default: "",
+        },
+        format: {
+            type: String,
+            default: "DD.MM.YYYY",
+            validator: (v) => [
+                "YYYY.MM.DD",
+                "YYYY-MM-DD",
+                "YYYY/MM/DD",
+                "DD.MM.YYYY",
+                "DD-MM-YYYY",
+                "DD/MM/YYYY",
+                "MM.DD.YYYY",
+                "MM-DD-YYYY",
+                "MM/DD/YYYY",
+            ].includes(v),
+        },
+        type: {
+            type: String,
+            default: "date",
+            validator: (v) => ["date", "datetime"].includes(v),
+        },
+        placeholder: {
+            type: String,
+        },
+        disabledDate: {
+            type: Function,
+        },
+        clearable: {
+            type: Boolean,
+            default: true,
+        },
+        isDontHighlightToday: {
+            type: Boolean,
+            default: false,
+        },
+        isIconsInsteadButtonsForTime: {
+            type: Boolean,
+            default: true,
+        },
+        dayColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        dayHoverColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        dayHoverBackground: {
+            type: String,
+            default: "#3f51b511",
+        },
+        dayHoverOutline: {
+            type: String,
+            default: "none",
+        },
+        dayHoverOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        dayBorderRadius: {
+            type: String,
+            default: "0",
+        },
+        daySelectedColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        daySelectedBackground: {
+            type: String,
+            default: "#4e62d1",
+        },
+        daySelectedOutline: {
+            type: String,
+            default: "none",
+        },
+        daySelectedOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        dayOffColor: {
+            type: String,
+            default: "#f14a4a",
+        },
+        dayOffBackground: {
+            type: String,
+            default: "transparent",
+        },
+        dayOffOutline: {
+            type: String,
+            default: "none",
+        },
+        dayOffOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        dayNotSelectedColor: {
+            type: String,
+            default: "#c0c0c0",
+        },
+        dayNotSelectedBackground: {
+            type: String,
+            default: "transparent",
+        },
+        dayNotSelectedOutline: {
+            type: String,
+            default: "none",
+        },
+        dayNotSelectedOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        todayColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        todayBackground: {
+            type: String,
+            default: "transparent",
+        },
+        todayOutline: {
+            type: String,
+            default: "2px solid green",
+        },
+        todayOutlineOffset: {
+            type: String,
+            default: "-2px",
+        },
+        dayDisabledColor: {
+            type: String,
+            default: "#00000059",
+        },
+        dayDisabledBackground: {
+            type: String,
+            default: "#dbdbdb",
+        },
+        headerMonthColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        headerMonthHoverColor: {
+            type: String,
+            default: "#4960df",
+        },
+        headerYearColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        headerYearHoverColor: {
+            type: String,
+            default: "#4960df",
+        },
+        headerTimeColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        headerTimeHoverColor: {
+            type: String,
+            default: "#4960df",
+        },
+        headerIconColor: {
+            type: String,
+            default: "#636363",
+        },
+        headerIconHoverColor: {
+            type: String,
+            default: "#4960df",
+        },
+        monthColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        monthBorderRadius: {
+            type: String,
+            default: "0",
+        },
+        monthSelectedColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        monthSelectedFontWeight: {
+            type: String,
+            default: "400",
+        },
+        monthSelectedBackground: {
+            type: String,
+            default: "#4e62d1",
+        },
+        monthSelectedOutline: {
+            type: String,
+            default: "none",
+        },
+        monthSelectedOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        monthHoverColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        monthHoverBackground: {
+            type: String,
+            default: "#3f51b511",
+        },
+        monthHoverOutline: {
+            type: String,
+            default: "none",
+        },
+        monthHoverOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        yearColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        yearBorderRadius: {
+            type: String,
+            default: "0",
+        },
+        yearSelectedColor: {
+            type: String,
+            default: "#ffffff",
+        },
+        yearSelectedFontWeight: {
+            type: String,
+            default: "400",
+        },
+        yearSelectedBackground: {
+            type: String,
+            default: "#4e62d1",
+        },
+        yearSelectedOutline: {
+            type: String,
+            default: "none",
+        },
+        yearSelectedOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        yearHoverColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        yearHoverBackground: {
+            type: String,
+            default: "#3f51b511",
+        },
+        yearHoverOutline: {
+            type: String,
+            default: "none",
+        },
+        yearHoverOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        timeColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        timeBorderRadius: {
+            type: String,
+            default: "0",
+        },
+        timeSelectedColor: {
+            type: String,
+            default: "#4e62d1",
+        },
+        timeSelectedFontWeight: {
+            type: String,
+            default: "600",
+        },
+        timeSelectedBackground: {
+            type: String,
+            default: "transparent",
+        },
+        timeSelectedOutline: {
+            type: String,
+            default: "none",
+        },
+        timeSelectedOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+        timeHoverColor: {
+            type: String,
+            default: "#1e1e1e",
+        },
+        timeHoverBackground: {
+            type: String,
+            default: "#3f51b511",
+        },
+        timeHoverOutline: {
+            type: String,
+            default: "none",
+        },
+        timeHoverOutlineOffset: {
+            type: String,
+            default: "0",
+        },
+    },
+    data() {
+        return {
+            initialValue: this.value,
+            selectedYear: null,
+            selectedMonth: null,
+            selectedDay: null,
+            preliminaryYear: null,
+            preliminaryMonth: null,
+            preliminaryDay: null,
+            selectedHours: "",
+            selectedMinutes: "",
+            selectedSeconds: "",
+            preliminaryHours: "00",
+            preliminaryMinutes: "00",
+            preliminarySeconds: "00",
+            isOpened: false,
+            isOpenedTime: false,
+            isOpenedMonth: false,
+            isMonthAnimationOpened: false,
+            isMonthAnimationClosed: false,
+            isOpenedYear: false,
+            isYearAnimationOpened: false,
+            isYearAnimationClosed: false,
+            isTimeAnimationOpened: false,
+            isTimeAnimationClosed: false,
+            isDayAnimationOpened: false,
+            isDayAnimationClosed: false,
+            isYearsListAnimation: false,
+            isDaysListAnimation: false,
+            renderMonths: MONTH,
+            minRangeYear: null,
+            maxRangeYear: null,
+            daysOfWeek: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+            calendarTable: "",
+            prevDays: [],
+            days: [],
+            nextDays: [],
+            isRenderedPrevDays: false,
+            isRenderedNextDays: false,
+            needDelayScrollDays: false,
+            renderHours: Array.from({ length: 24 }, (_, h) => `0${h}`.substr(-2)),
+            renderMinutes: Array.from({ length: 60 }, (_, m) => `0${m}`.substr(-2)),
+            renderSeconds: Array.from({ length: 60 }, (_, s) => `0${s}`.substr(-2)),
+            isCalendarPositionTop: false,
+        };
+    },
+    computed: {
+        isFisrtYear() {
+            return /^Y/.test(this.format);
+        },
+        isFisrtMonth() {
+            return /^M/.test(this.format);
+        },
+        isFisrtDay() {
+            return /^D/.test(this.format);
+        },
+        separatorFormat() {
+            return this.format.replace(/[A-Z]/g, "")[0];
+        },
+        splittedFormat() {
+            return this.format.split(this.separatorFormat);
+        },
+        maskInput() {
+            const arr = this.splittedFormat;
+            const sep = this.separatorFormat;
+            return `${arr[0].length}${sep}${arr[1].length}${sep}${arr[2].length} ${this.isDateTime ? "2:2:2" : ""}`;
+        },
+        preliminaryMonthName() {
+            return this.preliminaryMonth !== null ? MONTH[this.preliminaryMonth + 1 === 13 ? 0 : this.preliminaryMonth] : undefined;
+        },
+        renderYears() {
+            return Array.from({ length: 24 }, (_, v) => { var _a; return v + (((_a = this.minRangeYear) !== null && _a !== void 0 ? _a : 0) - 6); });
+        },
+        currentDate() {
+            const date = new Date();
+            return { day: date.getDate(), month: date.getMonth(), year: date.getFullYear() };
+        },
+        isDateTime() {
+            return this.type === "datetime";
+        },
+        preliminaryTime() {
+            return `${this.preliminaryHours}:${this.preliminaryMinutes}:${this.preliminarySeconds}`;
+        },
+        preparedPlaceholder() {
+            var _a;
+            return `${(_a = this.placeholder) !== null && _a !== void 0 ? _a : this.format}${this.isDateTime ? " чч:мм:сс" : ""}`;
+        },
+        stylesDay() {
+            return {
+                "--dayColor": this.dayColor,
+                "--dayHoverColor": this.dayHoverColor,
+                "--dayHoverBackground": this.dayHoverBackground,
+                "--dayHoverOutline": this.dayHoverOutline,
+                "--dayHoverOutlineOffset": this.dayHoverOutlineOffset,
+                "--dayBorderRadius": this.dayBorderRadius,
+                "--daySelectedColor": this.daySelectedColor,
+                "--daySelectedBackground": this.daySelectedBackground,
+                "--daySelectedOutline": this.daySelectedOutline,
+                "--daySelectedOutlineOffset": this.daySelectedOutlineOffset,
+                "--dayOffColor": this.dayOffColor,
+                "--dayOffBackground": this.dayOffBackground,
+                "--dayOffOutline": this.dayOffOutline,
+                "--dayOffOutlineOffset": this.dayOffOutlineOffset,
+                "--dayNotSelectedColor": this.dayNotSelectedColor,
+                "--dayNotSelectedBackground": this.dayNotSelectedBackground,
+                "--dayNotSelectedOutline": this.dayNotSelectedOutline,
+                "--dayNotSelectedOutlineOffset": this.dayNotSelectedOutlineOffset,
+                "--todayColor": this.todayColor,
+                "--todayBackground": this.todayBackground,
+                "--todayOutline": this.todayOutline,
+                "--todayOutlineOffset": this.todayOutlineOffset,
+                "--dayDisabledColor": this.dayDisabledColor,
+                "--dayDisabledBackground": this.dayDisabledBackground,
+            };
+        },
+        stylesHeader() {
+            return {
+                "--headerMonthColor": this.headerMonthColor,
+                "--headerMonthHoverColor": this.headerMonthHoverColor,
+                "--headerYearColor": this.headerYearColor,
+                "--headerYearHoverColor": this.headerYearHoverColor,
+                "--headerTimeColor": this.headerTimeColor,
+                "--headerTimeHoverColor": this.headerTimeHoverColor,
+                "--headerIconColor": this.headerIconColor,
+                "--headerIconHoverColor": this.headerIconHoverColor,
+            };
+        },
+        stylesMonths() {
+            return {
+                "--monthColor": this.monthColor,
+                "--monthHoverColor": this.monthHoverColor,
+                "--monthHoverBackground": this.monthHoverBackground,
+                "--monthHoverOutline": this.monthHoverOutline,
+                "--monthHoverOutlineOffset": this.monthHoverOutlineOffset,
+                "--monthBorderRadius": this.monthBorderRadius,
+                "--monthSelectedColor": this.monthSelectedColor,
+                "--monthSelectedFontWeight": this.monthSelectedFontWeight,
+                "--monthSelectedBackground": this.monthSelectedBackground,
+                "--monthSelectedOutline": this.monthSelectedOutline,
+                "--monthSelectedOutlineOffset": this.monthSelectedOutlineOffset,
+            };
+        },
+        stylesYears() {
+            return {
+                "--yearColor": this.yearColor,
+                "--yearHoverColor": this.yearHoverColor,
+                "--yearHoverBackground": this.yearHoverBackground,
+                "--yearHoverOutline": this.yearHoverOutline,
+                "--yearHoverOutlineOffset": this.yearHoverOutlineOffset,
+                "--yearBorderRadius": this.yearBorderRadius,
+                "--yearSelectedColor": this.yearSelectedColor,
+                "--yearSelectedFontWeight": this.yearSelectedFontWeight,
+                "--yearSelectedBackground": this.yearSelectedBackground,
+                "--yearSelectedOutline": this.yearSelectedOutline,
+                "--yearSelectedOutlineOffset": this.yearSelectedOutlineOffset,
+            };
+        },
+        stylesTimes() {
+            return {
+                "--timeColor": this.timeColor,
+                "--timeHoverColor": this.timeHoverColor,
+                "--timeHoverBackground": this.timeHoverBackground,
+                "--timeHoverOutline": this.timeHoverOutline,
+                "--timeHoverOutlineOffset": this.timeHoverOutlineOffset,
+                "--timeBorderRadius": this.timeBorderRadius,
+                "--timeSelectedColor": this.timeSelectedColor,
+                "--timeSelectedFontWeight": this.timeSelectedFontWeight,
+                "--timeSelectedBackground": this.timeSelectedBackground,
+                "--timeSelectedOutline": this.timeSelectedOutline,
+                "--timeSelectedOutlineOffset": this.timeSelectedOutlineOffset,
+            };
+        },
+    },
+    watch: {
+        initialValue(n) {
+            if (n.length < 1) {
+                this.selectedYear = null;
+                this.selectedMonth = null;
+                this.selectedDay = null;
+                this.selectedHours = "00";
+                this.selectedMinutes = "00";
+                this.selectedSeconds = "00";
+                this.$emit("update:value", "");
+                this.$emit("change", "");
+            }
+        },
+        value: {
+            immediate: true,
+            handler(n) {
+                const date = `${n}`.length > 0 ? new Date(n) : new Date();
+                this.selectedYear = date.getFullYear();
+                this.selectedMonth = date.getMonth();
+                this.selectedHours = `${n}`.length > 0 ? `0${date.getHours()}`.substr(-2) : "00";
+                this.selectedMinutes = `${n}`.length > 0 ? `0${date.getMinutes()}`.substr(-2) : "00";
+                this.selectedSeconds = `${n}`.length > 0 ? `0${date.getSeconds()}`.substr(-2) : "00";
+                this.preliminaryHours = this.selectedHours;
+                this.preliminaryMinutes = this.selectedMinutes;
+                this.preliminarySeconds = this.selectedSeconds;
+                this.preliminaryYear = date.getFullYear();
+                this.preliminaryMonth = date.getMonth();
+                this.preliminaryDay = date.getDate();
+                if (`${n}`.length > 0) {
+                    this.selectedDay = date.getDate();
+                    this.preparedInitialValue(date);
+                }
+            },
+        },
+        preliminaryYear: {
+            immediate: true,
+            handler(n) {
+                if (n !== null) {
+                    this.minRangeYear = n - 5;
+                    this.maxRangeYear = n + 6;
+                }
+            },
+        },
+    },
+    methods: {
+        renderCalendar() {
+            const render = (y, m, isPrev, isNext) => {
+                const firstDay = new Date(y, m, 7).getDay(); // названия дня 7 дня месяца
+                const lastDay = new Date(y, m + 1, 0).getDate(); // ласт день текущего месяца
+                const lastDayLastMonth = m === 0 ? new Date(y, 12, 0).getDate() : new Date(y, m, 0).getDate(); // ласт день предыдущего месяца
+                const days = isPrev ? "prevDays" : isNext ? "nextDays" : "days";
+                this.$data[days] = [];
+                let i = 1;
+                let prevDaysCount = 0;
+                let nextDay = 0;
+                do {
+                    let dow = new Date(y, m, i).getDay();
+                    if (dow !== 1 && i === 1) {
+                        let k = lastDayLastMonth - firstDay + 1;
+                        for (let j = 0; j < firstDay; j++) {
+                            this.$data[days].push({
+                                day: k,
+                                month: m - 1,
+                                year: y,
+                                isDayOff: [0, 6].includes(new Date(y, m - 1, k).getDay()),
+                                isDisabled: this.disabledDate !== undefined && this.disabledDate(new Date(y, m - 1, k, 0, 0, 0)),
+                                isToday: k === this.currentDate.day && m - 1 === this.currentDate.month && y === this.currentDate.year,
+                                isNotSelected: m - 1 !== this.preliminaryMonth - (isPrev ? 1 : isNext ? -1 : 0),
+                                isSelected: k === this.selectedDay && m - 1 === this.selectedMonth && y === this.selectedYear,
+                            });
+                            prevDaysCount++;
+                            k++;
+                        }
+                    }
+                    if (i <= lastDay) {
+                        this.$data[days].push({
+                            day: i,
+                            month: m,
+                            year: y,
+                            isDayOff: [0, 6].includes(dow),
+                            isDisabled: this.disabledDate !== undefined && this.disabledDate(new Date(y, m, i, 0, 0, 0)),
+                            isToday: i === this.currentDate.day && m === this.currentDate.month && y === this.currentDate.year,
+                            isNotSelected: m !== this.preliminaryMonth - (isPrev ? 1 : isNext ? -1 : 0),
+                            isSelected: i === this.selectedDay && m === this.selectedMonth && y === this.selectedYear,
+                        });
+                    }
+                    else {
+                        if (i - prevDaysCount > lastDay) {
+                            nextDay++;
+                            this.$data[days].push({
+                                day: nextDay,
+                                month: m + 1,
+                                year: y,
+                                isDayOff: [0, 6].includes(new Date(y, m + 1, nextDay).getDay()),
+                                isDisabled: this.disabledDate !== undefined && this.disabledDate(new Date(y, m + 1, nextDay, 0, 0, 0)),
+                                isToday: nextDay === this.currentDate.day && m + 1 === this.currentDate.month && y === this.currentDate.year,
+                                isNotSelected: m + 1 !== this.preliminaryMonth - (isPrev ? 1 : isNext ? -1 : 0),
+                                isSelected: nextDay === this.selectedDay && m + 1 === this.selectedMonth && y === this.selectedYear,
+                            });
+                        }
+                    }
+                    i++;
+                } while (i <= 42);
+                setTimeout(() => {
+                    const preliminaryDaysList = this.$refs.preliminaryDaysList;
+                    if (preliminaryDaysList !== undefined) {
+                        preliminaryDaysList.scrollTop = 240;
+                        this.needDelayScrollDays = false;
+                    }
+                }, this.needDelayScrollDays ? 300 : 0);
+            };
+            if (this.preliminaryYear !== null && this.preliminaryMonth !== null) {
+                render(this.preliminaryYear - (this.preliminaryMonth - 1 < 0 ? 1 : 0), this.preliminaryMonth - 1 < 0 ? 11 : this.preliminaryMonth - 1, true);
+                render(this.preliminaryYear, this.preliminaryMonth);
+                render(this.preliminaryYear + (this.preliminaryMonth + 1 > 11 ? 1 : 0), this.preliminaryMonth + 1 > 11 ? 0 : this.preliminaryMonth + 1, false, true);
+            }
+        },
+        preparedInitialValue(date) {
+            const d = new Date(date);
+            const year = d.getFullYear();
+            const month = `0${d.getMonth() + 1}`.substr(-2);
+            const day = `0${d.getDate()}`.substr(-2);
+            const time = d.toLocaleTimeString();
+            this.initialValue = `${this.isFisrtYear ? year : this.isFisrtMonth ? month : day}${this.separatorFormat}${this.isFisrtYear || this.isFisrtDay ? month : day}${this.separatorFormat}${!this.isFisrtYear ? year : day}${this.isDateTime ? ` ${time}` : ""}`;
+            if (this.preliminaryYear !== null && this.preliminaryMonth !== null && this.isOpened) {
+                this.renderCalendar();
+            }
+        },
+        changeDate(value) {
+            var _a, _b, _c;
+            const splittedDate = value.split(this.separatorFormat);
+            const lastNumberDate = this.isDateTime ? splittedDate[2].split(" ")[0] : splittedDate[2];
+            const splitedTime = this.isDateTime
+                ? splittedDate[2].split(" ")[1] === undefined
+                    ? []
+                    : splittedDate[2].split(" ")[1].split(":")
+                : [];
+            const hour = (_a = splitedTime[0]) !== null && _a !== void 0 ? _a : "00";
+            const minute = (_b = splitedTime[1]) !== null && _b !== void 0 ? _b : "00";
+            const second = (_c = splitedTime[2]) !== null && _c !== void 0 ? _c : "00";
+            const validHours = `${Number(hour) < 1 ? "00" : Number(hour) > 23 ? "23" : `0${hour}`.substr(-2)}`;
+            const validMinutes = `${Number(minute) < 1 ? "00" : Number(minute) > 59 ? "59" : `0${minute}`.substr(-2)}`;
+            const validSeconds = `${Number(second) < 1 ? "00" : Number(second) > 59 ? "59" : `0${second}`.substr(-2)}`;
+            const year = this.isFisrtYear ? splittedDate[0] : lastNumberDate;
+            const month = this.isFisrtMonth ? splittedDate[0] : splittedDate[1];
+            const day = this.isFisrtDay ? splittedDate[0] : this.isFisrtYear ? lastNumberDate : splittedDate[1];
+            const validMonth = `${Number(month) < 1 ? "01" : Number(month) > 12 ? 12 : month}`;
+            const datePrevMonth = new Date(Number(year), Number(validMonth) - 1, 1);
+            const datePreliminaryMonth = new Date(Number(year), Number(validMonth), 1);
+            const maxDay = Math.round((datePreliminaryMonth - datePrevMonth) / 1000 / 3600 / 24);
+            const validDay = `${Number(day) < 1 ? "01" : Number(day) > maxDay ? maxDay : day}`;
+            this.preparedInitialValue(`${year}-${validMonth}-${validDay}${this.isDateTime ? ` ${validHours}:${validMinutes}:${validSeconds}` : ""}`);
+            const date = this.isDateTime
+                ? new Date(Number(year), Number(validMonth) - 1, Number(validDay), Number(validHours), Number(validMinutes), Number(validSeconds))
+                : new Date(Number(year), Number(validMonth) - 1, Number(validDay));
+            this.$emit("change", date);
+        },
+        submit() {
+            const year = Number(this.preliminaryYear);
+            const month = Number(this.preliminaryMonth);
+            const day = Number(this.preliminaryDay);
+            const hours = Number(this.preliminaryHours);
+            const minutes = Number(this.preliminaryMinutes);
+            const seconds = Number(this.preliminarySeconds);
+            const date = this.isDateTime ? new Date(year, month, day, hours, minutes, seconds) : new Date(year, month, day);
+            this.$emit("update:value", date);
+            this.$emit("change", date);
+        },
+        daysListAnimation(isNext) {
+            const preliminaryDaysList = this.$refs.preliminaryDaysList;
+            this.isDaysListAnimation = true;
+            if (preliminaryDaysList !== undefined || this.isOpenedMonth) {
+                if (!this.isOpenedMonth) {
+                    preliminaryDaysList === null || preliminaryDaysList === void 0 ? void 0 : preliminaryDaysList.scroll({ top: isNext ? 480 : 0, behavior: "smooth" });
+                }
+                setTimeout(() => {
+                    if (this.preliminaryYear !== null && this.preliminaryMonth !== null) {
+                        if (isNext) {
+                            if (this.isOpenedMonth) {
+                                if (this.preliminaryYear + 1 > 9999) {
+                                    this.preliminaryYear = this.selectedYear;
+                                }
+                                else {
+                                    this.preliminaryYear++;
+                                }
+                            }
+                            else {
+                                if (this.preliminaryMonth + 1 > 11) {
+                                    this.preliminaryMonth = 0;
+                                    this.preliminaryYear++;
+                                }
+                                else {
+                                    this.preliminaryMonth++;
+                                }
+                            }
+                        }
+                        else {
+                            if (this.isOpenedMonth) {
+                                if (this.preliminaryYear - 1 < 100) {
+                                    this.preliminaryYear = this.selectedYear;
+                                }
+                                else {
+                                    this.preliminaryYear--;
+                                }
+                            }
+                            else {
+                                if (this.preliminaryMonth - 1 < 0) {
+                                    this.preliminaryMonth = 11;
+                                    this.preliminaryYear--;
+                                }
+                                else {
+                                    this.preliminaryMonth--;
+                                }
+                            }
+                        }
+                        this.renderCalendar();
+                    }
+                    setTimeout(() => {
+                        this.isDaysListAnimation = false;
+                    }, 100);
+                }, preliminaryDaysList !== undefined && !this.isOpenedMonth ? 300 : 0);
+            }
+        },
+        yearsListAnimation(isNext) {
+            const years = this.$refs.years;
+            this.isYearsListAnimation = true;
+            if (years !== null) {
+                years.scroll({ top: isNext ? 232 : 0, behavior: "smooth" });
+                setTimeout(() => {
+                    years.scrollTop = 116;
+                    this.isYearsListAnimation = false;
+                    if (this.minRangeYear !== null && this.maxRangeYear !== null && this.selectedYear !== null) {
+                        if (isNext) {
+                            if (this.maxRangeYear + 6 >= 9999) {
+                                this.minRangeYear = this.maxRangeYear < 9999 ? 9988 : this.selectedYear - 5;
+                                this.maxRangeYear = this.maxRangeYear < 9999 ? 9999 : this.selectedYear + 6;
+                            }
+                            else {
+                                this.minRangeYear = this.minRangeYear + 6;
+                                this.maxRangeYear = this.maxRangeYear + 6;
+                            }
+                        }
+                        else {
+                            if (this.minRangeYear - 6 <= 100) {
+                                this.maxRangeYear = this.minRangeYear > 100 ? 111 : this.selectedYear + 6;
+                                this.minRangeYear = this.minRangeYear > 100 ? 100 : this.selectedYear - 5;
+                            }
+                            else {
+                                this.minRangeYear = this.minRangeYear - 6;
+                                this.maxRangeYear = this.maxRangeYear - 6;
+                            }
+                        }
+                    }
+                }, 300);
+            }
+        },
+        prev() {
+            if (this.isOpenedTime || this.isYearsListAnimation || this.isDaysListAnimation) {
+                return;
+            }
+            if (this.isOpenedYear) {
+                this.yearsListAnimation();
+            }
+            else if (this.preliminaryYear !== null && this.preliminaryMonth !== null) {
+                this.daysListAnimation();
+            }
+        },
+        next() {
+            if (this.isOpenedTime || this.isYearsListAnimation || this.isDaysListAnimation) {
+                return;
+            }
+            if (this.isOpenedYear) {
+                this.yearsListAnimation(true);
+            }
+            else if (this.preliminaryYear !== null && this.preliminaryMonth !== null) {
+                this.daysListAnimation(true);
+            }
+        },
+        selectDay(d) {
+            if (d.isDisabled) {
+                return;
+            }
+            this.preliminaryDay = d.day;
+            this.preliminaryMonth = d.month;
+            this.submit();
+            this.close();
+        },
+        selectMonth(i) {
+            this.preliminaryMonth = i;
+            this.openCloseMenuMonth();
+            this.needDelayScrollDays = true;
+            this.renderCalendar();
+        },
+        selectYear(i) {
+            this.preliminaryYear = i < 100 ? 100 : i > 9999 ? 9999 : i;
+            this.openCloseMenuYear();
+            this.openCloseMenuMonth();
+        },
+        cancelSelectTime() {
+            this.preliminaryHours = this.selectedHours;
+            this.preliminaryMinutes = this.selectedMinutes;
+            this.preliminarySeconds = this.selectedSeconds;
+            this.openCloseMenuTime();
+        },
+        saveTime() {
+            if (this.preliminaryDay === null) {
+                this.preliminaryDay = new Date().getDate();
+            }
+            this.submit();
+            this.openCloseMenuTime();
+        },
+        selectHours(h) {
+            this.preliminaryHours = h;
+        },
+        selectMinutes(m) {
+            this.preliminaryMinutes = m;
+        },
+        selectSeconds(s) {
+            this.preliminarySeconds = s;
+        },
+        openCloseMenuTime() {
+            if (this.isOpenedTime) {
+                this.isTimeAnimationOpened = false;
+                this.isTimeAnimationClosed = true;
+                this.needDelayScrollDays = true;
+                setTimeout(() => {
+                    this.isOpenedTime = !this.isOpenedTime;
+                    this.isDayAnimationOpened = true;
+                    this.isDayAnimationClosed = false;
+                }, 300);
+                this.renderCalendar();
+            }
+            else {
+                this.isDayAnimationOpened = false;
+                this.isDayAnimationClosed = true;
+                this.isTimeAnimationOpened = true;
+                this.isTimeAnimationClosed = false;
+                setTimeout(() => {
+                    this.isOpenedTime = !this.isOpenedTime;
+                }, 300);
+            }
+        },
+        openCloseMenuMonth() {
+            if (this.isOpenedMonth) {
+                this.isMonthAnimationOpened = false;
+                this.isMonthAnimationClosed = true;
+                setTimeout(() => {
+                    this.isOpenedMonth = !this.isOpenedMonth;
+                    this.isDayAnimationOpened = true;
+                    this.isDayAnimationClosed = false;
+                }, 300);
+            }
+            else {
+                this.isDayAnimationOpened = false;
+                this.isDayAnimationClosed = true;
+                this.isMonthAnimationOpened = true;
+                this.isMonthAnimationClosed = false;
+                setTimeout(() => {
+                    this.isOpenedMonth = !this.isOpenedMonth;
+                }, 300);
+            }
+        },
+        openCloseMenuYear() {
+            if (this.isOpenedYear) {
+                this.isYearAnimationOpened = false;
+                this.isYearAnimationClosed = true;
+                setTimeout(() => {
+                    this.isOpenedYear = !this.isOpenedYear;
+                }, 300);
+            }
+            else {
+                if (this.isOpenedMonth) {
+                    this.openCloseMenuMonth();
+                }
+                this.isDayAnimationOpened = false;
+                this.isDayAnimationClosed = true;
+                this.isYearAnimationOpened = true;
+                this.isYearAnimationClosed = false;
+                setTimeout(() => {
+                    this.isOpenedYear = !this.isOpenedYear;
+                    this.$nextTick(() => {
+                        const years = this.$refs.years;
+                        if (years !== null) {
+                            years.scrollTop = 116;
+                        }
+                    });
+                }, 300);
+            }
+        },
+        open() {
+            const icon = this.$refs.icon || undefined;
+            this.isCalendarPositionTop = icon.getClientRects()[0].y + 376 > window.innerHeight;
+            if (!this.isOpened) {
+                this.isDayAnimationClosed = false;
+                this.isDayAnimationOpened = true;
+                this.isOpened = true;
+                document.addEventListener("keydown", this.esc);
+                document.addEventListener("click", this.outside);
+                if (this.preliminaryYear !== null && this.preliminaryMonth !== null) {
+                    this.renderCalendar();
+                }
+            }
+            else {
+                this.close();
+            }
+        },
+        close() {
+            this.isDayAnimationOpened = false;
+            this.isDayAnimationClosed = true;
+            setTimeout(() => {
+                this.isOpened = false;
+            }, 200);
+            document.removeEventListener("keydown", this.esc);
+            document.removeEventListener("click", this.outside);
+            if (this.isOpenedYear) {
+                this.openCloseMenuYear();
+            }
+            if (this.isOpenedMonth) {
+                this.openCloseMenuMonth();
+            }
+            if (this.isOpenedTime) {
+                this.openCloseMenuTime();
+            }
+            this.preliminaryYear = this.selectedYear;
+            this.preliminaryMonth = this.selectedMonth;
+            this.preliminaryDay = this.selectedDay;
+        },
+        esc(e) {
+            if (e.code === "Escape") {
+                this.close();
+            }
+        },
+        outside(e) {
+            const icon = this.$refs.icon;
+            const calendar = this.$refs.calendar;
+            const target = e.target;
+            if (!icon.contains(target) && !calendar.contains(target)) {
+                this.close();
+            }
+        },
+    },
+}));
+
+;// CONCATENATED MODULE: ./src/components/Datepicker.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_Datepickervue_type_script_lang_ts_ = (Datepickervue_type_script_lang_ts_); 
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Datepicker.vue?vue&type=style&index=0&id=7cc10972&prod&lang=scss&scoped=true&
+// extracted by mini-css-extract-plugin
+
+;// CONCATENATED MODULE: ./src/components/Datepicker.vue?vue&type=style&index=0&id=7cc10972&prod&lang=scss&scoped=true&
+
+;// CONCATENATED MODULE: ./src/components/Datepicker.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var Datepicker_component = normalizeComponent(
+  components_Datepickervue_type_script_lang_ts_,
+  Datepickervue_type_template_id_7cc10972_scoped_true_render,
+  Datepickervue_type_template_id_7cc10972_scoped_true_staticRenderFns,
+  false,
+  null,
+  "7cc10972",
+  null
+  
+)
+
+/* harmony default export */ var Datepicker = (Datepicker_component.exports);
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/DropDown.vue?vue&type=template&id=65e0f972&scoped=true&
 var DropDownvue_type_template_id_65e0f972_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('div',{ref:"drop-down",staticClass:"ui-drop-down",style:({ left: `${_vm.left}%`, 'margin-left': `${_vm.marginLeft}px`  })},[_c('span',{style:({ left: `${_vm.taleLeft}%` })}),_c('div',[_c('div',[_vm._t("default")],2)])])
 }
@@ -5059,6 +6029,7 @@ var Toggle_component = normalizeComponent(
 
 /* harmony default export */ var Toggle = (Toggle_component.exports);
 ;// CONCATENATED MODULE: ./src/lib-main.ts
+
 
 
 

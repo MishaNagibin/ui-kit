@@ -527,7 +527,7 @@ export default Vue.extend({
     },
     data() {
         return {
-            initialValue: this.value,
+            initialValue: this.value || "",
             selectedYear: null as number | null,
             selectedMonth: null as number | null,
             selectedDay: null as number | null,
@@ -713,19 +713,20 @@ export default Vue.extend({
         value: {
             immediate: true,
             handler(n) {
-                const date = `${n}`.length > 0 ? new Date(n) : new Date()
+                const notNull = n !== null && `${n}`.length > 0
+                const date = notNull ? new Date(n) : new Date()
                 this.selectedYear = date.getFullYear()
                 this.selectedMonth = date.getMonth()
-                this.selectedHours = `${n}`.length > 0 ? `0${date.getHours()}`.substr(-2) : "00"
-                this.selectedMinutes = `${n}`.length > 0 ? `0${date.getMinutes()}`.substr(-2) : "00"
-                this.selectedSeconds = `${n}`.length > 0 ? `0${date.getSeconds()}`.substr(-2) : "00"
+                this.selectedHours = notNull ? `0${date.getHours()}`.substr(-2) : "00"
+                this.selectedMinutes = notNull ? `0${date.getMinutes()}`.substr(-2) : "00"
+                this.selectedSeconds = notNull ? `0${date.getSeconds()}`.substr(-2) : "00"
                 this.preliminaryHours = this.selectedHours
                 this.preliminaryMinutes = this.selectedMinutes
                 this.preliminarySeconds = this.selectedSeconds
                 this.preliminaryYear = date.getFullYear()
                 this.preliminaryMonth = date.getMonth()
                 this.preliminaryDay = date.getDate()
-                if (`${n}`.length > 0) {
+                if (notNull) {
                     this.selectedDay = date.getDate()
                     this.preparedInitialValue(date)
                 }

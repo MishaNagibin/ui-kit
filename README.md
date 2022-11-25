@@ -28,6 +28,16 @@
   - [Размеры](#размеры-элементов-выпадающего-списка)
   - [Структура массива элементов выпадающего списка](#comboboxitem)
   - [Примеры](#примеры-использования-combobox)
+- [**DatePicker**](#datepicker)
+  - [Пропсы](#пропсы-datepicker)
+  - [Форматы](#форматы-datepicker)
+  - [disabledDate](#disableddate-datepicker)
+  - [Пропсы стилизации дней](#пропсы-стилизации-дней)
+  - [Пропсы стилизации в шапке](#пропсы-стилизации-в-шапке)
+  - [Пропсы стилизации месяцев](#пропсы-стилизации-месяцев)
+  - [Пропсы стилизации годов](#пропсы-стилизации-годов)
+  - [Пропсы стилизации времени](#пропсы-стилизации-времени)
+  - [Примеры](#примеры-использования-datepicker)
 - [**DropDown**](#dropdown)
   - [Пропсы](#пропсы-dropdown)
   - [Примеры](#примеры-использования-dropdown)
@@ -504,7 +514,7 @@ computed: {
 | ---- | ----------- |
 | primary | темно-синий чекбокс с белой галочкой внутри на темно-синем фоне, когда активен |
 | red | красный чекбокс с белой галочкой внутри на красном фоне, когда активен |
-| default | серый чекбокс с белой галочой внутри на темно-синем фоне, когда активен, толщина обводки 1px |
+| default | серый чекбокс с белой галочкой внутри на темно-синем фоне, когда активен, толщина обводки 1px |
 
 #### Размеры чекбокса:
 
@@ -651,6 +661,304 @@ computed: {
     is-searched-any-match
 />
 ```
+
+## DatePicker
+
+Представляет собой компонент выбора даты и времени. Дату можно вводить вручную в поле ввода, либо же нажать на иконку календарика и выбрать дату в календаре. Можно переключать год, месяц, как отдельно в меню выбора года/месяца, так и в самом календаре. Также можно выбирать время, и вводить его вручную в поле ввода.
+
+У компонента есть событие `change`, возвращает Date | string.
+
+Немного логики по позиционированию компонента: Если снизу поля ввода будет недостаточно места, чтобы без скрола отобразить календарик, то он будет находиться над полем ввода, при условии, что сверху места достаточно.
+
+#### Пропсы DatePicker:
+
+Это основные пропсы компонента.
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| value (он же v-model) | Date &#124; string &#124; number &#124; null | дата, может быть в формате Date, строки и числа | пустая строка |
+| format | string | формат даты, который будет отображаться, подробнее в таблице ниже | DD.MM.YYYY |
+| type | string | тип компонента, либо только дата - `date`, либо дата и время - `datetime` | date |
+| placeholder | string | плейсхолдер, отображаемый в поле ввода, если не передано значение, то будет отображено значение `format` | undefined |
+| disabledDate | Function | сюда нужно передать функцию, которая будет принимать в качестве аргумента дату в формате Date, и по вашим условиям определять, нужно ли сделать эту дату "отключенной/недоступной", подробнее в примере ниже | undefined |
+| clearable | boolean | признак, обозначающий, что дату можно "очистить" по нажатию на "крестик" | true |
+| isDontHighlightToday | boolean | в компоненте помечается визуально текущий день, обозначается зеленой рамочкой, но если вам не нужно отображать текущий день, можно отключить его выделение передав `true` | false |
+| isIconsInsteadButtonsForTime | boolean | по умолчанию, для компонента с пропсом `type: datetime` (дата и время) есть две кнопки: "Отмена" и "Готово", то есть когда вы выбираете время, чтобы его "утвердить" надо нажать "Готово", либо же вы передумали нажимаете "Отмена". Так вот, можно кнопки заменить на иконки - крестик и галочка, если вам это нужно - передайте `true` | false |
+
+#### Форматы DatePicker:
+
+| name | type |
+| ---- | ---- |
+| YYYY.MM.DD | string |
+| YYYY-MM-DD | string |
+| YYYY/MM/DD | string |
+| DD.MM.YYYY | string |
+| DD-MM-YYYY | string |
+| DD/MM/YYYY | string |
+| MM.DD.YYYY | string |
+| MM-DD-YYYY | string |
+| MM/DD/YYYY | string |
+
+#### disabledDate DatePicker:
+
+В данный пропс нужно передавать функцию. Функция должна принимать аргумент - Date, а в ответ возвращать boolean.
+
+![image](https://user-images.githubusercontent.com/41324851/204059261-c6b8aee4-46d5-4480-8471-e6e56f3b12ec.png)
+
+
+Пример функции:
+
+```js
+disabledDate(date: Date): boolean {
+    const today = new Date()
+
+    return date < today
+}
+```
+
+В данном примере будет происходить следующее:
+1) Каждая дата календаря, например текущего месяца, или того, что вы вебирете, в т.ч. года будет, при наличии функции в пропсе `disabledDate`, отдавать каждый день месяца, в ответ получать `boolean`, который будет возвращать либо `true` либо `false`, и на основе этого делать день "отключенным/недоступным", т.е. блокировать его для выбора, а также визуально, чтобы было видно, что день выбрать нельзя.
+2) В функции из примера каждый день месяца, который мы смотрим, будет проверяться на то, что он ранее чем текущий день. Если это так - значит день выбрать нельзя, если же он равен текущему дню или позже его - значит этот день можно выбрать. 
+
+
+Также в компоненте можно на свой вкус стилизовать такие вещи, как день, месяц, год, цвета при наведении, обводки, фоны, цвет текста, скругление углов обводки, цвет выбранного дня и т.д. Подробнее в таблицах ниже, все по порядку.
+
+#### Пропсы стилизации дней:
+
+![image](https://user-images.githubusercontent.com/41324851/204059572-abecd780-24d7-4654-bcc8-fa68a52cda91.png)
+
+
+*Outline - рамка вовнутрь, например `2px solid green`
+
+*OutlineOffset - толщина рамки, т.к. она вовнутрь то надо указать тоже самое, что в Outline, но в отрицательном значении, например `-2px`
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| dayColor | string | цвет текста дня | #1e1e1e |
+| dayHoverColor | string | цвет текста дня при наведении | #1e1e1e |
+| dayHoverBackground | string | фон дня при наведении | #3f51b511 |
+| dayHoverOutline | string | рамка дня при наведении | none |
+| dayHoverOutlineOffset | string | толщина рамки | 0 |
+| dayBorderRadius | string | скругление углов дня | 0 |
+| daySelectedColor | string | цвет текста выбранного дня | #ffffff |
+| daySelectedBackground | string | фон выбранного дня | #4e62d1 |
+| daySelectedOutline | string | рамка выбранного дня | none |
+| daySelectedOutlineOffset | string | толщина рамки выбранного дня | 0 |
+| dayOffColor | string | цвет текста выходного дня (сб, вс) | #f14a4a |
+| dayOffBackground | string | фон выходного дня | transparent |
+| dayOffOutline | string | рамка выходного дня | none |
+| dayOffOutlineOffset | string | толщина рамки выходного дня | 0 |
+| dayNotSelectedColor | string | цвет текста дня, который не из выбранного месяц (например из предыдущего или следующего) | #c0c0c0 |
+| dayNotSelectedBackground | string | фон дня, который не из выбранного месяц | transparent |
+| dayNotSelectedOutline | string | рамка дня, который не из выбранного месяц | none |
+| dayNotSelectedOutlineOffset | string | толщина рамки дня, который не из выбранного месяц | 0 |
+| todayColor | string | цвет текста текущего дня | #1e1e1e |
+| todayBackground | string | фон текущего дня | transparent |
+| todayOutline | string | рамка текущего дня | 2px solid green |
+| todayOutlineOffset | string | толщина рамки текущего дня | -2px |
+| dayDisabledColor | string | цвет текста отключенного/недоступного дня | #00000059 |
+| dayDisabledBackground | string | фон отключенного/недоступного дня | #dbdbdb |
+
+#### Пропсы стилизации в шапке:
+
+Имеется ввиду месяц, год, день, время, иконки, которые расположены над меню с днями, месяцами, годами, т.е. в шапке.
+
+![image](https://user-images.githubusercontent.com/41324851/204059198-d93c1e0c-337e-4ea7-b164-e6ce1b32312c.png)
+![image](https://user-images.githubusercontent.com/41324851/204059225-08eba8f8-c76a-4901-8184-3b1ed308f423.png)
+
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| headerMonthColor | string | цвет текста месяца | #1e1e1e |
+| headerMonthHoverColor | string | цвет текста месяца при наведении | #4960df |
+| headerYearColor | string | цвет текста года | #1e1e1e |
+| headerYearHoverColor | string | цвет текста года при наведении | #4960df |
+| headerTimeColor | string | цвет текста времени | #1e1e1e |
+| headerTimeHoverColor | string | цвет текста времени при наведении | #4960df |
+| headerIconColor | string | цвет иконок | #636363 |
+| headerIconHoverColor | string | цвет иконок при наведении | #4960df |
+
+#### Пропсы стилизации месяцев:
+
+В меню выбора месяца.
+
+![image](https://user-images.githubusercontent.com/41324851/204059547-6643fca6-0b5a-42a6-b7a7-e175166c6697.png)
+
+
+*Outline - рамка вовнутрь, например `2px solid green`
+
+*OutlineOffset - толщина рамки, т.к. она вовнутрь то надо указать тоже самое, что в Outline, но в отрицательном значении, например `-2px`
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| monthColor | string | цвет текста месяца | #1e1e1e |
+| monthBorderRadius | string | скругление углов месяца | 0 |
+| monthSelectedColor | string | цвет текста выбранного месяца | #ffffff |
+| monthSelectedFontWeight | string | толщина текста выбранного месяца | 400 |
+| monthSelectedBackground | string | фон выбранного месяца | #4e62d1 |
+| monthSelectedOutline | string | рамка выбранного месяца | none |
+| monthSelectedOutlineOffset | string | толщина рамки выбранного месяца | 0 |
+| monthHoverColor | string | цвет текста месяца при наведении | #1e1e1e |
+| monthHoverBackground | string | фон месяца при наведении | #3f51b511 |
+| monthHoverOutline | string | рамка месяца при наведении | none |
+| monthHoverOutlineOffset | string | толщина рамки месяца при наведении |
+
+#### Пропсы стилизации годов:
+
+В меню выбора года.
+
+![image](https://user-images.githubusercontent.com/41324851/204059557-a4c39400-ba11-4cf1-beb8-68618df38c55.png)
+
+
+*Outline - рамка вовнутрь, например `2px solid green`
+
+*OutlineOffset - толщина рамки, т.к. она вовнутрь то надо указать тоже самое, что в Outline, но в отрицательном значении, например `-2px`
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| yearColor | string | цвет текста года | #1e1e1e |
+| yearBorderRadius | string | скругление углов года | 0 |
+| yearSelectedColor | string | цвет текста выбранного года | #ffffff |
+| yearSelectedFontWeight | string | толщина текста выбранного года | 400 |
+| yearSelectedBackground | string | фон выбранного года | #4e62d1 |
+| yearSelectedOutline | string | рамка выбранного года | none |
+| yearSelectedOutlineOffset | string | толщина рамки выбранного года | 0 |
+| yearHoverColor | string | цвет текста года при наведении | #1e1e1e |
+| yearHoverBackground | string | фон года при наведении | #3f51b511 |
+| yearHoverOutline | string | рамка года при наведении | none |
+| yearHoverOutlineOffset | string | толщина рамки года при наведении |
+
+#### Пропсы стилизации времени:
+
+В меню выбора времени.
+
+![image](https://user-images.githubusercontent.com/41324851/204059648-3ffc2276-708d-423a-8b4c-3fd56432e7e4.png)
+![image](https://user-images.githubusercontent.com/41324851/204059606-feb521a8-c15b-4b85-9380-8f58126a1cca.png)
+
+
+Применяется одновременно к часам, минутам, секундам.
+
+*Outline - рамка вовнутрь, например `2px solid green`
+
+*OutlineOffset - толщина рамки, т.к. она вовнутрь то надо указать тоже самое, что в Outline, но в отрицательном значении, например `-2px`
+
+**Единица времени - час, минута, секунда.
+
+| name | type | description | default |
+| ---- | ---- | ----------- | ------- |
+| timeColor | string | цвет текста единицы времени | #1e1e1e |
+| timeBorderRadius | string | скругление углов единицы времени | 0 |
+| timeSelectedColor | string | цвет текста выбранной единицы времени | #4e62d1 |
+| timeSelectedFontWeight | string | толщина текста выбранной единицы времени | 600 |
+| timeSelectedBackground | string | фон выбранной единицы времени | transparent |
+| timeSelectedOutline | string | рамка выбранной единицы времени | none |
+| timeSelectedOutlineOffset | string | толщина рамки выбранной единицы времени | 0 |
+| timeHoverColor | string | цвет текста единицы времени при наведении | #1e1e1e |
+| timeHoverBackground | string | фон единицы времени при наведении | #3f51b511 |
+| timeHoverOutline | string | рамка единицы времени при наведении | none |
+| timeHoverOutlineOffset | string | толщина рамки единицы времени при наведении |
+
+#### Примеры использования DatePicker:
+
+```html
+<cDatePicker
+    v-model="date"
+    placeholder="дд.мм.гггг"
+    :disabledDate="disabledDate"
+    @change="changeDate"
+/>
+
+...
+
+data() {
+    return {
+        date: 1669413261000,
+    }
+},
+methods: {    
+    disabledDate(date: Date): boolean {
+        const today = new Date()
+
+        return date < today
+    },
+    changeDate(date: Date | string) {
+        this.date = date
+    }
+}
+```
+
+```html
+<cDatePicker
+    v-model="date"
+    format="YYYY-MM-DD"
+    @change="changeDate"
+/>
+
+...
+
+data() {
+    return {
+        date: new Date(),
+    }
+}
+```
+
+```html
+<cDatePicker
+    v-model="date"
+    format="DD/MM/YYYY"
+    placeholder="дд/мм/гггг"
+    @change="changeDate"
+/>
+
+...
+
+data() {
+    return {
+        date: "2022-11-26",
+    }
+}
+```
+
+![image](https://user-images.githubusercontent.com/41324851/204059348-fe9251f7-f94a-4c79-8b2a-f517ff6d5ca7.png)
+
+
+```html
+<cDatePicker
+    v-model="date"
+    type="datetime"
+    @change="changeDate"
+/>
+```
+
+![image](https://user-images.githubusercontent.com/41324851/204059303-ee2440d0-1683-4613-8c90-5eea136af25a.png)
+
+
+```html
+<cDatePicker
+    v-model="date"
+    :clearable="false"
+    is-dont-highlight-today
+    is-icons-instead-buttons-for-time
+    @change="changeDate"
+/>
+```
+
+```html
+<cDatePicker
+    v-model="date"
+    :clearable="false"
+    day-hover-color="white"
+    day-hover-background="crimson"
+    today-outline="3px solid purple"
+    today-outline-offset="-3px"
+    @change="changeDate"
+/>
+```
+
+![image](https://user-images.githubusercontent.com/41324851/204059416-16bdcfcc-f793-48ac-a226-a468597749b1.png)
+
+
 
 ## DropDown
 

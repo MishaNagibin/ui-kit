@@ -262,7 +262,7 @@ export default Vue.extend({
         },
         isIconsInsteadButtonsForTime: {
             type: Boolean,
-            default: true,
+            default: false,
         },
         dayColor: {
             type: String,
@@ -1110,7 +1110,7 @@ export default Vue.extend({
         },
         open() {
             const icon = (this.$refs.icon as HTMLElement) || undefined
-            this.isCalendarPositionTop = icon.getClientRects()[0].y + 376 > window.innerHeight
+            this.isCalendarPositionTop = icon.getClientRects()[0].y + 376 > window.innerHeight && icon.getClientRects()[0].y - 376 > 0
             if (!this.isOpened) {
                 this.isDayAnimationClosed = false
                 this.isDayAnimationOpened = true

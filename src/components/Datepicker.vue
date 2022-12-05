@@ -569,6 +569,7 @@ export default Vue.extend({
             renderMinutes: Array.from({ length: 60 }, (_, m) => `0${m}`.substr(-2)),
             renderSeconds: Array.from({ length: 60 }, (_, s) => `0${s}`.substr(-2)),
             isCalendarPositionTop: false,
+            fixedValue: null as string | null,
         }
     },
     computed: {
@@ -706,6 +707,7 @@ export default Vue.extend({
                 this.selectedHours = "00"
                 this.selectedMinutes = "00"
                 this.selectedSeconds = "00"
+                this.fixedValue = null
                 this.$emit("update:value", "")
                 this.$emit("change", "")
             }
@@ -840,7 +842,7 @@ export default Vue.extend({
             this.initialValue = `${this.isFisrtYear ? year : this.isFisrtMonth ? month : day}${this.separatorFormat}${
                 this.isFisrtYear || this.isFisrtDay ? month : day
             }${this.separatorFormat}${!this.isFisrtYear ? year : day}${this.isDateTime ? ` ${time}` : ""}`
-
+            this.fixedValue = this.initialValue
             if (this.preliminaryYear !== null && this.preliminaryMonth !== null && this.isOpened) {
                 this.renderCalendar()
             }
@@ -870,9 +872,6 @@ export default Vue.extend({
             const maxDay = Math.round(((datePreliminaryMonth as any) - (datePrevMonth as any)) / 1000 / 3600 / 24)
             const validDay = `${Number(day) < 1 ? "01" : Number(day) > maxDay ? maxDay : day}`
 
-            this.preparedInitialValue(
-                `${year}-${validMonth}-${validDay}${this.isDateTime ? ` ${validHours}:${validMinutes}:${validSeconds}` : ""}`,
-            )
             const date = this.isDateTime
                 ? new Date(
                     Number(year),
@@ -883,6 +882,16 @@ export default Vue.extend({
                     Number(validSeconds),
                 )
                 : new Date(Number(year), Number(validMonth) - 1, Number(validDay))
+
+            if (this.disabledDate !== undefined && this.disabledDate(date)) {
+                this.initialValue = this.fixedValue !== null ? this.fixedValue.replace(/\./g, "") : ""
+
+                return
+            }
+
+            this.preparedInitialValue(
+                `${year}-${validMonth}-${validDay}${this.isDateTime ? ` ${validHours}:${validMinutes}:${validSeconds}` : ""}`,
+            )
             this.$emit("change", date)
         },
         submit() {

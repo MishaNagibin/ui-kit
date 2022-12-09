@@ -15,7 +15,7 @@
     >
         <span
             v-show="isLoading"
-            class="icon spinner"
+            class="icon spinner1"
         />
         <div
             v-show="!isLoading"
@@ -418,7 +418,7 @@ export default Vue.extend({
         text-transform: unset;
     }
 
-    & > .spinner {
+    & > .spinner1 {
         margin: auto;
         mask-size: 100%;
         background-color: $gray-000;

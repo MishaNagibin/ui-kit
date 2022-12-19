@@ -17,7 +17,7 @@
             </span>
             <textarea
                 v-if="isLazy"
-                v-model="text"
+                v-model.lazy="text"
                 v-on="listeners"
                 v-bind="multilineBinds"
             />
@@ -345,6 +345,9 @@ export default Vue.extend({
         maxlength: {
             type: String,
         },
+        pattern: {
+            type: RegExp,
+        },
     },
     data() {
         return {
@@ -356,6 +359,7 @@ export default Vue.extend({
             formattedMask: "",
             formattedCode: "",
             code: Object.fromEntries(Array.from({ length: this.codeLength }, (_, i) => [i + 1, ""])) as { [key: number]: string },
+            oldVal: "",
         }
     },
     computed: {
@@ -379,6 +383,7 @@ export default Vue.extend({
                 focus: this.focus,
                 blur: this.blur,
                 keydown: this.keyDown,
+                paste: this.paste,
             }
         },
         multilineBinds(): any {
@@ -487,6 +492,7 @@ export default Vue.extend({
             immediate: true,
             handler() {
                 this.text = this.value
+                this.oldVal = this.value
                 if (this.isPhone) {
                     // if ((this.value || "").length !== 0) {
                     this.phoneFormatting("value")
@@ -506,6 +512,35 @@ export default Vue.extend({
         this.checkSlots()
     },
     methods: {
+        paste(e: ClipboardEvent) {
+            if (this.pattern !== undefined) {
+                e.stopPropagation()
+                e.preventDefault()
+                const clipboardData = e.clipboardData?.getData("Text")
+                if (clipboardData !== undefined) {
+                    let value =
+                        this.pattern !== undefined && !clipboardData.match(new RegExp(this.pattern))
+                            ? clipboardData
+                                .split("")
+                                .filter((i) => new RegExp(this.pattern).test(i))
+                                .join("")
+                            : clipboardData
+                    const start = (e.target as HTMLInputElement).selectionStart as number
+                    const end = (e.target as HTMLInputElement).selectionEnd as number
+                    const currentValue = (e.target as HTMLInputElement).value
+                    const newVal = `${currentValue.slice(0, start)}${value}${currentValue.slice(end)}`
+                    if (newVal.match(new RegExp(this.pattern))) {
+                        ;(e.target as HTMLInputElement).setRangeText(value, start, end, "end")
+                    }
+                    if (this.isLazy) {
+                        this.text = newVal.match(new RegExp(this.pattern)) ? newVal : currentValue
+                        this.change(e)
+                    } else {
+                        this.input(e as any)
+                    }
+                }
+            }
+        },
         selectEmoji(emoji: any) {
             const textarea = this.isMultiline ? (this.$refs.textarea as HTMLTextAreaElement) : (this.$refs.input as HTMLInputElement)
             const start = textarea.selectionStart as number
@@ -586,9 +621,15 @@ export default Vue.extend({
 
                 return
             }
+            let value = (e.target as HTMLInputElement | HTMLTextAreaElement).value
+            if (this.isLazy && value.match(new RegExp(this.pattern))) {
+                this.oldVal = value
+            }
+            value = this.pattern !== undefined && !value.match(new RegExp(this.pattern)) ? this.oldVal : value
+            ;(e.target as HTMLInputElement).value = value
 
             if (!this.isLazy) {
-                this.$emit("update:value", (e.target as HTMLInputElement | HTMLTextAreaElement).value)
+                this.$emit("update:value", value)
             }
             this.$emit("input", e)
         },

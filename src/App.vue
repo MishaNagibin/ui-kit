@@ -1,17 +1,23 @@
 <template>
     <div id="app">
-        <!-- <cEdit
+        <!-- <cCombobox
+            v-model="comboID"
+            :items="comboItems"
+            :filter="false"
+        /> -->
+        <cEdit
             v-model="phone"
-            mask="2.2"
+            :pattern="/^\d+(\.?)\d*$/g"
             placeholder="номер телефона"
             autocomplete="new-password"
-        />-->
-        <cDatePicker
-            v-model="date"
-            placeholder="дд.мм.гггг"
-            type="datetime"
-            @change="changeDate"
         />
+        <div>{{ phone }}</div>
+        <!-- <cDatePicker
+            v-model="date"
+            :disabledDate="disabledDate"
+            type="date"
+            @change="changeDate"
+        /> -->
         <!-- <cButton
             mode="red"
             @click="clear"
@@ -65,17 +71,20 @@ import cEdit from "@/components/Edit.vue"
 import cDatePicker from "@/components/DatePicker.vue"
 import cTable from "@/components/Table.vue"
 import cButton from "@/components/Button.vue"
+import cCombobox from "@/components/Combobox.vue"
 import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cDatePicker },
+    components: { cEdit },
     data() {
         return {
-            date: "" as Date | string,
+            date: null as Date | string | null,
             phone: "",
             isDisabled: false,
             val: "",
+            comboID: 1,
+            comboItems: [{ value: 1, name: "11111" }, { value: 2, name: "22222" }],
             categories: [
                 { ID: 1, name: "Кондиционеры и холодосы" },
                 { ID: 2, name: "Курьерские услуги" },
@@ -154,7 +163,7 @@ export default Vue.extend({
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    margin: 860px 0;
+    // margin: 860px 0;
 
     & > :deep(.ui-slider) {
         & > .carousel {

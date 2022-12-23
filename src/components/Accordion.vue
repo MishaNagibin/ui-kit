@@ -53,6 +53,7 @@ export default Vue.extend({
         },
     },
     render(h, ctx) {
+        const children = ctx.children.filter((c) => c.tag !== undefined && c.children !== undefined)
         let activeElements = [] as HTMLElement[]
         const resize = () => {
             for (let a of activeElements) {
@@ -97,7 +98,7 @@ export default Vue.extend({
         }
         const renderItems = [
             h("ul", [
-                ctx.children.map((v, i) => {
+                children.map((v, i) => {
                     return h(
                         "li",
                         {

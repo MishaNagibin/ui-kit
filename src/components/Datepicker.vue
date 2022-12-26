@@ -1,19 +1,21 @@
 <template>
-    <div class="ui-datepicker">
-        <cEdit
-            v-model="initialValue"
-            :mask="maskInput"
-            :placeholder="preparedPlaceholder"
-            :is-clear="clearable && initialValue.length > 0"
-            width="320px"
-            is-hide-status
-            @change="changeDate($event.target.value)"
-        />
-        <span
-            class="icon calendar-icon"
-            ref="icon"
-            @click="open"
-        />
+    <div :class="['ui-datepicker', { relative: isRelative }]">
+        <div class="field">
+            <cEdit
+                v-model="initialValue"
+                :mask="maskInput"
+                :placeholder="preparedPlaceholder"
+                :is-clear="clearable && initialValue.length > 0"
+                width="320px"
+                is-hide-status
+                @change="changeDate($event.target.value)"
+            />
+            <span
+                class="icon calendar-icon"
+                ref="icon"
+                @click="open"
+            />
+        </div>
         <div
             v-if="isOpened"
             :class="['calendar', { 'position-top': isCalendarPositionTop }]"
@@ -523,6 +525,10 @@ export default Vue.extend({
         timeHoverOutlineOffset: {
             type: String,
             default: "0",
+        },
+        isRelative: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
@@ -1119,7 +1125,7 @@ export default Vue.extend({
         },
         open() {
             const icon = (this.$refs.icon as HTMLElement) || undefined
-            this.isCalendarPositionTop = icon.getClientRects()[0].y + 376 > window.innerHeight && icon.getClientRects()[0].y - 376 > 0
+            this.isCalendarPositionTop = !this.isRelative && icon.getClientRects()[0].y + 376 > window.innerHeight && icon.getClientRects()[0].y - 376 > 0
             if (!this.isOpened) {
                 this.isDayAnimationClosed = false
                 this.isDayAnimationOpened = true
@@ -1183,16 +1189,30 @@ export default Vue.extend({
     width: fit-content;
     position: relative;
 
-    & > .icon {
-        margin: 0;
-        width: 40px;
-        height: 40px;
-        mask-size: 80%;
-        mask-repeat: no-repeat;
-        mask-position: center;
+    & > .field {
+        display: flex;
+        align-items: center;
 
-        &:hover {
-            cursor: pointer;
+        & > .icon {
+            margin: 0;
+            width: 40px;
+            height: 40px;
+            mask-size: 80%;
+            mask-repeat: no-repeat;
+            mask-position: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.relative {
+        flex-flow: column;
+
+        & > .calendar {
+            position: relative;
+            margin-top: 5px;
         }
     }
 

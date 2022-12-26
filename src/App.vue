@@ -1,23 +1,36 @@
 <template>
     <div id="app">
+        <cAccordion onlyOneCanActive>
+            <div>one</div>
+            <div>
+                <p>1</p>
+                <cDatePicker
+                    v-model="val"
+                    isRelative
+                    placeholder="дд.мм.гггг"
+                />
+            </div>
+            <div>three</div>
+            <div>four</div>
+        </cAccordion>
         <!-- <cCombobox
             v-model="comboID"
             :items="comboItems"
             :filter="false"
-        /> -->
-        <cEdit
+        />-->
+        <!-- <cEdit
             v-model="phone"
             :pattern="/^\d+(\.?)\d*$/g"
             placeholder="номер телефона"
             autocomplete="new-password"
         />
-        <div>{{ phone }}</div>
+        <div>{{ phone }}</div>-->
         <!-- <cDatePicker
             v-model="date"
             :disabledDate="disabledDate"
             type="date"
             @change="changeDate"
-        /> -->
+        />-->
         <!-- <cButton
             mode="red"
             @click="clear"
@@ -68,6 +81,7 @@
 <script lang="ts">
 import Vue from "vue"
 import cEdit from "@/components/Edit.vue"
+import cAccordion from "@/components/Accordion.vue"
 import cDatePicker from "@/components/DatePicker.vue"
 import cTable from "@/components/Table.vue"
 import cButton from "@/components/Button.vue"
@@ -76,15 +90,19 @@ import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cEdit },
+    components: { cAccordion, cDatePicker },
     data() {
         return {
             date: null as Date | string | null,
             phone: "",
             isDisabled: false,
+            isMounted: false,
             val: "",
             comboID: 1,
-            comboItems: [{ value: 1, name: "11111" }, { value: 2, name: "22222" }],
+            comboItems: [
+                { value: 1, name: "11111" },
+                { value: 2, name: "22222" },
+            ],
             categories: [
                 { ID: 1, name: "Кондиционеры и холодосы" },
                 { ID: 2, name: "Курьерские услуги" },
@@ -121,6 +139,9 @@ export default Vue.extend({
     },
     beforeMount() {
         this.isLoaded = true
+    },
+    mounted() {
+        this.isMounted = true
     },
     methods: {
         disabledDate(date: Date): boolean {

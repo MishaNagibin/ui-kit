@@ -69,6 +69,13 @@ export default Vue.extend({
                 }
             }
         }
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length > 0) {
+                    resize()
+                }
+            })
+        })
         window.addEventListener("resize", resize)
         const setActive = (e: HTMLElement) => {
             const isActive = e.classList.contains("active")
@@ -99,6 +106,9 @@ export default Vue.extend({
         const renderItems = [
             h("ul", [
                 children.map((v, i) => {
+                    setTimeout(() => {
+                        observer.observe(v.elm as HTMLElement, { childList: true, subtree: true })
+                    }, 0)
                     return h(
                         "li",
                         {

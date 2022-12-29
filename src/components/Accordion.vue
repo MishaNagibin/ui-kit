@@ -2,6 +2,8 @@
 import Vue from "vue"
 import { Prop } from "vue/types/options"
 
+// const dataDefaultActiveItems: number[] = []
+
 export default Vue.extend({
     name: "cAccordion",
     functional: true,
@@ -51,10 +53,10 @@ export default Vue.extend({
             type: String,
             default: "#8e8e8e",
         },
-        defaultActiveItems: {
-            type: Array as Prop<number[]>,
-            default: (): number[] => [],
-        },
+        // defaultActiveItems: {
+        //     type: Array as Prop<number[]>,
+        //     default: (): number[] => [],
+        // },
     },
     render(h, ctx) {
         const children = ctx.children.filter((c) => c.tag !== undefined && c.children !== undefined)
@@ -77,7 +79,7 @@ export default Vue.extend({
             resize()
         })
         window.addEventListener("resize", resize)
-        const setActive = (e: HTMLElement, isOnlyActive?: boolean) => {
+        const setActive = (e: HTMLElement) => {
             const isActive = e.classList.contains("active")
             if (ctx.props.onlyOneCanActive && !isActive) {
                 if (activeElements.length > 0) {
@@ -88,7 +90,7 @@ export default Vue.extend({
                     activeElements = []
                 }
             }
-            if (!isActive || isOnlyActive) {
+            if (!isActive) {
                 const items = e.children
                 let height = 15
                 for (let i of Array.from(items)) {
@@ -97,7 +99,7 @@ export default Vue.extend({
                 e.style.height = `${height}px`
                 e.classList.add("active")
                 activeElements.push(e)
-            } else if (!isOnlyActive) {
+            } else {
                 e.style.height = "24px"
                 e.classList.remove("active")
                 activeElements = activeElements.filter((i) => i !== e)
@@ -108,9 +110,10 @@ export default Vue.extend({
                 children.map((v, i) => {
                     setTimeout(() => {
                         resizeObserver.observe(v.elm as HTMLElement)
-                        if (ctx.props.defaultActiveItems.includes(i)) {
-                            setActive(v.elm?.parentElement as HTMLElement, true)
-                        }
+                        // if (!dataDefaultActiveItems.includes(i) && ctx.props.defaultActiveItems.includes(i)) {
+                        //     setActive(v.elm?.parentElement as HTMLElement)
+                        //     dataDefaultActiveItems.push(i)
+                        // }
                     }, 0)
                     return h(
                         "li",
@@ -133,7 +136,6 @@ export default Vue.extend({
                                     }
                                 },
                             },
-                            class: { active: ctx.props.defaultActiveItems.includes(i) }
                         },
                         [
                             h("header", [

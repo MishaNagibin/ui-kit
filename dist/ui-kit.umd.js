@@ -303,12 +303,8 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                 }
             }
         };
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length > 0) {
-                    resize();
-                }
-            });
+        const resizeObserver = new ResizeObserver(() => {
+            resize();
         });
         window.addEventListener("resize", resize);
         const setActive = (e) => {
@@ -343,7 +339,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                 children.map((v, i) => {
                     var _a;
                     setTimeout(() => {
-                        observer.observe(v.elm, { childList: true, subtree: true });
+                        resizeObserver.observe(v.elm);
                     }, 0);
                     return h("li", {
                         style: {
@@ -357,6 +353,8 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                         ref: `item${i + 1}`,
                         on: {
                             click: (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 if (e.target.localName === "header") {
                                     setActive(e.target.parentElement);
                                 }
@@ -384,10 +382,10 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
 
 ;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Accordionvue_type_script_lang_ts_ = (Accordionvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=069f8d3b&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-65.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-65.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-65.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-65.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=7645283e&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=069f8d3b&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=7645283e&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -502,7 +500,7 @@ var component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  "069f8d3b",
+  "7645283e",
   null
   
 )

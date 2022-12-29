@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <cAccordion onlyOneCanActive>
+        <cAccordion>
             <div>one</div>
             <div>
                 <p>1</p>
@@ -10,7 +10,29 @@
                     placeholder="дд.мм.гггг"
                 />
             </div>
-            <div>three</div>
+            <div>
+                <cAccordion>
+                    <div>
+                        <cAccordion>
+                            <div>one</div>
+                            <div>
+                                <cDatePicker
+                                    v-model="val"
+                                    isRelative
+                                    placeholder="дд.мм.гггг"
+                                />
+                            </div>
+                        </cAccordion>
+                    </div>
+                    <div>
+                        <cDatePicker
+                            v-model="val"
+                            isRelative
+                            placeholder="дд.мм.гггг"
+                        />
+                    </div>
+                </cAccordion>
+            </div>
             <div>four</div>
         </cAccordion>
         <!-- <cCombobox

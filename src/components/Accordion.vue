@@ -69,12 +69,8 @@ export default Vue.extend({
                 }
             }
         }
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length > 0) {
-                    resize()
-                }
-            })
+        const resizeObserver = new ResizeObserver(() => {
+            resize()
         })
         window.addEventListener("resize", resize)
         const setActive = (e: HTMLElement) => {
@@ -107,7 +103,7 @@ export default Vue.extend({
             h("ul", [
                 children.map((v, i) => {
                     setTimeout(() => {
-                        observer.observe(v.elm as HTMLElement, { childList: true, subtree: true })
+                        resizeObserver.observe(v.elm as HTMLElement)
                     }, 0)
                     return h(
                         "li",
@@ -123,6 +119,8 @@ export default Vue.extend({
                             ref: `item${i + 1}`,
                             on: {
                                 click: (e: any) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
                                     if (e.target.localName === "header") {
                                         setActive(e.target.parentElement)
                                     }

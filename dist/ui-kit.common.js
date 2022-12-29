@@ -293,7 +293,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
             resize();
         });
         window.addEventListener("resize", resize);
-        const setActive = (e) => {
+        const setActive = (e, isOnlyActive) => {
             const isActive = e.classList.contains("active");
             if (ctx.props.onlyOneCanActive && !isActive) {
                 if (activeElements.length > 0) {
@@ -304,7 +304,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                     activeElements = [];
                 }
             }
-            if (!isActive) {
+            if (!isActive || isOnlyActive) {
                 const items = e.children;
                 let height = 15;
                 for (let i of Array.from(items)) {
@@ -314,7 +314,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                 e.classList.add("active");
                 activeElements.push(e);
             }
-            else {
+            else if (!isOnlyActive) {
                 e.style.height = "24px";
                 e.classList.remove("active");
                 activeElements = activeElements.filter((i) => i !== e);
@@ -328,7 +328,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                         var _a;
                         resizeObserver.observe(v.elm);
                         if (ctx.props.defaultActiveItems.includes(i)) {
-                            setActive((_a = v.elm) === null || _a === void 0 ? void 0 : _a.parentElement);
+                            setActive((_a = v.elm) === null || _a === void 0 ? void 0 : _a.parentElement, true);
                         }
                     }, 0);
                     return h("li", {
@@ -350,6 +350,7 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                                 }
                             },
                         },
+                        class: { active: ctx.props.defaultActiveItems.includes(i) }
                     }, [
                         h("header", [
                             `${ctx.props.headersByIndexes !== undefined
@@ -372,10 +373,10 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
 
 ;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Accordionvue_type_script_lang_ts_ = (Accordionvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=f3753e92&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=499b9874&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=f3753e92&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=499b9874&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -490,7 +491,7 @@ var component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  "f3753e92",
+  "499b9874",
   null
   
 )

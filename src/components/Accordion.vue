@@ -77,7 +77,7 @@ export default Vue.extend({
             resize()
         })
         window.addEventListener("resize", resize)
-        const setActive = (e: HTMLElement) => {
+        const setActive = (e: HTMLElement, isOnlyActive?: boolean) => {
             const isActive = e.classList.contains("active")
             if (ctx.props.onlyOneCanActive && !isActive) {
                 if (activeElements.length > 0) {
@@ -88,7 +88,7 @@ export default Vue.extend({
                     activeElements = []
                 }
             }
-            if (!isActive) {
+            if (!isActive || isOnlyActive) {
                 const items = e.children
                 let height = 15
                 for (let i of Array.from(items)) {
@@ -97,7 +97,7 @@ export default Vue.extend({
                 e.style.height = `${height}px`
                 e.classList.add("active")
                 activeElements.push(e)
-            } else {
+            } else if (!isOnlyActive) {
                 e.style.height = "24px"
                 e.classList.remove("active")
                 activeElements = activeElements.filter((i) => i !== e)
@@ -109,7 +109,7 @@ export default Vue.extend({
                     setTimeout(() => {
                         resizeObserver.observe(v.elm as HTMLElement)
                         if (ctx.props.defaultActiveItems.includes(i)) {
-                            setActive(v.elm?.parentElement as HTMLElement)
+                            setActive(v.elm?.parentElement as HTMLElement, true)
                         }
                     }, 0)
                     return h(
@@ -133,6 +133,7 @@ export default Vue.extend({
                                     }
                                 },
                             },
+                            class: { active: ctx.props.defaultActiveItems.includes(i) }
                         },
                         [
                             h("header", [

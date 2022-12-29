@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <cAccordion :default-active-items="[2]">
+        <cAccordion>
             <div>one</div>
             <div>
                 <p>1</p>
@@ -11,16 +11,18 @@
                 />
             </div>
             <div>
-                <cAccordion :default-active-items="[1]">
-                    <div>
-                       3
-                    </div>
-                    <div>
-                        4
-                    </div>
+                <cAccordion>
+                    <div>3</div>
+                    <div>4</div>
                 </cAccordion>
             </div>
-            <div>four</div>
+            <div>
+                <cCombobox
+                    v-model="comboID"
+                    :items="comboItems"
+                    :filter="false"
+                />
+            </div>
         </cAccordion>
         <!-- <cCombobox
             v-model="comboID"
@@ -99,7 +101,7 @@ import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cAccordion, cDatePicker },
+    components: { cAccordion, cCombobox, cDatePicker },
     data() {
         return {
             date: null as Date | string | null,

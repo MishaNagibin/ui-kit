@@ -129,9 +129,9 @@ export default Vue.extend({
                             ref: `item${i + 1}`,
                             on: {
                                 click: (e: any) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
                                     if (e.target.localName === "header") {
+                                        e.preventDefault()
+                                        e.stopPropagation()
                                         setActive(e.target.parentElement)
                                     }
                                 },

@@ -340,9 +340,9 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
                         ref: `item${i + 1}`,
                         on: {
                             click: (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
                                 if (e.target.localName === "header") {
+                                    e.preventDefault();
+                                    e.stopPropagation();
                                     setActive(e.target.parentElement);
                                 }
                             },
@@ -369,10 +369,10 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
 
 ;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Accordionvue_type_script_lang_ts_ = (Accordionvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=79c14561&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Accordion.vue?vue&type=style&index=0&id=0934fe75&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=79c14561&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Accordion.vue?vue&type=style&index=0&id=0934fe75&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -487,7 +487,7 @@ var component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  "79c14561",
+  "0934fe75",
   null
   
 )

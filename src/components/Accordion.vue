@@ -51,6 +51,10 @@ export default Vue.extend({
             type: String,
             default: "#8e8e8e",
         },
+        defaultActiveItems: {
+            type: Array as Prop<number[]>,
+            default: (): number[] => [],
+        },
     },
     render(h, ctx) {
         const children = ctx.children.filter((c) => c.tag !== undefined && c.children !== undefined)
@@ -104,6 +108,9 @@ export default Vue.extend({
                 children.map((v, i) => {
                     setTimeout(() => {
                         resizeObserver.observe(v.elm as HTMLElement)
+                        if (ctx.props.defaultActiveItems.includes(i)) {
+                            setActive(v.elm?.parentElement as HTMLElement)
+                        }
                     }, 0)
                     return h(
                         "li",

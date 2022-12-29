@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <cAccordion>
+        <cAccordion :default-active-items="[2]">
             <div>one</div>
             <div>
                 <p>1</p>
@@ -11,25 +11,12 @@
                 />
             </div>
             <div>
-                <cAccordion>
+                <cAccordion :default-active-items="[1]">
                     <div>
-                        <cAccordion>
-                            <div>one</div>
-                            <div>
-                                <cDatePicker
-                                    v-model="val"
-                                    isRelative
-                                    placeholder="дд.мм.гггг"
-                                />
-                            </div>
-                        </cAccordion>
+                       3
                     </div>
                     <div>
-                        <cDatePicker
-                            v-model="val"
-                            isRelative
-                            placeholder="дд.мм.гггг"
-                        />
+                        4
                     </div>
                 </cAccordion>
             </div>

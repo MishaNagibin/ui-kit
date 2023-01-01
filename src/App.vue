@@ -1,6 +1,13 @@
 <template>
     <div id="app">
-        <cAccordion>
+        <cEdit
+            v-model="code"
+            is-confirmation-code
+            is-clear
+            ref="code"
+            autocomplete="new-password"
+        />
+        <!-- <cAccordion>
             <div>one</div>
             <div>
                 <p>1</p>
@@ -23,7 +30,7 @@
                     :filter="false"
                 />
             </div>
-        </cAccordion>
+        </cAccordion>-->
         <!-- <cCombobox
             v-model="comboID"
             :items="comboItems"
@@ -101,11 +108,12 @@ import { TableColumn } from "types/table"
 
 export default Vue.extend({
     name: "App",
-    components: { cAccordion, cCombobox, cDatePicker },
+    components: { cEdit },
     data() {
         return {
             date: null as Date | string | null,
             phone: "",
+            code: "",
             isDisabled: false,
             isMounted: false,
             val: "",
@@ -196,6 +204,11 @@ export default Vue.extend({
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     // margin: 860px 0;
+
+    & > .ui-edit {
+        max-width: 310px;
+        width: 100%;
+    }
 
     & > :deep(.ui-slider) {
         & > .carousel {

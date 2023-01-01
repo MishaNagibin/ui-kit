@@ -76,6 +76,11 @@
         >
             <slot name="status-text" />
         </div>
+        <span
+            v-if="isClear"
+            class="clear"
+            @click="clear"
+        >Очистить</span>
     </label>
     <label
         v-else
@@ -571,6 +576,9 @@ export default Vue.extend({
                 this.formattedPhone = ""
             } else if (this.mask !== undefined) {
                 this.formattedMask = ""
+            }
+            if (this.isConfirmationCode) {
+                this.code = Object.fromEntries(Array.from({ length: this.codeLength }, (_, i) => [i + 1, ""])) as { [key: number]: string }
             }
             this.$emit("input", "")
             this.isFocus = false
@@ -1130,6 +1138,21 @@ export default Vue.extend({
             align-items: center;
             width: 100%;
             justify-content: space-between;
+        }
+
+        & > .clear {
+            color: $primary-500;
+            width: 100%;
+            margin-top: 10px;
+
+            &:hover {
+                color: $primary-350;
+                cursor: pointer;
+            }
+
+            &:active {
+                color: $primary-700;
+            }
         }
     }
 

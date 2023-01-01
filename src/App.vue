@@ -3,7 +3,6 @@
         <cEdit
             v-model="code"
             is-confirmation-code
-            is-clear
             ref="code"
             autocomplete="new-password"
         />

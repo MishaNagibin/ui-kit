@@ -265,6 +265,10 @@ export default Vue.extend({
                 style["--color"] = this.modeProperties["disabled"].color ?? ""
                 style["--borderColor"] = this.modeProperties["disabled"].borderColor ?? ""
                 style["--iconColor"] = this.modeProperties["disabled"].iconColor ?? ""
+                style["--backgroundHoverColor"] = this.modeProperties["disabled"].background ?? ""
+                style["--colorHover"] = this.modeProperties["disabled"].color ?? ""
+                style["--backgroundActiveColor"] = this.modeProperties["disabled"].background ?? ""
+                style["--colorActive"] = this.modeProperties["disabled"].color ?? ""
             } else {
                 style["--background"] = this.background ?? this.modeProperties[this.mode].background ?? ""
                 style["--backgroundHoverColor"] =

@@ -58,8 +58,8 @@ export default Vue.extend({
         },
         borderWidth: {
             type: String,
-            default: "2px"
-        }
+            default: "2px",
+        },
     },
     computed: {
         listeners(): Record<string, Function | Function[]> {
@@ -225,6 +225,8 @@ export default Vue.extend({
     }
 
     &.disabled {
+        user-select: none;
+
         & > .check-mark {
             border-color: $gray-350;
         }
@@ -274,6 +276,18 @@ export default Vue.extend({
                 }
             }
         }
+
+        &.disabled {
+            cursor: not-allowed;
+
+            & > .check-mark {
+                border-color: $gray-350;
+            }
+
+            & > .checked {
+                background-color: $gray-350;
+            }
+        }
     }
 
     &:active {
@@ -310,6 +324,16 @@ export default Vue.extend({
                 &::before {
                     background-color: $activeColor;
                 }
+            }
+        }
+
+        &.disabled {
+            & > .check-mark {
+                border-color: $gray-350;
+            }
+
+            & > .checked {
+                background-color: $gray-350;
             }
         }
     }

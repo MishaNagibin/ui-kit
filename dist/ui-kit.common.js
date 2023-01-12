@@ -1094,10 +1094,10 @@ var Button_component = normalizeComponent(
 )
 
 /* harmony default export */ var Button = (Button_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Checkbox.vue?vue&type=template&id=0271d09d&scoped=true&
-var Checkboxvue_type_template_id_0271d09d_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('label',_vm._g({class:['ui-checkbox', !_vm.isCustom ? _vm.mode : '', _vm.size, { nowrap: _vm.nowrap, disabled: _vm.disabled, custom: _vm.isCustom }],style:({ '--color': _vm.color, '--hoverColor': _vm.hoverColor, '--activeColor': _vm.activeColor, '--borderWidth': _vm.borderWidth })},_vm.listeners),[_c('input',{attrs:{"disabled":_vm.disabled,"type":"checkbox"},domProps:{"checked":_vm.checked},on:{"change":function($event){$event.stopPropagation();return _vm.change.apply(null, arguments)}}}),_c('span',{class:['check-mark', { checked: _vm.checked }]}),_vm._t("default")],2)
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Checkbox.vue?vue&type=template&id=e4f8e7e2&scoped=true&
+var Checkboxvue_type_template_id_e4f8e7e2_scoped_true_render = function render(){var _vm=this,_c=_vm._self._c,_setup=_vm._self._setupProxy;return _c('label',_vm._g({class:['ui-checkbox', !_vm.isCustom ? _vm.mode : '', _vm.size, { nowrap: _vm.nowrap, disabled: _vm.disabled, custom: _vm.isCustom }],style:({ '--color': _vm.color, '--hoverColor': _vm.hoverColor, '--activeColor': _vm.activeColor, '--borderWidth': _vm.borderWidth })},_vm.listeners),[_c('input',{attrs:{"disabled":_vm.disabled,"type":"checkbox"},domProps:{"checked":_vm.checked},on:{"change":function($event){$event.stopPropagation();return _vm.change.apply(null, arguments)}}}),_c('span',{class:['check-mark', { checked: _vm.checked }]}),_vm._t("default")],2)
 }
-var Checkboxvue_type_template_id_0271d09d_scoped_true_staticRenderFns = []
+var Checkboxvue_type_template_id_e4f8e7e2_scoped_true_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Checkbox.vue?vue&type=script&lang=ts&
@@ -1142,8 +1142,8 @@ var Checkboxvue_type_template_id_0271d09d_scoped_true_staticRenderFns = []
         },
         borderWidth: {
             type: String,
-            default: "2px"
-        }
+            default: "2px",
+        },
     },
     computed: {
         listeners() {
@@ -1189,10 +1189,10 @@ var Checkboxvue_type_template_id_0271d09d_scoped_true_staticRenderFns = []
 
 ;// CONCATENATED MODULE: ./src/components/Checkbox.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Checkboxvue_type_script_lang_ts_ = (Checkboxvue_type_script_lang_ts_); 
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Checkbox.vue?vue&type=style&index=0&id=0271d09d&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Checkbox.vue?vue&type=style&index=0&id=e4f8e7e2&prod&lang=scss&scoped=true&
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/components/Checkbox.vue?vue&type=style&index=0&id=0271d09d&prod&lang=scss&scoped=true&
+;// CONCATENATED MODULE: ./src/components/Checkbox.vue?vue&type=style&index=0&id=e4f8e7e2&prod&lang=scss&scoped=true&
 
 ;// CONCATENATED MODULE: ./src/components/Checkbox.vue
 
@@ -1205,11 +1205,11 @@ var Checkboxvue_type_template_id_0271d09d_scoped_true_staticRenderFns = []
 
 var Checkbox_component = normalizeComponent(
   components_Checkboxvue_type_script_lang_ts_,
-  Checkboxvue_type_template_id_0271d09d_scoped_true_render,
-  Checkboxvue_type_template_id_0271d09d_scoped_true_staticRenderFns,
+  Checkboxvue_type_template_id_e4f8e7e2_scoped_true_render,
+  Checkboxvue_type_template_id_e4f8e7e2_scoped_true_staticRenderFns,
   false,
   null,
-  "0271d09d",
+  "e4f8e7e2",
   null
   
 )
